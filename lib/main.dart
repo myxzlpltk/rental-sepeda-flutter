@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       designSize: Size(360, 640),
       builder: () => MaterialApp(
         title: "Material App",
-
+        debugShowCheckedModeBanner: false,
         /* Routing */
         initialRoute: Routes.landing,
         onGenerateRoute: generateRoute,
@@ -42,7 +44,10 @@ class MyApp extends StatelessWidget {
 
         /* Theme */
         // TODO: add theme here
-        theme: ThemeData(),
+        theme: ThemeData(
+          fontFamily: GoogleFonts.lato().fontFamily,
+          scaffoldBackgroundColor: whiteColor,
+        ),
       ),
     );
   }

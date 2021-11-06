@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
 class LandingPage extends StatelessWidget {
@@ -12,10 +13,13 @@ class LandingPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Selamat Datang di Puncak Komedi"),
+            Text("Selamat Datang di Tingkat Tertinggi"),
             SizedBox(height: 16),
             TextButton(
-              child: Text("Fun"),
+              child: Text(
+                "Fun",
+                style: boldTextStyle,
+              ),
               onPressed: () {
                 Navigator.pushNamed(context, Routes.popowi);
               },
