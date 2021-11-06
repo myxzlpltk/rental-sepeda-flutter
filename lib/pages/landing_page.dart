@@ -12,7 +12,7 @@ class LandingPage extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text("Selamat Datang di Tingkat Tertinggi"),
+            Text("Selamat Datang di Puncak Komedi"),
             SizedBox(height: 16),
             TextButton(
               child: Text("Fun"),
