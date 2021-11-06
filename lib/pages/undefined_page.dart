@@ -10,7 +10,10 @@ class UndefinedPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(name, style: regularTextStyle),
+        title: Text(
+          name,
+          style: regularTextStyle,
+        ),
         leading: IconButton(
           splashRadius: 24,
           icon: Icon(Icons.chevron_left),
