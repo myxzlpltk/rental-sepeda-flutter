@@ -1,6 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.myxzlpltk.rental_sepeda_flutter">
-   <application
+    <!-- Required to fetch data from the internet. -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="rental_sepeda_flutter"
         android:icon="@mipmap/ic_launcher">
         <activity
