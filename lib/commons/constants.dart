@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /* Literal String */
 const String appName = "App Name";
@@ -13,12 +14,18 @@ const Color redColor = Color(0xFFFF0000);
 const Color whiteColor = Color(0xFFF1F8FB);
 
 /* Text Styles */
-const TextStyle regularTextStyle = TextStyle(
-  fontSize: 12,
+/// Untuk mengganti warna gunakan
+/// regularTextStyle.copyWith(
+///   color: Colors.white,
+/// )
+TextStyle regularTextStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(12),
+  color: Colors.black,
   height: 1,
 );
-const TextStyle boldTextStyle = TextStyle(
-  fontSize: 12,
+TextStyle boldTextStyle = TextStyle(
+  fontSize: ScreenUtil().setSp(12),
   fontWeight: FontWeight.w700,
+  color: Colors.black,
   height: 1,
 );
