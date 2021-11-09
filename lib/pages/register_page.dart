@@ -6,14 +6,14 @@ import 'package:rental_sepeda_flutter/models/user_model.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   bool isSavePassword = false;
   bool isPasswordVisible = false;
   @override
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Row(
                       children: <Widget>[
                         Text(
-                          "New user ?",
+                          "Have account ?",
                           style: TextStyle(
                             color: whiteColor,
                             fontWeight: FontWeight.w700,
@@ -60,10 +60,10 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, Routes.register);
+                              Navigator.pushNamed(context, Routes.login);
                             },
                             child: Text(
-                              "Sign up",
+                              "Login",
                               style: TextStyle(
                                 color: greenColor,
                                 fontWeight: FontWeight.w700,
@@ -76,6 +76,13 @@ class _LoginPageState extends State<LoginPage> {
                     padding: EdgeInsets.symmetric(horizontal: 8),
                     child: Column(
                       children: <Widget>[
+                        CustomTextFormField(
+                          hintText: "Enter your username",
+                          labelText: "Username",
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
                         CustomTextFormField(
                           hintText: "Enter your email",
                           labelText: "Email",
@@ -107,46 +114,12 @@ class _LoginPageState extends State<LoginPage> {
                                   ),
                           ),
                         ),
-                        Row(
-                          children: <Widget>[
-                            SizedBox(
-                              width: 35,
-                              child: Checkbox(
-                                value: isSavePassword,
-                                shape: CircleBorder(),
-                                activeColor: greenColor,
-                                checkColor: whiteColor,
-                                side: BorderSide(color: whiteColor, width: 2),
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isSavePassword = value!;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text(
-                              "Save Password?",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                              ),
-                            ),
-                            Spacer(),
-                            TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                "Forgot password",
-                                style: TextStyle(
-                                  color: greenColor,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ],
+                        SizedBox(
+                          height: 20,
                         ),
                         CustomGradientButton(
                           text: Text(
-                            "Login",
+                            "Sign Up",
                             style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w700,
@@ -170,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
                               width: 15,
                             ),
                             Text(
-                              "Or login with",
+                              "Or sign up with",
                               style: TextStyle(
                                 color: whiteColor,
                                 fontSize: 13,
