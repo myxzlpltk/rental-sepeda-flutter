@@ -1,10 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/services/user_services.dart';
 
-class LandingPage extends StatelessWidget {
+class LandingPage extends StatefulWidget {
   const LandingPage({Key? key}) : super(key: key);
 
+  @override
+  State<LandingPage> createState() => _LandingPageState();
+}
+
+class _LandingPageState extends State<LandingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,10 +21,11 @@ class LandingPage extends StatelessWidget {
           children: [
             Text("Selamat Datang di Puncak Komedi"),
             SizedBox(height: 16),
-            TextButton(
-              child: Text("Fun", style: boldTextStyle),
+            ElevatedButton(
+              child: Text("Login", style: boldTextStyle),
               onPressed: () {
-                Navigator.pushNamed(context, Routes.popowi);
+                // UserServices.register("watashi", "12333").then((value) => {});
+                Navigator.pushNamed(context, Routes.login);
               },
             )
           ],

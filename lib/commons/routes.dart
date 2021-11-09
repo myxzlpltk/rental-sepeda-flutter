@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
+import 'package:rental_sepeda_flutter/pages/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/popowi_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
@@ -8,6 +9,7 @@ class Routes {
 
   static const String landing = '/';
   static const String popowi = '/popowi';
+  static const String login = '/login';
 }
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -17,6 +19,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     /* Home */
     case Routes.landing:
       return MaterialPageRoute(builder: (_) => LandingPage());
+    case Routes.login:
+      return MaterialPageRoute(builder: (_) => LoginPage());
     /* Fun */
     case Routes.popowi:
       return MaterialPageRoute(builder: (_) => PopowiPage());
