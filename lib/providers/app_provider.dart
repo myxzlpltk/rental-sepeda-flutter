@@ -10,7 +10,7 @@ class AppProvider extends ChangeNotifier {
     // TODO: set login logic here
     _user = const User(
         id: 0,
-        name: "dummy",
+        username: "dummy",
         email: "dummy@gmail.com",
         photoURL: "http://lorempixel.com/200/200/people/");
   }
