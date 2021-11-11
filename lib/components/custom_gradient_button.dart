@@ -20,11 +20,7 @@ class CustomGradientButton extends StatelessWidget {
       width: width,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(40)),
-        gradient: LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [blueColor, greenColor],
-        ),
+        gradient: customGradientGreenToBlue,
       ),
       child: ElevatedButton(
         onPressed: () {},

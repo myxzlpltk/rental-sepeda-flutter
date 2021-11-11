@@ -14,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 32,
       child: TextFormField(
         style: TextStyle(fontSize: 12),

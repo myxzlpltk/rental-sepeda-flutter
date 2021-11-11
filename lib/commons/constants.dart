@@ -14,6 +14,19 @@ const Color redColor = Color(0xFFFF0000);
 const Color whiteColor = Color(0xFFF1F8FB);
 const Color greenColor = Color(0xFF61DEC0);
 const Color blueColor = Color(0xFF0A578E);
+
+/* Gradient */
+const LinearGradient customGradientBlueToGreen = LinearGradient(
+  begin: Alignment.topCenter,
+  end: Alignment.bottomCenter,
+  colors: [blueColor, greenColor],
+);
+const LinearGradient customGradientGreenToBlue = LinearGradient(
+  begin: Alignment.bottomCenter,
+  end: Alignment.topCenter,
+  colors: [blueColor, greenColor],
+);
+
 /* Text Styles */
 const TextStyle regularTextStyle = TextStyle(
   fontSize: 12,
