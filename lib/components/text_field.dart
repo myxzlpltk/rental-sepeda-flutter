@@ -14,7 +14,7 @@ class CustomTextFormField extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 32,
       child: TextFormField(
         style: TextStyle(fontSize: 12),
@@ -29,10 +29,11 @@ class CustomTextFormField extends StatelessWidget {
           ),
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(40.0)),
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+            borderRadius: BorderRadius.all(Radius.circular(40.0)),
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
           hintText: hintText,
           labelText: labelText,
         ),

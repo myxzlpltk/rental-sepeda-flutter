@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/text_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rental_sepeda_flutter/models/user_model.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
@@ -35,7 +34,7 @@ class _LoginPageState extends State<LoginPage> {
             Container(
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 24),
               decoration: BoxDecoration(
-                gradient: LinearGradient(
+                gradient: const LinearGradient(
                   begin: Alignment.bottomCenter,
                   end: Alignment.topCenter,
                   colors: [Color(0x99000000), Color(0x33FFFFFF)],
@@ -154,6 +153,9 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           width: 100,
                           height: 30,
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.main);
+                          },
                         ),
                         SizedBox(
                           height: 15,
@@ -197,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                'assets/icon/google.svg',
+                                'assets/svg/google.svg',
                                 width: 32,
                                 height: 32,
                               ),
@@ -208,7 +210,7 @@ class _LoginPageState extends State<LoginPage> {
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                'assets/icon/facebook.svg',
+                                'assets/svg/facebook.svg',
                                 width: 32,
                                 height: 32,
                               ),
