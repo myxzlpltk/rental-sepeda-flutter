@@ -43,7 +43,7 @@ class _LandingPageState extends State<LandingPage> {
                   SizedBox(
                     height: 128,
                     width: 117,
-                    child: SvgPicture.asset('assets/icon/logo.svg'),
+                    child: SvgPicture.asset('assets/svg/logo.svg'),
                   ),
                   SizedBox(
                     height: 100,
@@ -75,28 +75,29 @@ class _LandingPageState extends State<LandingPage> {
                     height: 14,
                   ),
                   ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        primary: whiteColor,
-                        minimumSize: Size(
-                          double.infinity,
-                          48,
-                        ),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0),
-                          side: BorderSide(color: whiteColor),
-                        ),
+                    style: ElevatedButton.styleFrom(
+                      primary: whiteColor,
+                      minimumSize: Size(
+                        double.infinity,
+                        48,
                       ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, Routes.login);
-                      },
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black.withOpacity(0.5),
-                        ),
-                      )),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                        side: BorderSide(color: whiteColor),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Routes.login);
+                    },
+                    child: Text(
+                      "Login",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black.withOpacity(0.5),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

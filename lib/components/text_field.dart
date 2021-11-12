@@ -29,10 +29,11 @@ class CustomTextFormField extends StatelessWidget {
           ),
           suffixIcon: suffixIcon,
           border: OutlineInputBorder(
-              borderRadius: BorderRadius.all(Radius.circular(40.0)),
-              borderSide: BorderSide(
-                color: Colors.transparent,
-              )),
+            borderRadius: BorderRadius.all(Radius.circular(40.0)),
+            borderSide: BorderSide(
+              color: Colors.transparent,
+            ),
+          ),
           hintText: hintText,
           labelText: labelText,
         ),

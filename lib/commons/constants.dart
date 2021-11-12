@@ -13,6 +13,7 @@ Map<String, String> headerHttp = {'Accept': 'application/json'};
 const Color redColor = Color(0xFFFF0000);
 const Color whiteColor = Color(0xFFF1F8FB);
 const Color greenColor = Color(0xFF61DEC0);
+const Color oldGreenColor = Color(0xFF2497A5);
 const Color blueColor = Color(0xFF0A578E);
 
 /* Gradient */

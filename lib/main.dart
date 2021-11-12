@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         title: "Material App",
         debugShowCheckedModeBanner: false,
         /* Routing */
-        initialRoute: Routes.main,
+        initialRoute: Routes.landing,
         onGenerateRoute: generateRoute,
         onUnknownRoute: (settings) => MaterialPageRoute(
           builder: (context) => UndefinedPage(

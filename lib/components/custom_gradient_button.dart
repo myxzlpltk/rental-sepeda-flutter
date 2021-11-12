@@ -5,12 +5,13 @@ class CustomGradientButton extends StatelessWidget {
   final Text text;
   final double height;
   final double width;
-
+  final VoidCallback onPressed;
   const CustomGradientButton({
     Key? key,
     this.text = const Text(""),
     this.height = 0,
     this.width = 0,
+    required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -23,7 +24,7 @@ class CustomGradientButton extends StatelessWidget {
         gradient: customGradientGreenToBlue,
       ),
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         child: text,
         style: ElevatedButton.styleFrom(
           primary: Colors.transparent,

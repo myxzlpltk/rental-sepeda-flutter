@@ -126,6 +126,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           width: 100,
                           height: 30,
+                          onPressed: () {},
                         ),
                         SizedBox(
                           height: 15,
@@ -169,7 +170,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                'assets/icon/google.svg',
+                                'assets/svg/google.svg',
                                 width: 32,
                                 height: 32,
                               ),
@@ -180,7 +181,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
-                                'assets/icon/facebook.svg',
+                                'assets/svg/facebook.svg',
                                 width: 32,
                                 height: 32,
                               ),
