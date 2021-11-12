@@ -5,14 +5,14 @@ class BottomAppItem extends StatefulWidget {
   final Function callback;
   final Widget screen;
   final int tab;
-  final int currenTab;
+  final int currentTab;
   final IconData icon;
   const BottomAppItem({
     Key? key,
     required this.callback,
     required this.screen,
     required this.tab,
-    required this.currenTab,
+    required this.currentTab,
     required this.icon,
   }) : super(key: key);
 
@@ -34,7 +34,7 @@ class _BottomAppItemState extends State<BottomAppItem> {
           Icon(
             widget.icon,
             color:
-                widget.currenTab == widget.tab ? Colors.black : Colors.black38,
+                widget.currentTab == widget.tab ? Colors.black : Colors.black38,
           ),
         ],
       ),
