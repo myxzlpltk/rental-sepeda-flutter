@@ -5,28 +5,22 @@ import 'package:flutter_svg/svg.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class RegisterPage extends StatelessWidget {
+  final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);
 
-  @override
-  State<RegisterPage> createState() => _RegisterPageState();
-}
+  RegisterPage({Key? key}) : super(key: key);
 
-class _RegisterPageState extends State<RegisterPage> {
-  bool isSavePassword = false;
-  bool isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/image/login.png"),
-          fit: BoxFit.cover,
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/image/login.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -58,16 +52,18 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.login);
-                            },
-                            child: Text(
-                              "Login",
-                              style: TextStyle(
-                                color: greenColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )),
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.login);
+                          },
+                          child: Text(
+                            "Login",
+                            style: TextStyle(
+                              color: greenColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -79,43 +75,33 @@ class _RegisterPageState extends State<RegisterPage> {
                           hintText: "Enter your username",
                           labelText: "Username",
                         ),
-                        SizedBox(
-                          height: 16,
-                        ),
+                        SizedBox(height: 16),
                         CustomTextFormField(
                           hintText: "Enter your email",
                           labelText: "Email",
                         ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        CustomTextFormField(
-                          hintText: "Enter your password",
-                          labelText: "Password",
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (isPasswordVisible == true) {
-                                  isPasswordVisible = false;
+                        SizedBox(height: 16),
+                        ValueListenableBuilder<bool>(
+                          valueListenable: isPasswordVisible,
+                          builder: (context, value, _) => CustomTextFormField(
+                            hintText: "Enter your password",
+                            labelText: "Password",
+                            obscureText: !value,
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                if (value) {
+                                  isPasswordVisible.value = false;
                                 } else {
-                                  isPasswordVisible = true;
+                                  isPasswordVisible.value = true;
                                 }
-                              });
-                            },
-                            child: isPasswordVisible
-                                ? Icon(
-                                    Icons.visibility_off,
-                                    size: 19,
-                                  )
-                                : Icon(
-                                    Icons.visibility,
-                                    size: 19,
-                                  ),
+                              },
+                              child: value
+                                  ? Icon(Icons.visibility_off, size: 19)
+                                  : Icon(Icons.visibility, size: 19),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
+                        SizedBox(height: 20),
                         CustomGradientButton(
                           text: Text(
                             "Sign Up",
@@ -124,24 +110,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          width: 100,
+                          width: MediaQuery.of(context).size.width - 48,
                           height: 30,
                           onPressed: () {},
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           children: const <Widget>[
                             Expanded(
-                              child: Divider(
-                                color: whiteColor,
-                                thickness: 1,
-                              ),
+                              child: Divider(color: whiteColor, thickness: 1),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Text(
                               "Or sign up with",
                               style: TextStyle(
@@ -150,20 +129,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Expanded(
-                              child: Divider(
-                                color: whiteColor,
-                                thickness: 1,
-                              ),
+                              child: Divider(color: whiteColor, thickness: 1),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -175,9 +147,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 height: 32,
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
+                            SizedBox(width: 20),
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
@@ -188,9 +158,7 @@ class _RegisterPageState extends State<RegisterPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SizedBox(height: 30),
                       ],
                     ),
                   ),

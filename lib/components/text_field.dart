@@ -5,18 +5,29 @@ class CustomTextFormField extends StatelessWidget {
   final String hintText;
   final String labelText;
   final Widget? suffixIcon;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
+  final bool obscureText;
+  final TextEditingController? controller;
+
   // Focus nodes are necessary
   const CustomTextFormField({
     Key? key,
     this.hintText = "",
     this.labelText = "",
-    this.suffixIcon = null,
+    this.suffixIcon,
+    this.textInputAction,
+    this.keyboardType,
+    this.obscureText = false,
+    this.controller,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 32,
       child: TextFormField(
+        controller: controller,
         style: TextStyle(fontSize: 12),
         decoration: InputDecoration(
           filled: true,
@@ -37,6 +48,9 @@ class CustomTextFormField extends StatelessWidget {
           hintText: hintText,
           labelText: labelText,
         ),
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        obscureText: obscureText,
       ),
     );
   }

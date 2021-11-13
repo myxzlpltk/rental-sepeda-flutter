@@ -45,3 +45,8 @@ TextStyle boldTextStyle = TextStyle(
   color: Colors.black,
   height: 1,
 );
+TextStyle elevatedButtonText = TextStyle(
+  fontSize: ScreenUtil().setSp(20),
+  fontWeight: FontWeight.w600,
+  color: Colors.black,
+);

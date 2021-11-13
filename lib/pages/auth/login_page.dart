@@ -5,28 +5,25 @@ import 'package:flutter_svg/svg.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({Key? key}) : super(key: key);
+class LoginPage extends StatelessWidget {
+  final ValueNotifier<bool> isSavePassword = ValueNotifier(false);
+  final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  @override
-  State<LoginPage> createState() => _LoginPageState();
-}
+  LoginPage({Key? key}) : super(key: key);
 
-class _LoginPageState extends State<LoginPage> {
-  bool isSavePassword = false;
-  bool isPasswordVisible = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage("assets/image/login.png"),
-          fit: BoxFit.cover,
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/image/login.png"),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Scaffold(
-        backgroundColor: Colors.transparent,
-        body: Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.end,
@@ -58,16 +55,18 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                         TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.register);
-                            },
-                            child: Text(
-                              "Sign up",
-                              style: TextStyle(
-                                color: greenColor,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            )),
+                          onPressed: () {
+                            Navigator.pushReplacementNamed(
+                                context, Routes.register);
+                          },
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(
+                              color: greenColor,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -76,51 +75,50 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: <Widget>[
                         CustomTextFormField(
+                          controller: emailController,
                           hintText: "Enter your email",
                           labelText: "Email",
+                          keyboardType: TextInputType.emailAddress,
+                          textInputAction: TextInputAction.next,
                         ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        CustomTextFormField(
-                          hintText: "Enter your password",
-                          labelText: "Password",
-                          suffixIcon: GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                if (isPasswordVisible == true) {
-                                  isPasswordVisible = false;
+                        SizedBox(height: 16),
+                        ValueListenableBuilder<bool>(
+                          valueListenable: isPasswordVisible,
+                          builder: (context, value, _) => CustomTextFormField(
+                            hintText: "Enter your password",
+                            labelText: "Password",
+                            obscureText: !value,
+                            keyboardType: TextInputType.visiblePassword,
+                            suffixIcon: GestureDetector(
+                              onTap: () {
+                                if (value) {
+                                  isPasswordVisible.value = false;
                                 } else {
-                                  isPasswordVisible = true;
+                                  isPasswordVisible.value = true;
                                 }
-                              });
-                            },
-                            child: isPasswordVisible
-                                ? Icon(
-                                    Icons.visibility_off,
-                                    size: 19,
-                                  )
-                                : Icon(
-                                    Icons.visibility,
-                                    size: 19,
-                                  ),
+                              },
+                              child: value
+                                  ? Icon(Icons.visibility_off, size: 19)
+                                  : Icon(Icons.visibility, size: 19),
+                            ),
                           ),
                         ),
                         Row(
                           children: <Widget>[
                             SizedBox(
                               width: 35,
-                              child: Checkbox(
-                                value: isSavePassword,
-                                shape: CircleBorder(),
-                                activeColor: greenColor,
-                                checkColor: whiteColor,
-                                side: BorderSide(color: whiteColor, width: 2),
-                                onChanged: (bool? value) {
-                                  setState(() {
-                                    isSavePassword = value!;
-                                  });
-                                },
+                              child: ValueListenableBuilder<bool>(
+                                valueListenable: isSavePassword,
+                                builder: (context, value, _) => Checkbox(
+                                  value: value,
+                                  shape: CircleBorder(),
+                                  activeColor: greenColor,
+                                  checkColor: whiteColor,
+                                  side: BorderSide(color: whiteColor, width: 2),
+                                  onChanged: (bool? value) {
+                                    isSavePassword.value = value!;
+                                  },
+                                ),
                               ),
                             ),
                             Text(
@@ -151,26 +149,19 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          width: 100,
+                          width: MediaQuery.of(context).size.width - 48,
                           height: 30,
                           onPressed: () {
                             Navigator.pushNamed(context, Routes.main);
                           },
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           children: const <Widget>[
                             Expanded(
-                              child: Divider(
-                                color: whiteColor,
-                                thickness: 1,
-                              ),
+                              child: Divider(color: whiteColor, thickness: 1),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Text(
                               "Or login with",
                               style: TextStyle(
@@ -179,20 +170,13 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Expanded(
-                              child: Divider(
-                                color: whiteColor,
-                                thickness: 1,
-                              ),
+                              child: Divider(color: whiteColor, thickness: 1),
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -204,9 +188,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 32,
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
+                            SizedBox(width: 20),
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
@@ -217,9 +199,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SizedBox(height: 30),
                       ],
                     ),
                   ),
