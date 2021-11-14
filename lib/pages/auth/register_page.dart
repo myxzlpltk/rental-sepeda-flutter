@@ -1,14 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/components/text_field.dart';
+import 'package:rental_sepeda_flutter/services/user_services.dart';
 
-class RegisterPage extends StatelessWidget {
-  final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({Key? key}) : super(key: key);
 
-  RegisterPage({Key? key}) : super(key: key);
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  final ValueNotifier<bool> _isPasswordVisible = ValueNotifier(false);
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  final _formKey = GlobalKey<FormState>();
+  final _emailValidator = MultiValidator([
+    RequiredValidator(errorText: "Kolom username wajib diisi"),
+    EmailValidator(errorText: "Email tidak valid"),
+  ]);
+  final _usernameValidator = MultiValidator([
+    RequiredValidator(errorText: "Kolom username wajib diisi"),
+    MinLengthValidator(6, errorText: "Minimal panjang username 6 karakter"),
+    MaxLengthValidator(25, errorText: "Maksimal panjang username 25 karakter"),
+  ]);
+  final _passwordValidator = MultiValidator([
+    RequiredValidator(errorText: "Kolom username wajib diisi"),
+    MinLengthValidator(8, errorText: "Minimal panjang username 8 karakter"),
+  ]);
 
   @override
   Widget build(BuildContext context) {
@@ -40,126 +65,110 @@ class RegisterPage extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 4),
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          "Have account ?",
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Have account ?",
+                        style: TextStyle(
+                          color: whiteColor,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacementNamed(context, Routes.login);
+                        },
+                        child: Text(
+                          "Login",
                           style: TextStyle(
-                            color: whiteColor,
+                            color: greenColor,
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(
-                                context, Routes.login);
-                          },
-                          child: Text(
-                            "Login",
-                            style: TextStyle(
-                              color: greenColor,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 8),
-                    child: Column(
-                      children: <Widget>[
-                        CustomTextFormField(
-                          hintText: "Enter your username",
-                          labelText: "Username",
-                        ),
-                        SizedBox(height: 16),
-                        CustomTextFormField(
-                          hintText: "Enter your email",
-                          labelText: "Email",
-                        ),
-                        SizedBox(height: 16),
-                        ValueListenableBuilder<bool>(
-                          valueListenable: isPasswordVisible,
-                          builder: (context, value, _) => CustomTextFormField(
-                            hintText: "Enter your password",
-                            labelText: "Password",
-                            obscureText: !value,
-                            suffixIcon: GestureDetector(
-                              onTap: () {
-                                if (value) {
-                                  isPasswordVisible.value = false;
-                                } else {
-                                  isPasswordVisible.value = true;
-                                }
-                              },
-                              child: value
-                                  ? Icon(Icons.visibility_off, size: 19)
-                                  : Icon(Icons.visibility, size: 19),
+                  Form(
+                    key: _formKey,
+                    child: AutofillGroup(
+                      child: Column(
+                        children: <Widget>[
+                          CustomTextFormField(
+                            controller: _usernameController,
+                            hintText: "Enter your username",
+                            labelText: "Username",
+                            textInputAction: TextInputAction.next,
+                            autofillHints: const [AutofillHints.username],
+                            validator: _usernameValidator,
+                          ),
+                          SizedBox(height: 16),
+                          CustomTextFormField(
+                            controller: _emailController,
+                            hintText: "Enter your email",
+                            labelText: "Email",
+                            textInputAction: TextInputAction.next,
+                            autofillHints: const [AutofillHints.email],
+                            validator: _emailValidator,
+                          ),
+                          SizedBox(height: 16),
+                          ValueListenableBuilder<bool>(
+                            valueListenable: _isPasswordVisible,
+                            builder: (context, value, _) => CustomTextFormField(
+                              controller: _passwordController,
+                              hintText: "Enter your password",
+                              labelText: "Password",
+                              obscureText: !value,
+                              keyboardType: TextInputType.visiblePassword,
+                              autofillHints: const [AutofillHints.password],
+                              suffixIcon: GestureDetector(
+                                onTap: () {
+                                  _isPasswordVisible.value = !value;
+                                },
+                                child: value
+                                    ? Icon(Icons.visibility_off, size: 19)
+                                    : Icon(Icons.visibility, size: 19),
+                              ),
+                              validator: _passwordValidator,
                             ),
                           ),
-                        ),
-                        SizedBox(height: 20),
-                        CustomGradientButton(
-                          text: Text(
-                            "Sign Up",
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                          width: MediaQuery.of(context).size.width - 48,
-                          height: 30,
-                          onPressed: () {},
-                        ),
-                        SizedBox(height: 15),
-                        Row(
-                          children: const <Widget>[
-                            Expanded(
-                              child: Divider(color: whiteColor, thickness: 1),
-                            ),
-                            SizedBox(width: 15),
-                            Text(
-                              "Or sign up with",
+                          SizedBox(height: 20),
+                          CustomGradientButton(
+                            text: Text(
+                              "Sign Up",
                               style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 13,
+                                fontSize: 14,
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(width: 15),
-                            Expanded(
-                              child: Divider(color: whiteColor, thickness: 1),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 15),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            GestureDetector(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                'assets/svg/google.svg',
-                                width: 32,
-                                height: 32,
-                              ),
-                            ),
-                            SizedBox(width: 20),
-                            GestureDetector(
-                              onTap: () {},
-                              child: SvgPicture.asset(
-                                'assets/svg/facebook.svg',
-                                width: 32,
-                                height: 32,
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 30),
-                      ],
+                            width: MediaQuery.of(context).size.width - 48,
+                            height: 30,
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                UserServices.register(
+                                  _emailController.text,
+                                  _usernameController.text,
+                                  _passwordController.text,
+                                ).then((value){
+                                  if(value){
+                                    return UserServices.login(
+                                      _usernameController.text,
+                                      _passwordController.text,
+                                    ).then((value) {
+                                      if (value) {
+                                        Navigator.popUntil(
+                                            context, (route) => route.isFirst);
+                                        Navigator.pushReplacementNamed(
+                                            context, Routes.main);
+                                      }
+                                    });
+                                  }
+                                });
+                              }
+                            },
+                          ),
+                          SizedBox(height: 30),
+                        ],
+                      ),
                     ),
                   ),
                 ],
