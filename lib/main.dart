@@ -51,23 +51,28 @@ class MyApp extends StatelessWidget {
             headline1: TextStyle(
               fontSize: ScreenUtil().setSp(28),
               fontWeight: FontWeight.w900,
+              color: Colors.black,
             ),
             headline2: TextStyle(
               fontSize: ScreenUtil().setSp(18),
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
             headline3: TextStyle(
               fontSize: ScreenUtil().setSp(13),
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
             bodyText1: TextStyle(
               fontSize: ScreenUtil().setSp(12),
+              color: Colors.black,
             ),
             bodyText2: TextStyle(
               fontSize: ScreenUtil().setSp(12),
               fontWeight: FontWeight.bold,
+              color: Colors.black,
             ),
-            subtitle1: TextStyle(
+            caption: TextStyle(
               fontSize: ScreenUtil().setSp(9),
               color: Colors.black87,
             ),

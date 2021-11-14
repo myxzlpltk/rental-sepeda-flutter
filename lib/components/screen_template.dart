@@ -36,6 +36,7 @@ class ScreenTemplate extends StatelessWidget {
           Expanded(
             child: Container(
                 margin: EdgeInsets.only(top: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
                   color: whiteColor,
