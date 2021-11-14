@@ -23,7 +23,6 @@ class MainPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: <Widget>[
-              SizedBox(height: 30),
               Text(
                 "Selamat datang, Megumin",
                 style: Theme.of(context)
@@ -254,21 +253,21 @@ class MainPage extends StatelessWidget {
                   children: const <Widget>[
                     StationCard(
                       stationID: 1,
-                      stationName: "Station1",
+                      stationName: "Station 1",
                       stationRange: 50,
                       stationAddress: "H5 Building",
                       bikesAvailable: 23,
                     ),
                     StationCard(
                       stationID: 1,
-                      stationName: "Station1",
+                      stationName: "Station 2",
                       stationRange: 50,
                       stationAddress: "H5 Building",
                       bikesAvailable: 23,
                     ),
                     StationCard(
                       stationID: 1,
-                      stationName: "Station1",
+                      stationName: "Station 3",
                       stationRange: 50,
                       stationAddress: "H5 Building",
                       bikesAvailable: 23,

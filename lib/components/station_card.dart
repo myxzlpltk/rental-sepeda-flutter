@@ -61,17 +61,17 @@ class StationCard extends StatelessWidget {
                       stationRange.toString() + "m",
                       style: Theme.of(context)
                           .textTheme
-                          .subtitle1!
+                          .caption!
                           .copyWith(color: Colors.black54),
                     ),
                   ],
                 ),
                 SizedBox(height: 4),
                 Text(stationAddress,
-                    style: Theme.of(context).textTheme.subtitle1),
+                    style: Theme.of(context).textTheme.caption),
                 Text(
                   bikesAvailable.toString() + " Bikes available",
-                  style: Theme.of(context).textTheme.subtitle1,
+                  style: Theme.of(context).textTheme.caption,
                 ),
                 Padding(
                   padding: EdgeInsets.all(2),
