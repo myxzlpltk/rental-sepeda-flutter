@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'pages/main_page.dart';
-import 'pages/history_page.dart';
-import 'pages/profile_page.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
+
 import 'components/bottom_app_item.dart';
+import 'pages/history_page.dart';
+import 'pages/main_page.dart';
+import 'pages/profile_page.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -44,7 +46,9 @@ class _HomeState extends State<Home> {
             gradient: customGradientBlueToGreen,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.loading);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(
