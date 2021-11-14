@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
-
-import '/home.dart';
-import '/pages/landing_page.dart';
-import '/pages/loading_page.dart';
-import '/pages/login_page.dart';
-import '/pages/popowi_page.dart';
-import '/pages/register_page.dart';
-import '/pages/undefined_page.dart';
+import 'package:rental_sepeda_flutter/home.dart';
+import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
+import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
+import 'package:rental_sepeda_flutter/pages/landing_page.dart';
+import 'package:rental_sepeda_flutter/pages/loading_page.dart';
+import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
 class Routes {
   Routes._();
 
   static const String landing = '/';
   static const String main = '/main';
-  static const String popowi = '/popowi';
   static const String login = '/login';
   static const String register = '/register';
   static const String loading = '/loading';
@@ -34,9 +31,6 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => RegisterPage());
     case Routes.loading:
       return MaterialPageRoute(builder: (_) => LoadingPage());
-    /* Fun */
-    case Routes.popowi:
-      return MaterialPageRoute(builder: (_) => PopowiPage());
   }
 
   return MaterialPageRoute(

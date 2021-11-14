@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 /* Literal String */
 const String appName = "App Name";
-const String apiURL = "https://api-ads-ebike.herokuapp.com/";
+const String apiURL = "https://ebike-api.herokuapp.com";
 const String errorAppString =
     "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
 
