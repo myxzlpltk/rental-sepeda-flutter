@@ -47,6 +47,31 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           fontFamily: GoogleFonts.lato().fontFamily,
           scaffoldBackgroundColor: whiteColor,
+          textTheme: TextTheme(
+            headline1: TextStyle(
+              fontSize: ScreenUtil().setSp(28),
+              fontWeight: FontWeight.w900,
+            ),
+            headline2: TextStyle(
+              fontSize: ScreenUtil().setSp(18),
+              fontWeight: FontWeight.bold,
+            ),
+            headline3: TextStyle(
+              fontSize: ScreenUtil().setSp(13),
+              fontWeight: FontWeight.bold,
+            ),
+            bodyText1: TextStyle(
+              fontSize: ScreenUtil().setSp(12),
+            ),
+            bodyText2: TextStyle(
+              fontSize: ScreenUtil().setSp(12),
+              fontWeight: FontWeight.bold,
+            ),
+            subtitle1: TextStyle(
+              fontSize: ScreenUtil().setSp(9),
+              color: Colors.black87,
+            ),
+          ),
         ),
       ),
     );

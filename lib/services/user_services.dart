@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'package:rental_sepeda_flutter/models/user_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class UserServices {

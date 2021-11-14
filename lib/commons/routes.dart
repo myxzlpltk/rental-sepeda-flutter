@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
-import '/home.dart';
-import '/pages/landing_page.dart';
-import '/pages/undefined_page.dart';
-import '../pages/auth/login_page.dart';
-import '../pages/auth/register_page.dart';
+import 'package:rental_sepeda_flutter/home.dart';
+import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
+import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
+import 'package:rental_sepeda_flutter/pages/landing_page.dart';
+import 'package:rental_sepeda_flutter/pages/loading_page.dart';
+import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
 class Routes {
   Routes._();
@@ -13,6 +13,7 @@ class Routes {
   static const String main = '/main';
   static const String login = '/login';
   static const String register = '/register';
+  static const String loading = '/loading';
 }
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -28,6 +29,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => LoginPage());
     case Routes.register:
       return MaterialPageRoute(builder: (_) => RegisterPage());
+    case Routes.loading:
+      return MaterialPageRoute(builder: (_) => LoadingPage());
   }
 
   return MaterialPageRoute(

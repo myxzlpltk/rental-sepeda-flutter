@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
@@ -148,8 +147,8 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _emailController.text,
                                   _usernameController.text,
                                   _passwordController.text,
-                                ).then((value){
-                                  if(value){
+                                ).then((value) {
+                                  if (value) {
                                     return UserServices.login(
                                       _usernameController.text,
                                       _passwordController.text,

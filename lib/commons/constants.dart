@@ -8,10 +8,7 @@ const String errorAppString =
     "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
 
 /* Literal Object */
-Map<String, String> headerHttp = {
-  'Accept': 'application/json',
-  // 'Content-Type': 'application/json; charset=UTF-8',
-};
+Map<String, String> headerHttp = {'Accept': 'application/json'};
 
 /* Colors */
 const Color redColor = Color(0xFFFF0000);
@@ -47,9 +44,4 @@ TextStyle boldTextStyle = TextStyle(
   fontWeight: FontWeight.w700,
   color: Colors.black,
   height: 1,
-);
-TextStyle elevatedButtonText = TextStyle(
-  fontSize: ScreenUtil().setSp(20),
-  fontWeight: FontWeight.w600,
-  color: Colors.black,
 );

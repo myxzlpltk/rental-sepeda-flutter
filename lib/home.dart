@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 
 import 'components/bottom_app_item.dart';
 import 'pages/history_page.dart';
@@ -45,7 +46,9 @@ class _HomeState extends State<Home> {
             gradient: customGradientBlueToGreen,
           ),
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.loading);
+        },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomAppBar(

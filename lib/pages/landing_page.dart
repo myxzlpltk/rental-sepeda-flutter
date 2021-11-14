@@ -37,12 +37,16 @@ class LandingPage extends StatelessWidget {
               child: SvgPicture.asset('assets/svg/logo.svg'),
             ),
             SizedBox(height: 100),
-            ElevatedButton(
+            TextButton(
               onPressed: () {
                 Navigator.pushReplacementNamed(context, Routes.main);
               },
-              child: Text("Skip to Main"),
+              child: Text(
+                "Skip to Main",
+                style: TextStyle(color: Colors.white),
+              ),
             ),
+            SizedBox(height: 16),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Colors.transparent,
@@ -52,15 +56,16 @@ class LandingPage extends StatelessWidget {
                   side: BorderSide(color: whiteColor),
                 ),
               ),
-              child: Text(
-                "Sign Up",
-                style: elevatedButtonText.copyWith(
-                  color: Colors.white,
-                ),
-              ),
               onPressed: () {
                 Navigator.pushNamed(context, Routes.register);
               },
+              child: Text(
+                "Sign Up",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
             SizedBox(height: 14),
             ElevatedButton(
@@ -72,15 +77,17 @@ class LandingPage extends StatelessWidget {
                   side: BorderSide(color: whiteColor),
                 ),
               ),
-              child: Text(
-                "Login",
-                style: elevatedButtonText.copyWith(
-                  color: Colors.black.withOpacity(0.5),
-                ),
-              ),
               onPressed: () {
                 Navigator.pushNamed(context, Routes.login);
               },
+              child: Text(
+                "Login",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.black.withOpacity(0.5),
+                ),
+              ),
             ),
           ],
         ),

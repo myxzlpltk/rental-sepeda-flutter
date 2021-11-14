@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import 'custom_button.dart';
 
@@ -25,9 +24,17 @@ class StationCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 4),
       child: Column(
         children: <Widget>[
-          SvgPicture.asset('assets/svg/station_icon.svg'),
-          SizedBox(
-            height: 12,
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(5),
+              topRight: Radius.circular(5),
+            ),
+            child: Image(
+              height: 73,
+              width: 100,
+              image: AssetImage('assets/image/card_banner.png'),
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
             padding: EdgeInsets.all(8),
@@ -52,29 +59,19 @@ class StationCard extends StatelessWidget {
                     Spacer(),
                     Text(
                       stationRange.toString() + "m",
-                      style: TextStyle(
-                        fontSize: 9,
-                        color: Colors.black54,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .subtitle1!
+                          .copyWith(color: Colors.black54),
                     ),
                   ],
                 ),
-                SizedBox(
-                  height: 4,
-                ),
-                Text(
-                  stationAddress,
-                  style: TextStyle(
-                    fontSize: 9,
-                    color: Colors.black87,
-                  ),
-                ),
+                SizedBox(height: 4),
+                Text(stationAddress,
+                    style: Theme.of(context).textTheme.subtitle1),
                 Text(
                   bikesAvailable.toString() + " Bikes available",
-                  style: TextStyle(
-                    fontSize: 9,
-                    color: Colors.black87,
-                  ),
+                  style: Theme.of(context).textTheme.subtitle1,
                 ),
                 Padding(
                   padding: EdgeInsets.all(2),
