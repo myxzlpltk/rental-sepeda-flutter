@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import '/pages/landing_page.dart';
+
 import '/home.dart';
-import '../pages/auth/login_page.dart';
-import '../pages/auth/register_page.dart';
+import '/pages/landing_page.dart';
 import '/pages/popowi_page.dart';
 import '/pages/undefined_page.dart';
+import '../pages/auth/login_page.dart';
+import '../pages/auth/register_page.dart';
 
 class Routes {
   Routes._();

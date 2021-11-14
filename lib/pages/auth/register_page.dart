@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'package:rental_sepeda_flutter/components/text_field.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
+import 'package:rental_sepeda_flutter/components/text_field.dart';
 
 class RegisterPage extends StatelessWidget {
   final ValueNotifier<bool> isPasswordVisible = ValueNotifier(false);

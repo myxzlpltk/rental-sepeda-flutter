@@ -9,6 +9,8 @@ class CustomTextFormField extends StatelessWidget {
   final TextInputType? keyboardType;
   final bool obscureText;
   final TextEditingController? controller;
+  final Iterable<String>? autofillHints;
+  final String? Function(String?)? validator;
 
   // Focus nodes are necessary
   const CustomTextFormField({
@@ -20,38 +22,40 @@ class CustomTextFormField extends StatelessWidget {
     this.keyboardType,
     this.obscureText = false,
     this.controller,
+    this.autofillHints,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 32,
-      child: TextFormField(
-        controller: controller,
-        style: TextStyle(fontSize: 12),
-        decoration: InputDecoration(
-          filled: true,
-          fillColor: whiteColor,
-          floatingLabelBehavior: FloatingLabelBehavior.never,
-          contentPadding: EdgeInsets.only(left: 20),
-          suffixIconConstraints: BoxConstraints(
-            minWidth: 50,
-            minHeight: 50,
-          ),
-          suffixIcon: suffixIcon,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(40.0)),
-            borderSide: BorderSide(
-              color: Colors.transparent,
-            ),
-          ),
-          hintText: hintText,
-          labelText: labelText,
+    return TextFormField(
+      controller: controller,
+      style: TextStyle(fontSize: 12),
+      decoration: InputDecoration(
+        filled: true,
+        fillColor: whiteColor,
+        floatingLabelBehavior: FloatingLabelBehavior.never,
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+        isDense: true,
+        suffixIconConstraints: BoxConstraints(
+          minWidth: 50,
+          minHeight: 32,
         ),
-        keyboardType: keyboardType,
-        textInputAction: textInputAction,
-        obscureText: obscureText,
+        suffixIcon: suffixIcon,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(40.0)),
+          borderSide: BorderSide(
+            color: Colors.transparent,
+          ),
+        ),
+        hintText: hintText,
+        labelText: labelText,
       ),
+      keyboardType: keyboardType,
+      textInputAction: textInputAction,
+      obscureText: obscureText,
+      autofillHints: autofillHints,
+      validator: validator,
     );
   }
 }
