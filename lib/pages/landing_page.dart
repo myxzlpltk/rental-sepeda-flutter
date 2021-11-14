@@ -45,9 +45,7 @@ class _LandingPageState extends State<LandingPage> {
                     width: 117,
                     child: SvgPicture.asset('assets/svg/logo.svg'),
                   ),
-                  SizedBox(
-                    height: 100,
-                  ),
+                  SizedBox(height: 100),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: Colors.transparent,
@@ -71,9 +69,7 @@ class _LandingPageState extends State<LandingPage> {
                       ),
                     ),
                   ),
-                  SizedBox(
-                    height: 14,
-                  ),
+                  SizedBox(height: 14),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       primary: whiteColor,

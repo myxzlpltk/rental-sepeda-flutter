@@ -79,9 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: "Enter your email",
                           labelText: "Email",
                         ),
-                        SizedBox(
-                          height: 16,
-                        ),
+                        SizedBox(height: 16),
                         CustomTextFormField(
                           hintText: "Enter your password",
                           labelText: "Password",
@@ -157,9 +155,7 @@ class _LoginPageState extends State<LoginPage> {
                             Navigator.pushNamed(context, Routes.main);
                           },
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           children: const <Widget>[
                             Expanded(
@@ -168,9 +164,7 @@ class _LoginPageState extends State<LoginPage> {
                                 thickness: 1,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Text(
                               "Or login with",
                               style: TextStyle(
@@ -179,9 +173,7 @@ class _LoginPageState extends State<LoginPage> {
                                 fontWeight: FontWeight.w700,
                               ),
                             ),
-                            SizedBox(
-                              width: 15,
-                            ),
+                            SizedBox(width: 15),
                             Expanded(
                               child: Divider(
                                 color: whiteColor,
@@ -190,9 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 15,
-                        ),
+                        SizedBox(height: 15),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
@@ -204,9 +194,7 @@ class _LoginPageState extends State<LoginPage> {
                                 height: 32,
                               ),
                             ),
-                            SizedBox(
-                              width: 20,
-                            ),
+                            SizedBox(width: 20),
                             GestureDetector(
                               onTap: () {},
                               child: SvgPicture.asset(
@@ -217,9 +205,7 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           ],
                         ),
-                        SizedBox(
-                          height: 30,
-                        ),
+                        SizedBox(height: 30),
                       ],
                     ),
                   ),

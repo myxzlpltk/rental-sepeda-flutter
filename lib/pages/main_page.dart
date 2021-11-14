@@ -15,21 +15,21 @@ class MainPage extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          height: 225,
+          height: 180,
           width: 130,
           child: SvgPicture.asset('assets/svg/home_decoration.svg'),
         ),
         Container(
-          padding: EdgeInsets.symmetric(vertical: 30, horizontal: 16),
+          padding: EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: <Widget>[
+              SizedBox(height: 30),
               Text(
                 "Selamat datang, Megumin",
-                style: TextStyle(
-                  color: blueColor,
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .headline2!
+                    .copyWith(color: blueColor),
               ),
               SizedBox(
                 height: 2,
@@ -62,10 +62,10 @@ class MainPage extends StatelessWidget {
                             ),
                             child: Text(
                               "Exclusive Offer",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText1!
+                                  .copyWith(color: whiteColor),
                             ),
                           ),
                           SizedBox(width: 8),
@@ -81,11 +81,10 @@ class MainPage extends StatelessWidget {
                             ),
                             child: Text(
                               "00",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: whiteColor),
                             ),
                           ),
                           SizedBox(width: 2),
@@ -106,11 +105,10 @@ class MainPage extends StatelessWidget {
                             ),
                             child: Text(
                               "00",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: whiteColor),
                             ),
                           ),
                           SizedBox(width: 2),
@@ -131,11 +129,10 @@ class MainPage extends StatelessWidget {
                             ),
                             child: Text(
                               "00",
-                              style: TextStyle(
-                                color: whiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyText2!
+                                  .copyWith(color: whiteColor),
                             ),
                           ),
                         ],
@@ -152,7 +149,7 @@ class MainPage extends StatelessWidget {
                       ),
                       SizedBox(height: 2),
                       Row(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.pin_drop,
                             size: 14,
@@ -161,17 +158,13 @@ class MainPage extends StatelessWidget {
                           SizedBox(
                             width: 4,
                           ),
-                          Text(
-                            "H5 Building",
-                            style: TextStyle(
-                              fontSize: 12,
-                            ),
-                          ),
+                          Text("H5 Building",
+                              style: Theme.of(context).textTheme.bodyText1),
                         ],
                       ),
                       SizedBox(height: 2),
                       Row(
-                        children: const [
+                        children: [
                           Icon(
                             Icons.attach_money_rounded,
                             size: 14,
@@ -182,23 +175,25 @@ class MainPage extends StatelessWidget {
                           ),
                           Text(
                             "IDR 30.000/hour",
-                            style: TextStyle(
-                              fontSize: 12,
-                              decoration: TextDecoration.lineThrough,
-                            ),
+                            style:
+                                Theme.of(context).textTheme.bodyText1!.copyWith(
+                                      decoration: TextDecoration.lineThrough,
+                                    ),
                           ),
                         ],
                       ),
                       SizedBox(height: 2),
                       Row(
-                        children: const [
+                        children: [
                           SizedBox(
                             width: 18,
                           ),
                           Text(
                             "IDR 20.000/hour",
-                            style: TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.w700),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText2!
+                                .copyWith(fontSize: 14),
                           ),
                         ],
                       ),

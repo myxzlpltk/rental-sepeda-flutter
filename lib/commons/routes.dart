@@ -3,8 +3,9 @@ import '/pages/landing_page.dart';
 import '/home.dart';
 import '/pages/login_page.dart';
 import '/pages/register_page.dart';
-import '/pages/popowi_page.dart';
+import '/pages/loading_page.dart';
 import '/pages/undefined_page.dart';
+import '/pages/popowi_page.dart';
 
 class Routes {
   Routes._();
@@ -14,6 +15,7 @@ class Routes {
   static const String popowi = '/popowi';
   static const String login = '/login';
   static const String register = '/register';
+  static const String loading = '/loading';
 }
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
@@ -29,6 +31,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => LoginPage());
     case Routes.register:
       return MaterialPageRoute(builder: (_) => RegisterPage());
+    case Routes.loading:
+      return MaterialPageRoute(builder: (_) => LoadingPage());
     /* Fun */
     case Routes.popowi:
       return MaterialPageRoute(builder: (_) => PopowiPage());
