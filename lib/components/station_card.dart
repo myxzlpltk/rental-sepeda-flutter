@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 
 import 'custom_button.dart';
 
@@ -31,14 +32,14 @@ class StationCard extends StatelessWidget {
             ),
             child: Image(
               height: 73,
-              width: 100,
+              width: 120,
               image: AssetImage('assets/image/card_banner.png'),
               fit: BoxFit.cover,
             ),
           ),
           Container(
             padding: EdgeInsets.all(8),
-            width: 100,
+            width: 120,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               color: Colors.white,
@@ -77,7 +78,13 @@ class StationCard extends StatelessWidget {
                   padding: EdgeInsets.all(2),
                   child: CustomButton(
                     text: "Go now",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        Routes.station,
+                        arguments: {'id': stationID},
+                      );
+                    },
                   ),
                 ),
               ],

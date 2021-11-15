@@ -23,6 +23,7 @@ class MainPage extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: ListView(
             children: <Widget>[
+              SizedBox(height: 20),
               Text(
                 "Selamat datang, Megumin",
                 style: Theme.of(context)
@@ -210,9 +211,7 @@ class MainPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
               SizedBox(
                 height: 40,
                 child: TextField(
