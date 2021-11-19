@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/specification_box.dart';
@@ -39,7 +40,7 @@ class StationPage extends StatelessWidget {
                         value: 'One',
                         iconSize: 24,
                         onChanged: (String? newValue) {},
-                        items: <String>['One', 'Two', 'Free', 'Four']
+                        items: <String>['One', 'Two', 'Three', 'Four', 'Five']
                             .map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -69,7 +70,11 @@ class StationPage extends StatelessWidget {
                     ),
                     SizedBox(
                       width: 140,
-                      child: CustomButton(text: "Book now", onPressed: () {}),
+                      child: CustomButton(
+                          text: "Book now",
+                          onPressed: () {
+                            Navigator.pushNamed(context, Routes.checkout);
+                          }),
                     )
                   ],
                 )
