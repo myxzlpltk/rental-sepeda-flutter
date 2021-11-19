@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/pages/setting_page.dart';
 
 import 'components/bottom_app_item.dart';
 import 'pages/history_page.dart';
@@ -83,7 +84,7 @@ class _HomeState extends State<Home> {
               ),
               BottomAppItem(
                 callback: callback,
-                screen: HistoryPage(),
+                screen: SettingPage(),
                 tab: 3,
                 currentTab: currentTab,
                 icon: Icons.settings,

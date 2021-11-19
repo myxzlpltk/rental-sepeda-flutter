@@ -16,7 +16,7 @@ class HistoryPage extends StatelessWidget {
           "New",
           style: Theme.of(context).textTheme.headline1,
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 16),
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",
@@ -27,12 +27,12 @@ class HistoryPage extends StatelessWidget {
           historyStatus: "has been booked",
           historyTime: new DateTime.now(),
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 16),
         Text(
           "Previous",
           style: Theme.of(context).textTheme.headline1,
         ),
-        SizedBox(height: 10),
+        SizedBox(height: 16),
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",

@@ -3,7 +3,7 @@ import 'package:form_field_validator/form_field_validator.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
-import 'package:rental_sepeda_flutter/components/text_field.dart';
+import 'package:rental_sepeda_flutter/components/text_form_field.dart';
 import 'package:rental_sepeda_flutter/services/user_services.dart';
 
 class RegisterPage extends StatefulWidget {

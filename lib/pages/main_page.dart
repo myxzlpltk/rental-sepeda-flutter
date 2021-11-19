@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/station_card.dart';
 
@@ -200,7 +201,9 @@ class MainPage extends StatelessWidget {
                       SizedBox(height: 2),
                       CustomButton(
                         text: "Book Now",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, Routes.checkout);
+                        },
                       ),
                     ],
                   ),
@@ -215,7 +218,6 @@ class MainPage extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: TextField(
-                  obscureText: true,
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,
