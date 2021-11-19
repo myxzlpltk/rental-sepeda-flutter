@@ -215,7 +215,6 @@ class MainPage extends StatelessWidget {
               SizedBox(
                 height: 40,
                 child: TextField(
-                  obscureText: true,
                   textInputAction: TextInputAction.search,
                   decoration: InputDecoration(
                     floatingLabelBehavior: FloatingLabelBehavior.never,

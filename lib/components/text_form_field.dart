@@ -59,3 +59,37 @@ class CustomTextFormField extends StatelessWidget {
     );
   }
 }
+
+class CustomTextFormField2 extends StatelessWidget {
+  final String hintText;
+  final String labelText;
+  final String initialValue;
+  final bool obscureText;
+  final bool enabled;
+  const CustomTextFormField2({
+    Key? key,
+    this.hintText = "",
+    this.labelText = "",
+    this.initialValue = "",
+    this.obscureText = false,
+    this.enabled = true,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 80,
+      child: TextFormField(
+        enabled: enabled,
+        obscureText: obscureText,
+        initialValue: initialValue,
+        decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
+          contentPadding: EdgeInsets.symmetric(vertical: 18),
+          labelText: labelText,
+          hintText: hintText,
+        ),
+      ),
+    );
+  }
+}
