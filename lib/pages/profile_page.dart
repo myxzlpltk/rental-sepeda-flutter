@@ -18,7 +18,7 @@ class ProfilePage extends StatelessWidget {
               child: Image(
                 height: 90,
                 width: 90,
-                image: AssetImage('assets/image/card_banner.png'),
+                image: AssetImage('assets/image/profile_pict.jpg'),
                 fit: BoxFit.cover,
               ),
             ),
