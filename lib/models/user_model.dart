@@ -1,26 +1,21 @@
 import 'package:equatable/equatable.dart';
 
-class User extends Equatable {
+class AppUser extends Equatable {
   // Properti harus final dan menyertakan tipe data
-  final int id;
-  final String username;
+  final String id;
+  final String name;
   final String email;
-  final String photoURL;
+  final int balance;
+  final String? photoURL;
 
   // Initialisasi
-  const User({
+  const AppUser({
     required this.id,
-    required this.username,
+    required this.name,
     required this.email,
-    required this.photoURL,
+    this.balance = 0,
+    this.photoURL,
   });
-
-  // Factory adalah membuat obyek model dari data json (Map<String, dynamic>)
-  factory User.fromJson(Map<String, dynamic> data) => User(
-      id: data['id'],
-      username: data['username'],
-      email: data['email'],
-      photoURL: data['photo_url']);
 
   @override
   List<Object?> get props => [id];

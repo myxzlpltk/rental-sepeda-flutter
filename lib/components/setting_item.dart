@@ -3,10 +3,13 @@ import 'package:flutter/material.dart';
 class SettingItem extends StatelessWidget {
   final String text;
   final IconData iconData;
+  final void Function()? onPressed;
+
   const SettingItem({
     Key? key,
     required this.text,
     required this.iconData,
+    this.onPressed,
   }) : super(key: key);
 
   @override
@@ -20,10 +23,10 @@ class SettingItem extends StatelessWidget {
       ),
       child: TextButton(
         style: TextButton.styleFrom(
-          padding: EdgeInsets.all(0),
+          padding: EdgeInsets.symmetric(horizontal: 4),
           primary: Colors.black54,
         ),
-        onPressed: () {},
+        onPressed: onPressed,
         child: Row(
           children: [
             Icon(iconData),
