@@ -4,8 +4,8 @@ import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/checkout_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
-import 'package:rental_sepeda_flutter/pages/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/loading_page.dart';
+import 'package:rental_sepeda_flutter/pages/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
 class Routes {

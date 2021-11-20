@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:form_field_validator/form_field_validator.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/src/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/commons/validators.dart';
 import 'package:rental_sepeda_flutter/components/custom_gradient_button.dart';
 import 'package:rental_sepeda_flutter/components/text_form_field.dart';
-import 'package:rental_sepeda_flutter/services/user_services.dart';
+import 'package:rental_sepeda_flutter/providers/app_provider.dart';
+import 'package:rental_sepeda_flutter/services/auth_services.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -14,21 +17,30 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final ValueNotifier<bool> _isSavePassword = ValueNotifier(false);
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier(false);
-  final TextEditingController _usernameController = TextEditingController();
+  final ValueNotifier<bool> _isProcessing = ValueNotifier(false);
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
   final _formKey = GlobalKey<FormState>();
-  final _usernameValidator = MultiValidator([
-    RequiredValidator(errorText: "Kolom username wajib diisi"),
-    MinLengthValidator(6, errorText: "Minimal panjang username 6 karakter"),
-    MaxLengthValidator(25, errorText: "Maksimal panjang username 25 karakter"),
-  ]);
-  final _passwordValidator = MultiValidator([
-    RequiredValidator(errorText: "Kolom username wajib diisi"),
-    MinLengthValidator(8, errorText: "Minimal panjang username 8 karakter"),
-  ]);
+
+  void signIn() async {
+    if (_formKey.currentState!.validate()) {
+      _isProcessing.value = true;
+      SignInSignUpResult result = await AuthServices.signIn(
+          _emailController.text, _passwordController.text);
+
+      if (result.user == null) {
+        _isProcessing.value = false;
+        Fluttertoast.showToast(msg: result.message!);
+      } else {
+        _isProcessing.value = true;
+        context.read<AppProvider>().user = result.user;
+
+        Navigator.popUntil(context, (route) => route.isFirst);
+        Navigator.pushReplacementNamed(context, Routes.main);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     children: <Widget>[
                       Text(
-                        "New user ?",
+                        "Pengguna baru?",
                         style: TextStyle(
                           color: whiteColor,
                           fontWeight: FontWeight.w700,
@@ -75,7 +87,18 @@ class _LoginPageState extends State<LoginPage> {
                               context, Routes.register);
                         },
                         child: Text(
-                          "Sign up",
+                          "Daftar",
+                          style: TextStyle(
+                            color: greenColor,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "Lupa kata sandi",
                           style: TextStyle(
                             color: greenColor,
                             fontWeight: FontWeight.w700,
@@ -90,20 +113,20 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           CustomTextFormField(
-                            controller: _usernameController,
-                            hintText: "Enter your username",
-                            labelText: "Username",
+                            controller: _emailController,
+                            hintText: "Masukkan alamat email",
+                            labelText: "Email",
                             textInputAction: TextInputAction.next,
-                            autofillHints: const [AutofillHints.username],
-                            validator: _usernameValidator,
+                            autofillHints: const [AutofillHints.email],
+                            validator: Validator.emailValidator,
                           ),
                           SizedBox(height: 16),
                           ValueListenableBuilder<bool>(
                             valueListenable: _isPasswordVisible,
                             builder: (context, value, _) => CustomTextFormField(
                               controller: _passwordController,
-                              hintText: "Enter your password",
-                              labelText: "Password",
+                              hintText: "Masukkan kata sandi",
+                              labelText: "Kata sandi",
                               obscureText: !value,
                               keyboardType: TextInputType.visiblePassword,
                               autofillHints: const [AutofillHints.password],
@@ -115,73 +138,25 @@ class _LoginPageState extends State<LoginPage> {
                                     ? Icon(Icons.visibility_off, size: 19)
                                     : Icon(Icons.visibility, size: 19),
                               ),
-                              validator: _passwordValidator,
+                              validator: Validator.passwordValidator,
                             ),
                           ),
-                          Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: 35,
-                                child: ValueListenableBuilder<bool>(
-                                  valueListenable: _isSavePassword,
-                                  builder: (context, value, _) => Checkbox(
-                                    value: value,
-                                    shape: CircleBorder(),
-                                    activeColor: greenColor,
-                                    checkColor: whiteColor,
-                                    side:
-                                        BorderSide(color: whiteColor, width: 2),
-                                    onChanged: (bool? value) {
-                                      _isSavePassword.value = value!;
-                                    },
-                                  ),
-                                ),
-                              ),
-                              Text(
-                                "Save Password?",
+                          SizedBox(height: 16),
+                          ValueListenableBuilder<bool>(
+                            valueListenable: _isProcessing,
+                            builder: (context, value, _) =>
+                                CustomGradientButton(
+                              text: Text(
+                                "Masuk",
                                 style: TextStyle(
-                                  color: whiteColor,
-                                  fontSize: 12,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w700,
                                 ),
                               ),
-                              Spacer(),
-                              TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Forgot password",
-                                  style: TextStyle(
-                                    color: greenColor,
-                                    fontSize: 12,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          CustomGradientButton(
-                            text: Text(
-                              "Login",
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              width: MediaQuery.of(context).size.width - 48,
+                              height: 30,
+                              onPressed: value ? null : signIn,
                             ),
-                            width: MediaQuery.of(context).size.width - 48,
-                            height: 30,
-                            onPressed: () {
-                              if (_formKey.currentState!.validate()) {
-                                UserServices.login(
-                                  _usernameController.text,
-                                  _passwordController.text,
-                                ).then((value) {
-                                  if (value) {
-                                    Navigator.popUntil(
-                                        context, (route) => route.isFirst);
-                                    Navigator.pushReplacementNamed(
-                                        context, Routes.main);
-                                  }
-                                });
-                              }
-                            },
                           ),
                           SizedBox(height: 30),
                         ],

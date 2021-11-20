@@ -1,0 +1,76 @@
+{
+  "project_info": {
+    "project_number": "904742683372",
+    "project_id": "ebike-4eee8",
+    "storage_bucket": "ebike-4eee8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904742683372:android:2c44ac8e548c8f727edbc9",
+        "android_client_info": {
+          "package_name": "com.myxzlpltk.rental_sepeda_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904742683372-ui2d9vqq3rq881inqv97rvtrj85c4ids.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myxzlpltk.rental_sepeda_flutter",
+            "certificate_hash": "50ccd40d4c24165f44b2dc15fc9487bce35c85d0"
+          }
+        },
+        {
+          "client_id": "904742683372-ohnb71p5r8vgbh9oeb6msh495plbd7t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnKv6DhjPw2sNBSp0VA91DgycSFZOUpO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904742683372-ohnb71p5r8vgbh9oeb6msh495plbd7t9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904742683372:android:c09d73268aa12f767edbc9",
+        "android_client_info": {
+          "package_name": "ebike.api.ads"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904742683372-ohnb71p5r8vgbh9oeb6msh495plbd7t9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnKv6DhjPw2sNBSp0VA91DgycSFZOUpO0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904742683372-ohnb71p5r8vgbh9oeb6msh495plbd7t9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

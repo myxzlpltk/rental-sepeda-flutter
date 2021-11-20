@@ -5,7 +5,7 @@ class CustomGradientButton extends StatelessWidget {
   final Text text;
   final double height;
   final double width;
-  final VoidCallback onPressed;
+  final void Function()? onPressed;
   const CustomGradientButton({
     Key? key,
     this.text = const Text(""),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/src/provider.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/setting_item.dart';
+import 'package:rental_sepeda_flutter/providers/app_provider.dart';
+import 'package:rental_sepeda_flutter/services/auth_services.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -52,7 +56,7 @@ class SettingPage extends StatelessWidget {
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: const [
+          children: [
             SettingItem(
               text: "help",
               iconData: Icons.headphones_rounded,
@@ -64,6 +68,16 @@ class SettingPage extends StatelessWidget {
             SettingItem(
               text: "User Feedback",
               iconData: Icons.mark_email_read_outlined,
+            ),
+            SettingItem(
+              text: "Keluar",
+              iconData: Icons.logout,
+              onPressed: () {
+                AuthServices.signOut().then((_) {
+                  context.read<AppProvider>().user = null;
+                  Navigator.pushReplacementNamed(context, Routes.landing);
+                });
+              },
             ),
           ],
         ),

@@ -1,58 +1,28 @@
-import 'dart:convert';
-
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart' as http;
-import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rental_sepeda_flutter/models/user_model.dart';
 
 class UserServices {
-  static Future<bool> login(String username, String password) async {
-    // Ambil data dari server
-    var response = await http.post(
-      Uri.parse("$apiURL/user/login/"),
-      headers: headerHttp,
-      body: {'username': username, 'password': password},
-    );
+  static final CollectionReference _users =
+      FirebaseFirestore.instance.collection("users");
 
-    // Jika kode respon 200
-    if (response.statusCode == 200) {
-      try {
-        // Proses mapping
-        Map<String, dynamic> result = json.decode(response.body);
-
-        final prefs = await SharedPreferences.getInstance();
-        prefs.setString('jwt', result['jwt']);
-
-        return true;
-      } catch (e, s) {
-        Fluttertoast.showToast(msg: errorAppString);
-      }
-    } else if (response.statusCode == 401) {
-      Fluttertoast.showToast(msg: response.body);
-    } else {
-      Fluttertoast.showToast(msg: errorAppString);
-    }
-
-    return false;
+  static Future<void> create(AppUser appUser) async {
+    await _users.doc(appUser.id).set({
+      'name': appUser.name,
+      'email': appUser.email,
+      'balance': appUser.balance,
+      'photoURL': appUser.photoURL,
+    });
   }
 
-  static Future<bool> register(
-      String email, String username, String password) async {
-    var response = await http.post(
-      Uri.parse("$apiURL/user/register/"),
-      headers: headerHttp,
-      body: {'email': email, 'username': username, 'password': password},
+  static Future<AppUser?> get(String id) async {
+    DocumentSnapshot doc = await _users.doc(id).get();
+
+    return AppUser(
+      id: id,
+      name: doc.get('name'),
+      email: doc.get('email'),
+      balance: doc.get('balance'),
+      photoURL: doc.get('photoURL'),
     );
-
-    // Jika kode respon 200
-    if (response.statusCode == 200) {
-      return true;
-    } else if (response.statusCode == 401) {
-      Fluttertoast.showToast(msg: response.body);
-    } else {
-      Fluttertoast.showToast(msg: errorAppString);
-    }
-
-    return false;
   }
 }
