@@ -6,12 +6,13 @@ class CustomGradientButton extends StatelessWidget {
   final double height;
   final double width;
   final void Function()? onPressed;
+
   const CustomGradientButton({
     Key? key,
-    this.text = const Text(""),
-    this.height = 0,
-    this.width = 0,
     required this.onPressed,
+    this.height = 0,
+    this.text = const Text(""),
+    this.width = 0,
   }) : super(key: key);
 
   @override

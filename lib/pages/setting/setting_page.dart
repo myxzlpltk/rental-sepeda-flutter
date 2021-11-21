@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/setting_item.dart';
@@ -17,14 +17,9 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 20),
         Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(50)),
-              child: Image(
-                height: 90,
-                width: 90,
-                image: AssetImage('assets/image/profile_pict.jpg'),
-                fit: BoxFit.cover,
-              ),
+            CircleAvatar(
+              radius: 45,
+              backgroundImage: AssetImage('assets/image/profile_pict.jpg'),
             ),
             SizedBox(width: 20),
             Column(
@@ -54,32 +49,27 @@ class SettingPage extends StatelessWidget {
           "General",
           style: Theme.of(context).textTheme.headline2,
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SettingItem(
-              text: "help",
-              iconData: Icons.headphones_rounded,
-            ),
-            SettingItem(
-              text: "About Application",
-              iconData: Icons.info_rounded,
-            ),
-            SettingItem(
-              text: "User Feedback",
-              iconData: Icons.mark_email_read_outlined,
-            ),
-            SettingItem(
-              text: "Keluar",
-              iconData: Icons.logout,
-              onPressed: () {
-                AuthServices.signOut().then((_) {
-                  context.read<AppProvider>().user = null;
-                  Navigator.pushReplacementNamed(context, Routes.landing);
-                });
-              },
-            ),
-          ],
+        SettingItem(
+          text: "help",
+          iconData: Icons.headphones_rounded,
+        ),
+        SettingItem(
+          text: "About Application",
+          iconData: Icons.info_rounded,
+        ),
+        SettingItem(
+          text: "User Feedback",
+          iconData: Icons.mark_email_read_outlined,
+        ),
+        SettingItem(
+          text: "Keluar",
+          iconData: Icons.logout,
+          onPressed: () {
+            AuthServices.signOut().then((_) {
+              Provider.of<AppProvider>(context, listen: false).user = null;
+              Navigator.pushReplacementNamed(context, Routes.landing);
+            });
+          },
         ),
       ],
     );

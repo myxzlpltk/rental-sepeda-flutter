@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:provider/src/provider.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/commons/validators.dart';
@@ -34,10 +34,10 @@ class _LoginPageState extends State<LoginPage> {
         Fluttertoast.showToast(msg: result.message!);
       } else {
         _isProcessing.value = true;
-        context.read<AppProvider>().user = result.user;
+        Provider.of<AppProvider>(context, listen: false).user = result.user;
 
         Navigator.popUntil(context, (route) => route.isFirst);
-        Navigator.pushReplacementNamed(context, Routes.main);
+        Navigator.pushReplacementNamed(context, Routes.dashboard);
       }
     }
   }

@@ -36,7 +36,7 @@ class LandingPage extends StatelessWidget {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.data != null) {
                 Future.microtask(
-                    () => Navigator.pushReplacementNamed(context, Routes.main));
+                    () => Navigator.pushReplacementNamed(context, Routes.dashboard));
               } else {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -49,7 +49,7 @@ class LandingPage extends StatelessWidget {
                     SizedBox(height: 100),
                     TextButton(
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, Routes.main);
+                        Navigator.pushReplacementNamed(context, Routes.dashboard);
                       },
                       child: Text(
                         "Skip to Main",

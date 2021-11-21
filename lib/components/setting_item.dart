@@ -1,21 +1,20 @@
 import 'package:flutter/material.dart';
 
 class SettingItem extends StatelessWidget {
-  final String text;
   final IconData iconData;
+  final String text;
   final void Function()? onPressed;
 
   const SettingItem({
     Key? key,
-    required this.text,
     required this.iconData,
+    required this.text,
     this.onPressed,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 0),
       decoration: BoxDecoration(
         border: Border(
           bottom: BorderSide(color: Colors.black54),

@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:rental_sepeda_flutter/home.dart';
 import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
-import 'package:rental_sepeda_flutter/pages/checkout_page.dart';
+import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
+import 'package:rental_sepeda_flutter/pages/dashboard_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
-import 'package:rental_sepeda_flutter/pages/loading_page.dart';
-import 'package:rental_sepeda_flutter/pages/station_page.dart';
+import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
+import 'package:rental_sepeda_flutter/pages/station/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
 class Routes {
   Routes._();
 
   static const String landing = '/';
-  static const String main = '/main';
   static const String login = '/login';
   static const String register = '/register';
+  static const String dashboard = '/dashboard';
   static const String station = '/station';
   static const String checkout = '/checkout';
   static const String loading = '/loading';
 }
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
-  final arguments = settings.arguments;
+  // final arguments = settings.arguments;
 
   switch (settings.name) {
     /* Home */
     case Routes.landing:
       return MaterialPageRoute(builder: (_) => LandingPage());
-    case Routes.main:
-      return MaterialPageRoute(builder: (_) => Home());
+    case Routes.dashboard:
+      return MaterialPageRoute(builder: (_) => DashboardPage());
     case Routes.login:
       return MaterialPageRoute(builder: (_) => LoginPage());
     case Routes.register:

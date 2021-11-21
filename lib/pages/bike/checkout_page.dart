@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 
@@ -10,22 +12,18 @@ class CheckoutPage extends StatelessWidget {
     return Scaffold(
       body: ScreenTemplate(
         title: "Checkout",
-        children: [
-          Row(
-            children: const [
-              Spacer(),
-              Icon(
-                Icons.share,
-                size: 25,
-              ),
-              SizedBox(width: 8),
-              Icon(
-                Icons.download,
-                size: 25,
-              ),
-            ],
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.share, color: whiteColor),
           ),
-          SizedBox(height: 40),
+          IconButton(
+            onPressed: () {},
+            icon: Icon(Icons.download, color: whiteColor),
+          ),
+        ],
+        children: [
+          SizedBox(height: 20),
           SizedBox(
             width: 200,
             height: 200,
