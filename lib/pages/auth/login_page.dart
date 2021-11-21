@@ -19,15 +19,15 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier(false);
   final ValueNotifier<bool> _isProcessing = ValueNotifier(false);
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  String _email = "";
+  String _password = "";
 
   void signIn() async {
     if (_formKey.currentState!.validate()) {
       _isProcessing.value = true;
-      SignInSignUpResult result = await AuthServices.signIn(
-          _emailController.text, _passwordController.text);
+      SignInSignUpResult result = await AuthServices.signIn(_email, _password);
 
       if (result.user == null) {
         _isProcessing.value = false;
@@ -113,18 +113,17 @@ class _LoginPageState extends State<LoginPage> {
                       child: Column(
                         children: <Widget>[
                           CustomTextFormField(
-                            controller: _emailController,
                             hintText: "Masukkan alamat email",
                             labelText: "Email",
                             textInputAction: TextInputAction.next,
                             autofillHints: const [AutofillHints.email],
                             validator: Validator.emailValidator,
+                            onChanged: (value) => _email = value,
                           ),
                           SizedBox(height: 16),
                           ValueListenableBuilder<bool>(
                             valueListenable: _isPasswordVisible,
                             builder: (context, value, _) => CustomTextFormField(
-                              controller: _passwordController,
                               hintText: "Masukkan kata sandi",
                               labelText: "Kata sandi",
                               obscureText: !value,
@@ -139,6 +138,7 @@ class _LoginPageState extends State<LoginPage> {
                                     : Icon(Icons.visibility, size: 19),
                               ),
                               validator: Validator.passwordValidator,
+                              onChanged: (value) => _password = value,
                             ),
                           ),
                           SizedBox(height: 16),

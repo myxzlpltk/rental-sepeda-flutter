@@ -25,20 +25,24 @@ class SettingPage extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Megumin (めぐみん)",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline2!
-                      .copyWith(color: Colors.black87),
+                Consumer<AppProvider>(
+                  builder: (context, app, _) => Text(
+                    app.user!.name,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline2!
+                        .copyWith(color: Colors.black87),
+                  ),
                 ),
                 SizedBox(height: 12),
-                Text(
-                  "megumin@isekai.com",
-                  style: Theme.of(context)
-                      .textTheme
-                      .headline3!
-                      .copyWith(color: Colors.black87),
+                Consumer<AppProvider>(
+                  builder: (context, app, _) => Text(
+                    app.user!.email,
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline3!
+                        .copyWith(color: Colors.black87),
+                  ),
                 ),
               ],
             )
@@ -65,10 +69,8 @@ class SettingPage extends StatelessWidget {
           text: "Keluar",
           iconData: Icons.logout,
           onPressed: () {
-            AuthServices.signOut().then((_) {
-              Provider.of<AppProvider>(context, listen: false).user = null;
-              Navigator.pushReplacementNamed(context, Routes.landing);
-            });
+            AuthServices.signOut();
+            Navigator.pushReplacementNamed(context, Routes.landing);
           },
         ),
       ],

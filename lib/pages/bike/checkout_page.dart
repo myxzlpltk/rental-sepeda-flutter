@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 

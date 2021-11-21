@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
+import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
 import 'package:rental_sepeda_flutter/pages/dashboard_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
-import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
 import 'package:rental_sepeda_flutter/pages/station/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
 
