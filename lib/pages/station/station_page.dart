@@ -6,6 +6,7 @@ import 'package:rental_sepeda_flutter/components/specification_box.dart';
 
 class StationPage extends StatelessWidget {
   final int id;
+
   const StationPage({
     Key? key,
     required this.id,
