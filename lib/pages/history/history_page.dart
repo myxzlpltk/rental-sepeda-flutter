@@ -20,12 +20,12 @@ class HistoryPage extends StatelessWidget {
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",
-          historyTime: new DateTime.now(),
+          historyTime: DateTime.now(),
         ),
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",
-          historyTime: new DateTime.now(),
+          historyTime: DateTime.now(),
         ),
         SizedBox(height: 16),
         Text(
@@ -36,12 +36,12 @@ class HistoryPage extends StatelessWidget {
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",
-          historyTime: new DateTime.now(),
+          historyTime: DateTime.now(),
         ),
         HistoryItem(
           historyID: 100912,
           historyStatus: "has been booked",
-          historyTime: new DateTime.now(),
+          historyTime: DateTime.now(),
         ),
       ],
     );

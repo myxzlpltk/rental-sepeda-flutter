@@ -2,27 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
+  final Iterable<String>? autofillHints;
   final String hintText;
   final String labelText;
-  final Widget? suffixIcon;
+  final String? Function(String?)? validator;
+  final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
+  final Widget? suffixIcon;
   final bool obscureText;
-  final TextEditingController? controller;
-  final Iterable<String>? autofillHints;
-  final String? Function(String?)? validator;
 
   // Focus nodes are necessary
   const CustomTextFormField({
     Key? key,
+    this.autofillHints,
+    this.controller,
     this.hintText = "",
+    this.keyboardType,
     this.labelText = "",
+    this.obscureText = false,
     this.suffixIcon,
     this.textInputAction,
-    this.keyboardType,
-    this.obscureText = false,
-    this.controller,
-    this.autofillHints,
     this.validator,
   }) : super(key: key);
 
@@ -62,17 +62,18 @@ class CustomTextFormField extends StatelessWidget {
 
 class CustomTextFormField2 extends StatelessWidget {
   final String hintText;
-  final String labelText;
   final String initialValue;
-  final bool obscureText;
+  final String labelText;
   final bool enabled;
+  final bool obscureText;
+
   const CustomTextFormField2({
     Key? key,
-    this.hintText = "",
-    this.labelText = "",
-    this.initialValue = "",
-    this.obscureText = false,
     this.enabled = true,
+    this.hintText = "",
+    this.initialValue = "",
+    this.labelText = "",
+    this.obscureText = false,
   }) : super(key: key);
 
   @override

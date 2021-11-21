@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rental_sepeda_flutter/models/user_model.dart';
 
 class UserServices {
+  UserServices._();
+
   static final CollectionReference _users =
       FirebaseFirestore.instance.collection("users");
 

@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
 class HistoryItem extends StatelessWidget {
-  final int historyID;
+  final DateTime historyTime;
   final String historyStatus;
-  final historyTime;
+  final int historyID;
 
   const HistoryItem({
     Key? key,
     required this.historyID,
-    required this.historyTime,
     required this.historyStatus,
+    required this.historyTime,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,11 +39,11 @@ class HistoryItem extends StatelessWidget {
                     style: TextStyle(color: Colors.black),
                     children: [
                       TextSpan(
-                        text: " #" + historyID.toString(),
+                        text: " #$historyID",
                         style: TextStyle(color: Colors.blue),
                       ),
                       TextSpan(
-                        text: " " + historyStatus.toString(),
+                        text: " $historyStatus",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],

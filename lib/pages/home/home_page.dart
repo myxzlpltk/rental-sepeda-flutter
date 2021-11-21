@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/components/countdown.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/station_card.dart';
 
-class MainPage extends StatelessWidget {
-  const MainPage({Key? key}) : super(key: key);
+class HomePage extends StatelessWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,9 +21,9 @@ class MainPage extends StatelessWidget {
           width: 130,
           child: SvgPicture.asset('assets/svg/home_decoration.svg'),
         ),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16),
+        SafeArea(
           child: ListView(
+            padding: EdgeInsets.symmetric(horizontal: 16),
             children: <Widget>[
               SizedBox(height: 20),
               Text(
@@ -32,9 +33,7 @@ class MainPage extends StatelessWidget {
                     .headline2!
                     .copyWith(color: blueColor),
               ),
-              SizedBox(
-                height: 2,
-              ),
+              SizedBox(height: 2),
               Text(
                 "Let’s find and book the Bike for You! ",
                 style: TextStyle(
@@ -42,9 +41,7 @@ class MainPage extends StatelessWidget {
                   fontSize: 12,
                 ),
               ),
-              SizedBox(
-                height: 24,
-              ),
+              SizedBox(height: 24),
               Row(
                 children: [
                   Column(
@@ -54,7 +51,9 @@ class MainPage extends StatelessWidget {
                         children: [
                           Container(
                             padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 8),
+                              vertical: 2,
+                              horizontal: 8,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(5),
@@ -70,77 +69,12 @@ class MainPage extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 8),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 4),
-                            decoration: BoxDecoration(
-                              gradient: customGradientBlueToGreen,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              color: Color(0xFFFBA73F),
-                            ),
-                            child: Text(
-                              "00",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: whiteColor),
-                            ),
-                          ),
-                          SizedBox(width: 2),
-                          Text(
-                            ":",
-                            style: TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(width: 2),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 4),
-                            decoration: BoxDecoration(
-                              gradient: customGradientBlueToGreen,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              color: Color(0xFFFBA73F),
-                            ),
-                            child: Text(
-                              "00",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: whiteColor),
-                            ),
-                          ),
-                          SizedBox(width: 2),
-                          Text(
-                            ":",
-                            style: TextStyle(fontWeight: FontWeight.w700),
-                          ),
-                          SizedBox(width: 2),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                                vertical: 2, horizontal: 4),
-                            decoration: BoxDecoration(
-                              gradient: customGradientBlueToGreen,
-                              borderRadius: BorderRadius.all(
-                                Radius.circular(5),
-                              ),
-                              color: Color(0xFFFBA73F),
-                            ),
-                            child: Text(
-                              "00",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyText2!
-                                  .copyWith(color: whiteColor),
-                            ),
+                          Countdown(
+                            dateTime: DateTime.now().add(Duration(minutes: 2)),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Text(
                         "Station 1's Bike",
                         style: TextStyle(
@@ -156,9 +90,7 @@ class MainPage extends StatelessWidget {
                             size: 14,
                             color: Colors.black38,
                           ),
-                          SizedBox(
-                            width: 4,
-                          ),
+                          SizedBox(width: 4),
                           Text("H5 Building",
                               style: Theme.of(context).textTheme.bodyText1),
                         ],
@@ -171,9 +103,7 @@ class MainPage extends StatelessWidget {
                             size: 14,
                             color: Colors.black38,
                           ),
-                          SizedBox(
-                            width: 4,
-                          ),
+                          SizedBox(width: 4),
                           Text(
                             "IDR 30.000/hour",
                             style:
@@ -186,9 +116,7 @@ class MainPage extends StatelessWidget {
                       SizedBox(height: 2),
                       Row(
                         children: [
-                          SizedBox(
-                            width: 18,
-                          ),
+                          SizedBox(width: 18),
                           Text(
                             "IDR 20.000/hour",
                             style: Theme.of(context)
@@ -207,11 +135,13 @@ class MainPage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  Spacer(),
                   Image.asset(
                     'assets/image/cycle.png',
                     width: 101,
                     height: 115,
                   ),
+                  Spacer(),
                 ],
               ),
               SizedBox(height: 20),
@@ -234,9 +164,7 @@ class MainPage extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 25,
-              ),
+              SizedBox(height: 25),
               Text(
                 "Nearby Station",
                 style: TextStyle(
@@ -244,41 +172,23 @@ class MainPage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
+              SizedBox(height: 20),
               SizedBox(
-                height: 20,
-              ),
-              Container(
                 height: 184,
-                child: ListView(
+                child: ListView.separated(
                   scrollDirection: Axis.horizontal,
-                  children: const <Widget>[
-                    StationCard(
-                      stationID: 1,
-                      stationName: "Station 1",
-                      stationRange: 50,
-                      stationAddress: "H5 Building",
-                      bikesAvailable: 23,
-                    ),
-                    StationCard(
-                      stationID: 1,
-                      stationName: "Station 2",
-                      stationRange: 50,
-                      stationAddress: "H5 Building",
-                      bikesAvailable: 23,
-                    ),
-                    StationCard(
-                      stationID: 1,
-                      stationName: "Station 3",
-                      stationRange: 50,
-                      stationAddress: "H5 Building",
-                      bikesAvailable: 23,
-                    ),
-                  ],
+                  separatorBuilder: (context, index) => SizedBox(width: 8),
+                  itemCount: 3,
+                  itemBuilder: (context, index) => StationCard(
+                    stationID: 1,
+                    stationName: "Station $index",
+                    stationRange: 50,
+                    stationAddress: "H5 Building",
+                    bikesAvailable: 23,
+                  ),
                 ),
               ),
-              SizedBox(
-                height: 25,
-              ),
+              SizedBox(height: 25),
               Text(
                 "Today's Promo",
                 style: TextStyle(
@@ -286,9 +196,7 @@ class MainPage extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
-                height: 20,
-              ),
+              SizedBox(height: 20),
             ],
           ),
         ),

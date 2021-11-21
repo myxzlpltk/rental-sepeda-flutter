@@ -1,39 +1,28 @@
 import 'package:flutter/material.dart';
 
-class BottomAppItem extends StatefulWidget {
-  final Function callback;
-  final Widget screen;
-  final int tab;
-  final int currentTab;
+class BottomAppItem extends StatelessWidget {
   final IconData icon;
+  final bool isActive;
+  final void Function()? onPressed;
+
   const BottomAppItem({
     Key? key,
-    required this.callback,
-    required this.screen,
-    required this.tab,
-    required this.currentTab,
     required this.icon,
+    required this.isActive,
+    this.onPressed,
   }) : super(key: key);
 
-  @override
-  _BottomAppItemState createState() => _BottomAppItemState();
-}
-
-class _BottomAppItemState extends State<BottomAppItem> {
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
       minWidth: 40,
-      onPressed: () {
-        widget.callback(widget.tab, widget.screen);
-      },
+      onPressed: onPressed,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Icon(
-            widget.icon,
-            color:
-                widget.currentTab == widget.tab ? Colors.black : Colors.black38,
+            icon,
+            color: isActive ? Colors.black : Colors.black38,
           ),
         ],
       ),

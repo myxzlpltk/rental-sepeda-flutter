@@ -4,16 +4,17 @@ import 'package:rental_sepeda_flutter/commons/constants.dart';
 class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
+
   const CustomButton({
     Key? key,
-    required this.text,
     required this.onPressed,
+    required this.text,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: this.onPressed,
+      onPressed: onPressed,
       child: Text(
         text,
         style: TextStyle(
@@ -28,10 +29,7 @@ class CustomButton extends StatelessWidget {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
         ),
-        minimumSize: Size(
-          175,
-          25,
-        ),
+        minimumSize: Size(175, 25),
       ),
     );
   }

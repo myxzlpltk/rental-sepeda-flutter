@@ -4,6 +4,8 @@ import 'package:rental_sepeda_flutter/models/user_model.dart';
 import 'package:rental_sepeda_flutter/services/user_services.dart';
 
 class AuthServices {
+  AuthServices._();
+
   static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   static Future<AppUser?> auth() async {

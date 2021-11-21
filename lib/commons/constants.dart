@@ -30,6 +30,7 @@ const LinearGradient customGradientGreenToBlue = LinearGradient(
 );
 
 /* Text Styles */
+
 /// Untuk mengganti warna gunakan
 /// regularTextStyle.copyWith(
 ///   color: Colors.white,
