@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/text_form_field.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
+  @override
+  _ProfilePageState createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
@@ -25,25 +30,25 @@ class ProfilePage extends StatelessWidget {
           labelText: "Email",
           hintText: "Type your email here",
           initialValue: "nsmaulidi12@gmail.com",
-          enabled: false,
+          enabled: true,
         ),
         CustomTextFormField2(
           labelText: "Password",
           hintText: "Type your password here",
           initialValue: "blablabla",
-          enabled: false,
+          enabled: true,
           obscureText: true,
         ),
         CustomTextFormField2(
           labelText: "Phone Number",
           hintText: "Type your city here",
           initialValue: "+6287123456789",
-          enabled: false,
+          enabled: true,
         ),
         CustomTextFormField2(
           labelText: "City",
           hintText: "Type your city here",
-          enabled: false,
+          enabled: true,
           initialValue: "Malang",
         ),
       ],
