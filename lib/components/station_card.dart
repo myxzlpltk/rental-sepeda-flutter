@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
-import 'custom_button.dart';
-
 class StationCard extends StatelessWidget {
   final String stationAddress;
   final String stationName;
@@ -26,7 +24,7 @@ class StationCard extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       elevation: 1,
       child: InkWell(
-        onTap: (){
+        onTap: () {
           Navigator.pushNamed(
             context,
             Routes.station,
