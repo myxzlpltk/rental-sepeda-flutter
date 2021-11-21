@@ -19,18 +19,17 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final ValueNotifier<bool> _isPasswordVisible = ValueNotifier(false);
   final ValueNotifier<bool> _isProcessing = ValueNotifier(false);
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+
+  String _name = "";
+  String _email = "";
+  String _password = "";
 
   void signUp() async {
     if (_formKey.currentState!.validate()) {
       _isProcessing.value = true;
-      SignInSignUpResult result = await AuthServices.signUp(
-          _nameController.text,
-          _emailController.text,
-          _passwordController.text);
+      SignInSignUpResult result =
+          await AuthServices.signUp(_name, _email, _password);
 
       if (result.user == null) {
         _isProcessing.value = false;
@@ -104,27 +103,26 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: Column(
                         children: <Widget>[
                           CustomTextFormField(
-                            controller: _nameController,
                             hintText: "Masukkan nama lengkap",
                             labelText: "Nama lengkap",
                             textInputAction: TextInputAction.next,
                             autofillHints: const [AutofillHints.name],
                             validator: Validator.nameValidator,
+                            onChanged: (value) => _name = value,
                           ),
                           SizedBox(height: 16),
                           CustomTextFormField(
-                            controller: _emailController,
                             hintText: "Masukkan alamat email",
                             labelText: "Email",
                             textInputAction: TextInputAction.next,
                             autofillHints: const [AutofillHints.email],
                             validator: Validator.emailValidator,
+                            onChanged: (value) => _email = value,
                           ),
                           SizedBox(height: 16),
                           ValueListenableBuilder<bool>(
                             valueListenable: _isPasswordVisible,
                             builder: (context, value, _) => CustomTextFormField(
-                              controller: _passwordController,
                               hintText: "Masukkan kata sandi",
                               labelText: "Kata sandi",
                               obscureText: !value,
@@ -139,6 +137,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                     : Icon(Icons.visibility, size: 19),
                               ),
                               validator: Validator.passwordValidator,
+                              onChanged: (value) => _password = value,
                             ),
                           ),
                           SizedBox(height: 20),
