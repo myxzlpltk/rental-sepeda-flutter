@@ -69,8 +69,8 @@ class SettingPage extends StatelessWidget {
           text: "Keluar",
           iconData: Icons.logout,
           onPressed: () {
-            AuthServices.signOut();
-            Navigator.pushReplacementNamed(context, Routes.landing);
+            AuthServices.signOut().then((value) =>
+                Navigator.pushReplacementNamed(context, Routes.landing));
           },
         ),
       ],

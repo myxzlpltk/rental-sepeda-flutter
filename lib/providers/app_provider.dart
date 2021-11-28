@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/models/user_model.dart';
+import 'package:rental_sepeda_flutter/services/auth_services.dart';
 
 class AppProvider extends ChangeNotifier {
   AppUser? _user;
@@ -8,5 +9,16 @@ class AppProvider extends ChangeNotifier {
   set user(AppUser? user) {
     _user = user;
     notifyListeners();
+  }
+
+  Future<bool> auth() async {
+    AppUser? user = await AuthServices.auth();
+    if (user != null) {
+      _user = user;
+      return true;
+    } else {
+      _user = null;
+      return false;
+    }
   }
 }

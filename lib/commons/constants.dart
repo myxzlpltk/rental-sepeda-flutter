@@ -46,3 +46,16 @@ TextStyle boldTextStyle = TextStyle(
   color: Colors.black,
   height: 1,
 );
+
+/* Response Class */
+class Response<T> {
+  final bool status;
+  final T? data;
+  final String? message;
+
+  Response(
+    this.status, {
+    this.data,
+    this.message,
+  });
+}

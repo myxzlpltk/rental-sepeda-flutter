@@ -3,12 +3,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
-import 'package:rental_sepeda_flutter/models/user_model.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
-import 'package:rental_sepeda_flutter/services/auth_services.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({Key? key}) : super(key: key);
+
+  void navigateToDashboard(BuildContext context) {
+    Future.microtask(() {
+      Navigator.pushReplacementNamed(context, Routes.dashboard);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +36,12 @@ class LandingPage extends StatelessWidget {
             colors: [Color(0x5561DEC0), Color(0x550A578E)],
           ),
         ),
-        child: FutureBuilder<AppUser?>(
-          future: AuthServices.auth(),
+        child: FutureBuilder<bool>(
+          future: Provider.of<AppProvider>(context, listen: false).auth(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              if (snapshot.hasData && snapshot.data != null) {
-                Provider.of<AppProvider>(context, listen: false).user =
-                    snapshot.data;
-                Future.microtask(() =>
-                    Navigator.pushReplacementNamed(context, Routes.dashboard));
+              if (snapshot.hasData && snapshot.data == true) {
+                navigateToDashboard(context);
               } else {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.end,
