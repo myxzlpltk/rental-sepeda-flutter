@@ -47,10 +47,7 @@ class Countdown extends StatelessWidget {
             valueListenable: hours,
             builder: (context, value, _) => Text(
               value.toString().padLeft(2, "0"),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2!
-                  .copyWith(color: whiteColor),
+              style: bodyText2Style.copyWith(color: whiteColor),
             ),
           ),
         ),
@@ -73,10 +70,7 @@ class Countdown extends StatelessWidget {
             valueListenable: minutes,
             builder: (context, value, _) => Text(
               value.toString().padLeft(2, "0"),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2!
-                  .copyWith(color: whiteColor),
+              style: bodyText2Style.copyWith(color: whiteColor),
             ),
           ),
         ),
@@ -99,10 +93,7 @@ class Countdown extends StatelessWidget {
             valueListenable: seconds,
             builder: (context, value, _) => Text(
               value.toString().padLeft(2, "0"),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText2!
-                  .copyWith(color: whiteColor),
+              style: bodyText2Style.copyWith(color: whiteColor),
             ),
           ),
         ),

@@ -60,8 +60,7 @@ class HomePage extends StatelessWidget {
       children: [
         Text(
           "Selamat datang, Megumin",
-          style:
-              Theme.of(context).textTheme.headline2!.copyWith(color: blueColor),
+          style: headline2Style.copyWith(color: blueColor),
         ),
         Text(
           "Let’s find and book the Bike for You! ",
@@ -95,10 +94,7 @@ class HomePage extends StatelessWidget {
                   ),
                   child: Text(
                     "Exclusive Offer",
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1!
-                        .copyWith(color: whiteColor),
+                    style: bodyText1Style.copyWith(color: whiteColor),
                   ),
                 ),
                 SizedBox(width: 8),
@@ -124,8 +120,7 @@ class HomePage extends StatelessWidget {
                   color: Colors.black38,
                 ),
                 SizedBox(width: 4),
-                Text("H5 Building",
-                    style: Theme.of(context).textTheme.bodyText1),
+                Text("H5 Building", style: bodyText1Style),
               ],
             ),
             SizedBox(height: 2),
@@ -139,9 +134,9 @@ class HomePage extends StatelessWidget {
                 SizedBox(width: 4),
                 Text(
                   "IDR 30.000/hour",
-                  style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                        decoration: TextDecoration.lineThrough,
-                      ),
+                  style: bodyText1Style.copyWith(
+                    decoration: TextDecoration.lineThrough,
+                  ),
                 ),
               ],
             ),
@@ -151,10 +146,7 @@ class HomePage extends StatelessWidget {
                 SizedBox(width: 18),
                 Text(
                   "IDR 20.000/hour",
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2!
-                      .copyWith(fontSize: 14),
+                  style: bodyText2Style.copyWith(fontSize: 14),
                 ),
               ],
             ),

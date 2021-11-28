@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/history_item.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 
@@ -14,7 +15,7 @@ class HistoryPage extends StatelessWidget {
       children: <Widget>[
         Text(
           "New",
-          style: Theme.of(context).textTheme.headline1,
+          style: headline1Style,
         ),
         SizedBox(height: 16),
         HistoryItem(
@@ -30,7 +31,7 @@ class HistoryPage extends StatelessWidget {
         SizedBox(height: 16),
         Text(
           "Previous",
-          style: Theme.of(context).textTheme.headline1,
+          style: headline1Style,
         ),
         SizedBox(height: 16),
         HistoryItem(

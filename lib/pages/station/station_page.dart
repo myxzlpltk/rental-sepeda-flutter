@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
@@ -28,7 +29,7 @@ class StationPage extends StatelessWidget {
                 children: [
                   Text(
                     "Hour",
-                    style: Theme.of(context).textTheme.headline2,
+                    style: headline2Style,
                   ),
                   SizedBox(
                     width: 140,
@@ -49,7 +50,7 @@ class StationPage extends StatelessWidget {
                   ),
                   Text(
                     "Price",
-                    style: Theme.of(context).textTheme.headline2,
+                    style: headline2Style,
                   ),
                   SizedBox(height: 10),
                   Container(
@@ -62,7 +63,7 @@ class StationPage extends StatelessWidget {
                     ),
                     child: Text(
                       "IDR 20.000",
-                      style: Theme.of(context).textTheme.headline3,
+                      style: headline3Style,
                     ),
                   ),
                   SizedBox(
@@ -78,7 +79,7 @@ class StationPage extends StatelessWidget {
             ],
           ),
           SizedBox(height: 8),
-          Text("Specifications", style: Theme.of(context).textTheme.headline2),
+          Text("Specifications", style: headline2Style),
           GridView(
             physics: NeverScrollableScrollPhysics(),
             shrinkWrap: true,

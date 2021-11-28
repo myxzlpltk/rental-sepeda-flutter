@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 
 class StationCard extends StatelessWidget {
@@ -59,21 +60,18 @@ class StationCard extends StatelessWidget {
                       ),
                       Text(
                         "${stationRange}m",
-                        style: Theme.of(context)
-                            .textTheme
-                            .caption!
-                            .copyWith(color: Colors.black54),
+                        style: captionStyle.copyWith(color: Colors.black54),
                       ),
                     ],
                   ),
                   SizedBox(height: 4),
                   Text(
                     stationAddress,
-                    style: Theme.of(context).textTheme.caption,
+                    style: captionStyle,
                   ),
                   Text(
                     bikesAvailable.toString() + " Bikes available",
-                    style: Theme.of(context).textTheme.caption,
+                    style: captionStyle,
                   ),
                 ],
               ),

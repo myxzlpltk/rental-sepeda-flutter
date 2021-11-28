@@ -40,10 +40,7 @@ class ScreenTemplate extends StatelessWidget {
                 Expanded(
                   child: Text(
                     title,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline1!
-                        .copyWith(color: whiteColor),
+                    style: headline1Style.copyWith(color: whiteColor),
                   ),
                 ),
                 SizedBox(width: 16),

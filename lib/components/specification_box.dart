@@ -37,10 +37,10 @@ class SpecificationsBox extends StatelessWidget {
           SizedBox(height: 12),
           Text(
             caption,
-            style: Theme.of(context).textTheme.caption,
+            style: captionStyle,
           ),
           SizedBox(height: 8),
-          Text(value, style: Theme.of(context).textTheme.bodyText2),
+          Text(value, style: bodyText2Style),
         ],
       ),
     );
