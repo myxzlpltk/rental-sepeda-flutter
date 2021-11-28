@@ -12,7 +12,7 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return ChangeNotifierProvider<RegisterProvider>(
       create: (context) => RegisterProvider(),
       builder: (context, _) => Scaffold(
         body: Container(
