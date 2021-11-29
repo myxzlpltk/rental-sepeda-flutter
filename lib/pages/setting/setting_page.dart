@@ -13,7 +13,7 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-      title: "Setting",
+      title: "Pengaturan",
       children: [
         SizedBox(height: 20),
         Row(
@@ -51,21 +51,18 @@ class SettingPage extends StatelessWidget {
           ],
         ),
         SizedBox(height: 40),
-        Text(
-          "General",
-          style: headline2Style,
-        ),
+        Text("Pilih Menu", style: headline2Style),
         SettingItem(
-          text: "help",
-          iconData: Icons.headphones_rounded,
-        ),
-        SettingItem(
-          text: "About Application",
+          text: "Tentang Aplikasi",
           iconData: Icons.info_rounded,
         ),
         SettingItem(
-          text: "User Feedback",
-          iconData: Icons.mark_email_read_outlined,
+          text: "Minta Bantuan",
+          iconData: Icons.help,
+        ),
+        SettingItem(
+          text: "Umpan Balik Pengguna",
+          iconData: Icons.feedback,
         ),
         SettingItem(
           text: "Keluar",
