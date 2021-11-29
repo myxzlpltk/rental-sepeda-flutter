@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /* Literal String */
-const String appName = "App Name";
-const String apiURL = "https://ebike-api.herokuapp.com";
-const String errorAppString =
-    "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
+const String appName = "e-Bike";
+const String appError = "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
+const String appDescription =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis. Est ultricies integer quis auctor elit sed vulputate mi. Donec enim diam vulputate ut pharetra sit.";
 
 /* Literal Object */
 Map<String, String> headerHttp = {'Accept': 'application/json'};

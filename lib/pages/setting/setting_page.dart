@@ -55,6 +55,9 @@ class SettingPage extends StatelessWidget {
         SettingItem(
           text: "Tentang Aplikasi",
           iconData: Icons.info_rounded,
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.infoApp);
+          },
         ),
         SettingItem(
           text: "Minta Bantuan",

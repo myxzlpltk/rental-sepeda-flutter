@@ -34,7 +34,7 @@ class AuthServices {
     } on FirebaseAuthException catch (e) {
       return Response<AppUser>(false, message: e.message);
     } catch (e) {
-      return Response<AppUser>(false, message: errorAppString);
+      return Response<AppUser>(false, message: appError);
     }
   }
 
@@ -57,7 +57,7 @@ class AuthServices {
     } on FirebaseAuthException catch (e) {
       return Response<AppUser>(false, message: e.message);
     } catch (e) {
-      return Response<AppUser>(false, message: errorAppString);
+      return Response<AppUser>(false, message: appError);
     }
   }
 
