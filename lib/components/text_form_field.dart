@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -64,19 +65,31 @@ class CustomTextFormField extends StatelessWidget {
 }
 
 class CustomTextFormField2 extends StatelessWidget {
+  final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
   final String hintText;
   final String initialValue;
   final String labelText;
+  final String? Function(String?)? validator;
+  final TextInputAction? textInputAction;
+  final TextInputType? keyboardType;
   final bool enabled;
   final bool obscureText;
+  final void Function(String)? onChanged;
 
   const CustomTextFormField2({
     Key? key,
     this.enabled = true,
+    this.focusNode,
     this.hintText = "",
     this.initialValue = "",
+    this.inputFormatters,
+    this.keyboardType,
     this.labelText = "",
     this.obscureText = false,
+    this.onChanged,
+    this.textInputAction,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -84,6 +97,7 @@ class CustomTextFormField2 extends StatelessWidget {
     return SizedBox(
       height: 80,
       child: TextFormField(
+        focusNode: focusNode,
         enabled: enabled,
         obscureText: obscureText,
         initialValue: initialValue,
@@ -93,6 +107,11 @@ class CustomTextFormField2 extends StatelessWidget {
           labelText: labelText,
           hintText: hintText,
         ),
+        keyboardType: keyboardType,
+        textInputAction: textInputAction,
+        validator: validator,
+        inputFormatters: inputFormatters,
+        onChanged: onChanged,
       ),
     );
   }

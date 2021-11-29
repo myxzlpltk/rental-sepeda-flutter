@@ -4,6 +4,7 @@ import 'package:rental_sepeda_flutter/commons/constants.dart';
 class ScreenTemplate extends StatelessWidget {
   final List<Widget> actions;
   final List<Widget> children;
+  final ScrollController? controller;
   final String title;
 
   const ScreenTemplate({
@@ -11,6 +12,7 @@ class ScreenTemplate extends StatelessWidget {
     required this.children,
     required this.title,
     this.actions = const [],
+    this.controller,
   }) : super(key: key);
 
   @override
@@ -55,6 +57,7 @@ class ScreenTemplate extends StatelessWidget {
               child: Container(
                 color: whiteColor,
                 child: ListView(
+                  controller: controller,
                   padding: EdgeInsets.all(20),
                   children: children,
                 ),

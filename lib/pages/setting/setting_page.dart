@@ -18,9 +18,16 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 20),
         Row(
           children: [
-            CircleAvatar(
-              radius: 45,
-              backgroundImage: AssetImage('assets/image/profile_pict.jpg'),
+            Consumer<AppProvider>(
+              builder: (context, state, _) => CircleAvatar(
+                radius: 45,
+                backgroundImage: state.image != null
+                    ? FileImage(state.image!)
+                    : state.user!.photoURL.isNotEmpty
+                        ? NetworkImage(state.user!.photoURL)
+                        : AssetImage("assets/image/profile_pict.jpg")
+                            as ImageProvider,
+              ),
             ),
             SizedBox(width: 20),
             Column(

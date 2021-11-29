@@ -12,6 +12,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return ChangeNotifierProvider<LoginProvider>(
       create: (context) => LoginProvider(),
       builder: (context, _) => Scaffold(
@@ -78,8 +80,7 @@ class LoginPage extends StatelessWidget {
                       ],
                     ),
                     Form(
-                      key: Provider.of<LoginProvider>(context, listen: false)
-                          .formKey,
+                      key: formKey,
                       child: AutofillGroup(
                         child: Column(
                           children: <Widget>[
@@ -88,7 +89,7 @@ class LoginPage extends StatelessWidget {
                               labelText: "Email",
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],
-                              validator: Validator.emailValidator,
+                              validator: Validator.email,
                               onChanged: (value) => Provider.of<LoginProvider>(
                                       context,
                                       listen: false)
@@ -112,7 +113,7 @@ class LoginPage extends StatelessWidget {
                                       ? Icon(Icons.visibility_off, size: 19)
                                       : Icon(Icons.visibility, size: 19),
                                 ),
-                                validator: Validator.passwordValidator,
+                                validator: Validator.password,
                                 onChanged: (value) => state.password = value,
                               ),
                             ),
@@ -132,8 +133,7 @@ class LoginPage extends StatelessWidget {
                                 onPressed: state.isProcessing
                                     ? null
                                     : () {
-                                        if (state.formKey.currentState!
-                                            .validate()) {
+                                        if (formKey.currentState!.validate()) {
                                           state.signIn(context);
                                         }
                                       },

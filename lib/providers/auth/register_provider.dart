@@ -8,8 +8,6 @@ import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 import 'package:rental_sepeda_flutter/services/auth_services.dart';
 
 class RegisterProvider extends ChangeNotifier {
-  final formKey = GlobalKey<FormState>();
-
   bool _isPasswordVisible = false;
   bool get isPasswordVisible => _isPasswordVisible;
   set isPasswordVisible(bool isPasswordVisible) {

@@ -12,6 +12,8 @@ class RegisterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formKey = GlobalKey<FormState>();
+
     return ChangeNotifierProvider<RegisterProvider>(
       create: (context) => RegisterProvider(),
       builder: (context, _) => Scaffold(
@@ -67,8 +69,7 @@ class RegisterPage extends StatelessWidget {
                       ],
                     ),
                     Form(
-                      key: Provider.of<RegisterProvider>(context, listen: false)
-                          .formKey,
+                      key: formKey,
                       child: AutofillGroup(
                         child: Column(
                           children: <Widget>[
@@ -77,7 +78,7 @@ class RegisterPage extends StatelessWidget {
                               labelText: "Nama lengkap",
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.name],
-                              validator: Validator.nameValidator,
+                              validator: Validator.name,
                               onChanged: (value) =>
                                   Provider.of<RegisterProvider>(context,
                                           listen: false)
@@ -89,7 +90,7 @@ class RegisterPage extends StatelessWidget {
                               labelText: "Email",
                               textInputAction: TextInputAction.next,
                               autofillHints: const [AutofillHints.email],
-                              validator: Validator.emailValidator,
+                              validator: Validator.email,
                               onChanged: (value) =>
                                   Provider.of<RegisterProvider>(context,
                                           listen: false)
@@ -113,7 +114,7 @@ class RegisterPage extends StatelessWidget {
                                       ? Icon(Icons.visibility_off, size: 19)
                                       : Icon(Icons.visibility, size: 19),
                                 ),
-                                validator: Validator.passwordValidator,
+                                validator: Validator.password,
                                 onChanged: (value) => state.password = value,
                               ),
                             ),
@@ -133,8 +134,7 @@ class RegisterPage extends StatelessWidget {
                                 onPressed: state.isProcessing
                                     ? null
                                     : () {
-                                        if (state.formKey.currentState!
-                                            .validate()) {
+                                        if (formKey.currentState!.validate()) {
                                           state.signUp(context);
                                         }
                                       },
