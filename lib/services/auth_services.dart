@@ -18,8 +18,7 @@ class AuthServices {
     }
   }
 
-  static Future<SignInSignUpResult> signIn(
-      String email, String password) async {
+  static Future<Response<AppUser>> signIn(String email, String password) async {
     try {
       UserCredential credential = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
@@ -28,18 +27,18 @@ class AuthServices {
       AppUser? appUser = await UserServices.get(user.uid);
 
       if (appUser != null) {
-        return SignInSignUpResult(user: appUser);
+        return Response<AppUser>(true, data: appUser);
       } else {
-        return SignInSignUpResult(message: "Akun anda tidak valid.");
+        return Response<AppUser>(false, message: "Akun anda tidak valid.");
       }
     } on FirebaseAuthException catch (e) {
-      return SignInSignUpResult(message: e.message);
+      return Response<AppUser>(false, message: e.message);
     } catch (e) {
-      return SignInSignUpResult(message: errorAppString);
+      return Response<AppUser>(false, message: errorAppString);
     }
   }
 
-  static Future<SignInSignUpResult> signUp(
+  static Future<Response<AppUser>> signUp(
       String name, String email, String password) async {
     try {
       UserCredential credential = await _auth.createUserWithEmailAndPassword(
@@ -54,22 +53,15 @@ class AuthServices {
 
       await UserServices.create(appUser);
 
-      return SignInSignUpResult(user: appUser);
+      return Response<AppUser>(true, data: appUser);
     } on FirebaseAuthException catch (e) {
-      return SignInSignUpResult(message: e.message);
+      return Response<AppUser>(false, message: e.message);
     } catch (e) {
-      return SignInSignUpResult(message: errorAppString);
+      return Response<AppUser>(false, message: errorAppString);
     }
   }
 
   static Future<void> signOut() async {
     await _auth.signOut();
   }
-}
-
-class SignInSignUpResult {
-  final AppUser? user;
-  final String? message;
-
-  SignInSignUpResult({this.user, this.message});
 }

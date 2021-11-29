@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 /* Literal String */
 const String appName = "App Name";
@@ -35,14 +36,44 @@ const LinearGradient customGradientGreenToBlue = LinearGradient(
 /// regularTextStyle.copyWith(
 ///   color: Colors.white,
 /// )
-TextStyle regularTextStyle = TextStyle(
+TextStyle headline1Style = GoogleFonts.lato(
+  fontSize: ScreenUtil().setSp(28),
+  fontWeight: FontWeight.w900,
+  color: Colors.black,
+);
+TextStyle headline2Style = GoogleFonts.lato(
+  fontSize: ScreenUtil().setSp(18),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+TextStyle headline3Style = GoogleFonts.lato(
+  fontSize: ScreenUtil().setSp(13),
+  fontWeight: FontWeight.bold,
+  color: Colors.black,
+);
+TextStyle bodyText1Style = GoogleFonts.lato(
   fontSize: ScreenUtil().setSp(12),
   color: Colors.black,
-  height: 1,
 );
-TextStyle boldTextStyle = TextStyle(
+TextStyle bodyText2Style = GoogleFonts.lato(
   fontSize: ScreenUtil().setSp(12),
-  fontWeight: FontWeight.w700,
+  fontWeight: FontWeight.bold,
   color: Colors.black,
-  height: 1,
 );
+TextStyle captionStyle = GoogleFonts.lato(
+  fontSize: ScreenUtil().setSp(9),
+  color: Colors.black87,
+);
+
+/* Response Class */
+class Response<T> {
+  final bool status;
+  final T? data;
+  final String? message;
+
+  Response(
+    this.status, {
+    this.data,
+    this.message,
+  });
+}

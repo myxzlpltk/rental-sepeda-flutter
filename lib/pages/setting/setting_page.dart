@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/setting_item.dart';
@@ -17,9 +18,16 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 20),
         Row(
           children: [
-            CircleAvatar(
-              radius: 45,
-              backgroundImage: AssetImage('assets/image/profile_pict.jpg'),
+            Consumer<AppProvider>(
+              builder: (context, state, _) => CircleAvatar(
+                radius: 45,
+                backgroundImage: state.image != null
+                    ? FileImage(state.image!)
+                    : state.user!.photoURL.isNotEmpty
+                        ? NetworkImage(state.user!.photoURL)
+                        : AssetImage("assets/image/profile_pict.jpg")
+                            as ImageProvider,
+              ),
             ),
             SizedBox(width: 20),
             Column(
@@ -28,20 +36,14 @@ class SettingPage extends StatelessWidget {
                 Consumer<AppProvider>(
                   builder: (context, app, _) => Text(
                     app.user!.name,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline2!
-                        .copyWith(color: Colors.black87),
+                    style: headline2Style.copyWith(color: Colors.black87),
                   ),
                 ),
                 SizedBox(height: 12),
                 Consumer<AppProvider>(
                   builder: (context, app, _) => Text(
                     app.user!.email,
-                    style: Theme.of(context)
-                        .textTheme
-                        .headline3!
-                        .copyWith(color: Colors.black87),
+                    style: headline3Style.copyWith(color: Colors.black87),
                   ),
                 ),
               ],
@@ -51,7 +53,7 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 40),
         Text(
           "General",
-          style: Theme.of(context).textTheme.headline2,
+          style: headline2Style,
         ),
         SettingItem(
           text: "help",
@@ -69,8 +71,8 @@ class SettingPage extends StatelessWidget {
           text: "Keluar",
           iconData: Icons.logout,
           onPressed: () {
-            AuthServices.signOut();
-            Navigator.pushReplacementNamed(context, Routes.landing);
+            AuthServices.signOut().then((value) =>
+                Navigator.pushReplacementNamed(context, Routes.landing));
           },
         ),
       ],

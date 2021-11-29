@@ -1,4 +1,5 @@
 import 'package:intl/intl.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 /* Methods helper */
 final _formatCurrency = NumberFormat.currency(
@@ -10,3 +11,5 @@ final _formatCurrency = NumberFormat.currency(
 String toIDR(int money) {
   return _formatCurrency.format(money);
 }
+
+final phoneNumberMask = MaskTextInputFormatter(mask: '+62 ###-####-#####');

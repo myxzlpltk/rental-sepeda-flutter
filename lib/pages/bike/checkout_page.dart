@@ -52,12 +52,12 @@ class CheckoutPage extends StatelessWidget {
                   children: [
                     Text(
                       "Station 1's Bike",
-                      style: Theme.of(context).textTheme.headline3,
+                      style: headline3Style,
                     ),
                     Spacer(),
                     Text(
                       "ID #198H878K",
-                      style: Theme.of(context).textTheme.headline3,
+                      style: headline3Style,
                     )
                   ],
                 ),
@@ -66,18 +66,12 @@ class CheckoutPage extends StatelessWidget {
                   children: [
                     Text(
                       "5 Hours",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.black87),
+                      style: bodyText1Style.copyWith(color: Colors.black87),
                     ),
                     Spacer(),
                     Text(
                       "5 D",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.black87),
+                      style: bodyText1Style.copyWith(color: Colors.black87),
                     )
                   ],
                 ),
@@ -85,18 +79,12 @@ class CheckoutPage extends StatelessWidget {
                   children: [
                     Text(
                       "Per Hour",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.black87),
+                      style: bodyText1Style.copyWith(color: Colors.black87),
                     ),
                     Spacer(),
                     Text(
                       "IDR 20.000",
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1!
-                          .copyWith(color: Colors.black87),
+                      style: bodyText1Style.copyWith(color: Colors.black87),
                     )
                   ],
                 ),
@@ -106,12 +94,12 @@ class CheckoutPage extends StatelessWidget {
                   children: [
                     Text(
                       "Total",
-                      style: Theme.of(context).textTheme.headline3,
+                      style: headline3Style,
                     ),
                     Spacer(),
                     Text(
                       "IDR 100.000",
-                      style: Theme.of(context).textTheme.bodyText1,
+                      style: bodyText1Style,
                     )
                   ],
                 ),
