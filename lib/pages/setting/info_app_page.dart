@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
@@ -37,12 +35,7 @@ class InfoAppPage extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FlutterLogo(),
-            ],
-          ),
+          Center(child: FlutterLogo()),
         ],
       ),
     );

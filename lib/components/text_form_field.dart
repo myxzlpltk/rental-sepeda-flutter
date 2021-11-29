@@ -68,9 +68,10 @@ class CustomTextFormField2 extends StatelessWidget {
   final FocusNode? focusNode;
   final List<TextInputFormatter>? inputFormatters;
   final String hintText;
-  final String initialValue;
   final String labelText;
   final String? Function(String?)? validator;
+  final String? initialValue;
+  final TextEditingController? controller;
   final TextInputAction? textInputAction;
   final TextInputType? keyboardType;
   final bool enabled;
@@ -79,10 +80,11 @@ class CustomTextFormField2 extends StatelessWidget {
 
   const CustomTextFormField2({
     Key? key,
+    this.controller,
     this.enabled = true,
     this.focusNode,
     this.hintText = "",
-    this.initialValue = "",
+    this.initialValue,
     this.inputFormatters,
     this.keyboardType,
     this.labelText = "",
@@ -98,6 +100,7 @@ class CustomTextFormField2 extends StatelessWidget {
       height: 80,
       child: TextFormField(
         focusNode: focusNode,
+        controller: controller,
         enabled: enabled,
         obscureText: obscureText,
         initialValue: initialValue,

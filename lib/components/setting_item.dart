@@ -16,14 +16,12 @@ class SettingItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.black54),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.black54)),
       ),
       child: TextButton(
         style: TextButton.styleFrom(
           padding: EdgeInsets.symmetric(horizontal: 4),
-          primary: Colors.black54,
+          primary: Colors.black87,
         ),
         onPressed: onPressed,
         child: Row(

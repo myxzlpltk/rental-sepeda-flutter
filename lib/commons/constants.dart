@@ -47,7 +47,7 @@ TextStyle headline2Style = GoogleFonts.lato(
   color: Colors.black,
 );
 TextStyle headline3Style = GoogleFonts.lato(
-  fontSize: ScreenUtil().setSp(13),
+  fontSize: ScreenUtil().setSp(14),
   fontWeight: FontWeight.bold,
   color: Colors.black,
 );

@@ -7,7 +7,7 @@ import 'package:rental_sepeda_flutter/pages/history/history_page.dart';
 import 'package:rental_sepeda_flutter/pages/home/home_page.dart';
 import 'package:rental_sepeda_flutter/pages/profile/profile_page.dart';
 import 'package:rental_sepeda_flutter/pages/setting/setting_page.dart';
-import 'package:rental_sepeda_flutter/providers/dashboard_provider.dart';
+import 'package:rental_sepeda_flutter/providers/dashboard/dashboard_provider.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
