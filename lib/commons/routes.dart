@@ -3,6 +3,7 @@ import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
+import 'package:rental_sepeda_flutter/pages/bike/search_page.dart';
 import 'package:rental_sepeda_flutter/pages/dashboard_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
 import 'package:rental_sepeda_flutter/pages/setting/info_app_page.dart';
@@ -19,6 +20,7 @@ class Routes {
   static const String login = '/login';
   static const String register = '/register';
   static const String dashboard = '/dashboard';
+  static const String search = '/search';
   static const String station = '/station';
   static const String checkout = '/checkout';
   static const String loading = '/loading';
@@ -41,6 +43,8 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => LoginPage());
     case Routes.register:
       return MaterialPageRoute(builder: (_) => RegisterPage());
+    case Routes.search:
+      return MaterialPageRoute(builder: (_) => SearchPage());
     case Routes.station:
       return MaterialPageRoute(builder: (_) => StationPage(id: 1));
     case Routes.checkout:
