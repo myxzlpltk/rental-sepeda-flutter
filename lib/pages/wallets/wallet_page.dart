@@ -1,8 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:paginate_firestore/bloc/pagination_listeners.dart';
+import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/balance_box.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
+import 'package:rental_sepeda_flutter/components/shimmer_box.dart';
 import 'package:rental_sepeda_flutter/components/top_up_card.dart';
 import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 import 'package:rental_sepeda_flutter/services/top_up_services.dart';
@@ -12,37 +15,49 @@ class WalletPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: ScreenTemplate(
-        title: "Dompet Saya",
-        children: [
-          BalanceBox(),
-          SizedBox(height: 16),
-          Text("Riwayat Transaksi", style: headline2Style),
-          SizedBox(height: 8),
-          StreamBuilder<QuerySnapshot>(
-            stream: TopUpServices.queryList(context),
-            builder: (context, snapshot) {
-              if (snapshot.hasData && snapshot.data != null) {
-                return ListView.separated(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  padding: EdgeInsets.zero,
-                  itemCount: snapshot.data!.docs.length,
-                  separatorBuilder: (context, i) => Divider(thickness: 1, height: 2),
-                  itemBuilder: (context, i) => TopUpCard(
-                    topUp: TopUp.fromDocument(snapshot.data!.docs.elementAt(i)),
-                  ),
-                );
-              }
+    PaginateRefreshedChangeListener refreshChangeListener =
+        PaginateRefreshedChangeListener();
 
-              return Center(
-                child: CircularProgressIndicator(),
-              );
-            },
-          ),
-          SizedBox(height: 16),
-        ],
+    return Scaffold(
+      body: RefreshIndicator(
+        onRefresh: () async {
+          refreshChangeListener.refreshed = true;
+        },
+        child: ScreenTemplate(
+          title: "Dompet Saya",
+          children: [
+            BalanceBox(),
+            SizedBox(height: 16),
+            Text("Riwayat Transaksi", style: headline2Style),
+            SizedBox(height: 8),
+            PaginateFirestore(
+              itemBuilder: (context, snapshots, i) => TopUpCard(
+                topUp: TopUp.fromDocument(snapshots[i]),
+              ),
+              query: TopUpServices.queryList(context),
+              itemBuilderType: PaginateBuilderType.listView,
+              listeners: [refreshChangeListener],
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              padding: EdgeInsets.zero,
+              separator: Divider(thickness: 1, height: 2),
+              initialLoader: _shimmerTopUpCard(),
+              bottomLoader: _shimmerTopUpCard(),
+              onEmpty: Center(
+                child: Text("Kosong?"),
+              ),
+            ),
+            SizedBox(height: 16),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _shimmerTopUpCard() {
+    return ShimmerBox(
+      child: TopUpCard(
+        topUp: TopUp(id: '', uid: '', createdAt: DateTime.now(), amount: 99),
       ),
     );
   }

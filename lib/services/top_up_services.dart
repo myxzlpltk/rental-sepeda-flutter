@@ -23,11 +23,10 @@ class TopUpServices {
     return TopUp.fromDocument(doc);
   }
 
-  static Stream<QuerySnapshot<Object?>> queryList(BuildContext context) {
+  static Query<Object?> queryList(BuildContext context) {
     AppUser user = Provider.of<AppProvider>(context, listen: false).user!;
     return _topUps
         .where('uid', isEqualTo: user.id)
-        .orderBy('createdAt', descending: true)
-        .snapshots();
+        .orderBy('createdAt', descending: true);
   }
 }
