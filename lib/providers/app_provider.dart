@@ -13,13 +13,15 @@ class AppProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<bool> auth() async {
+  Future<bool> sync() async {
     AppUser? user = await AuthServices.auth();
     if (user != null) {
       _user = user;
+      notifyListeners();
       return true;
     } else {
       _user = null;
+      notifyListeners();
       return false;
     }
   }

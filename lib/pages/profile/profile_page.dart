@@ -50,7 +50,7 @@ class ProfilePage extends StatelessWidget {
         context,
         Provider.of<AppProvider>(context, listen: false).user!,
       ),
-      child: ScreenTemplate(
+      builder: (context, _) => ScreenTemplate(
         controller: scroll,
         title: "Profil Saya",
         children: <Widget>[

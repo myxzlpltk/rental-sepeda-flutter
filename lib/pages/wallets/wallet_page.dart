@@ -2,12 +2,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:paginate_firestore/bloc/pagination_listeners.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/balance_box.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/shimmer_box.dart';
 import 'package:rental_sepeda_flutter/components/top_up_card.dart';
 import 'package:rental_sepeda_flutter/models/top_up_model.dart';
+import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 import 'package:rental_sepeda_flutter/services/top_up_services.dart';
 
 class WalletPage extends StatelessWidget {
@@ -22,6 +24,7 @@ class WalletPage extends StatelessWidget {
       body: RefreshIndicator(
         onRefresh: () async {
           refreshChangeListener.refreshed = true;
+          await Provider.of<AppProvider>(context, listen: false).sync();
         },
         child: ScreenTemplate(
           title: "Dompet Saya",

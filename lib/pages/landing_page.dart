@@ -37,7 +37,7 @@ class LandingPage extends StatelessWidget {
           ),
         ),
         child: FutureBuilder<bool>(
-          future: Provider.of<AppProvider>(context, listen: false).auth(),
+          future: Provider.of<AppProvider>(context, listen: false).sync(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               if (snapshot.hasData && snapshot.data == true) {
