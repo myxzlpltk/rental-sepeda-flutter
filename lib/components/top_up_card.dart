@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/commons/utils.dart';
 import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 
@@ -11,7 +12,9 @@ class TopUpCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, Routes.detailTopUp, arguments: topUp.id);
+      },
       child: Padding(
         padding: EdgeInsets.all(8),
         child: Row(
@@ -29,7 +32,11 @@ class TopUpCard extends StatelessWidget {
             Text(
               "+${toIDR(topUp.amount)}",
               style: headline3Style.copyWith(
-                color: Colors.green.shade700,
+                color: topUp.status == TopUpStatus.pending
+                    ? Colors.black
+                    : topUp.status == TopUpStatus.success
+                        ? Colors.green.shade700
+                        : Colors.red.shade700,
               ),
             ),
           ],
