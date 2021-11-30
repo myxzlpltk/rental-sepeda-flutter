@@ -90,8 +90,6 @@ class DetailTopUpPage extends StatelessWidget {
   }
 
   Widget _buildShimmer(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return Column(
       children: [
         ShimmerBox(

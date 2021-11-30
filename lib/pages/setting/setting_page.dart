@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:launch_review/launch_review.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
@@ -7,6 +8,7 @@ import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/setting_item.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 import 'package:rental_sepeda_flutter/services/auth_services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SettingPage extends StatelessWidget {
   const SettingPage({Key? key}) : super(key: key);
@@ -54,19 +56,37 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 20),
         Text("Pilih Menu", style: headline2Style),
         SettingItem(
+          text: "Dompet Saya",
+          iconData: Icons.account_balance_wallet,
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.wallet);
+          },
+        ),
+        SettingItem(
+            text: "Minta Bantuan",
+            iconData: Icons.help,
+            onPressed: () async {
+              if (await canLaunch(emailURL)) {
+                await launch(emailURL);
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text("Tidak bisa mengirim surel. Hubungi kami di $emailAddress"),
+                ));
+              }
+            }),
+        SettingItem(
+          text: "Umpan Balik Pengguna",
+          iconData: Icons.feedback,
+          onPressed: () => LaunchReview.launch(
+            androidAppId: 'com.myxzlpltk.rental_sepeda_flutter',
+          ),
+        ),
+        SettingItem(
           text: "Tentang Aplikasi",
           iconData: Icons.info_rounded,
           onPressed: () {
             Navigator.pushNamed(context, Routes.infoApp);
           },
-        ),
-        SettingItem(
-          text: "Minta Bantuan",
-          iconData: Icons.help,
-        ),
-        SettingItem(
-          text: "Umpan Balik Pengguna",
-          iconData: Icons.feedback,
         ),
         SettingItem(
           text: "Keluar",
