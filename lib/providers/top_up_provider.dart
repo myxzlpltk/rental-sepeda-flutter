@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
+import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 import 'package:rental_sepeda_flutter/services/top_up_services.dart';
 import 'package:rental_sepeda_flutter/services/user_services.dart';
@@ -68,7 +69,8 @@ class TopUpProvider extends ChangeNotifier {
 
       isProcessing = false;
 
-      // Navigator.pushReplacementNamed(context, )
+      Navigator.pushReplacementNamed(context, Routes.detailTopUp,
+          arguments: topUp.id);
     } catch (e) {
       Fluttertoast.showToast(msg: appError);
       isProcessing = false;

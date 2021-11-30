@@ -17,6 +17,8 @@ const Color whiteColor = Color(0xFFF1F8FB);
 const Color greenColor = Color(0xFF61DEC0);
 const Color oldGreenColor = Color(0xFF2497A5);
 const Color blueColor = Color(0xFF0A578E);
+const Color shimmerBaseColor = Color(0xFFAAAAAA);
+const Color shimmerHighlightColor = Color(0xFFCCCCCC);
 
 /* Gradient */
 const LinearGradient customGradientBlueToGreen = LinearGradient(

@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:rental_sepeda_flutter/commons/constants.dart';
 
 class TopUp extends Equatable {
   final String id;
