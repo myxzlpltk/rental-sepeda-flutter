@@ -17,7 +17,7 @@ class ScreenTemplate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Ink(
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topCenter,
@@ -52,15 +52,14 @@ class ScreenTemplate extends StatelessWidget {
           ),
           SizedBox(height: 30),
           Expanded(
-            child: ClipRRect(
+            child: Material(
+              clipBehavior: Clip.hardEdge,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(25)),
-              child: Container(
-                color: whiteColor,
-                child: ListView(
-                  controller: controller,
-                  padding: EdgeInsets.all(20),
-                  children: children,
-                ),
+              color: whiteColor,
+              child: ListView(
+                controller: controller,
+                padding: EdgeInsets.fromLTRB(20, 20, 20, 50),
+                children: children,
               ),
             ),
           ),

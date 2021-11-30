@@ -3,10 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 /* Literal String */
-const String appName = "App Name";
-const String apiURL = "https://ebike-api.herokuapp.com";
-const String errorAppString =
-    "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
+const String appName = "e-Bike";
+const String appError = "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
+const String appDescription =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis. Est ultricies integer quis auctor elit sed vulputate mi. Donec enim diam vulputate ut pharetra sit.";
 
 /* Literal Object */
 Map<String, String> headerHttp = {'Accept': 'application/json'};
@@ -17,6 +17,8 @@ const Color whiteColor = Color(0xFFF1F8FB);
 const Color greenColor = Color(0xFF61DEC0);
 const Color oldGreenColor = Color(0xFF2497A5);
 const Color blueColor = Color(0xFF0A578E);
+const Color shimmerBaseColor = Color(0xFFAAAAAA);
+const Color shimmerHighlightColor = Color(0xFFCCCCCC);
 
 /* Gradient */
 const LinearGradient customGradientBlueToGreen = LinearGradient(
@@ -47,7 +49,7 @@ TextStyle headline2Style = GoogleFonts.lato(
   color: Colors.black,
 );
 TextStyle headline3Style = GoogleFonts.lato(
-  fontSize: ScreenUtil().setSp(13),
+  fontSize: ScreenUtil().setSp(14),
   fontWeight: FontWeight.bold,
   color: Colors.black,
 );

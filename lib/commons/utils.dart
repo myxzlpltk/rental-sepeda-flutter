@@ -13,3 +13,11 @@ String toIDR(int money) {
 }
 
 final phoneNumberMask = MaskTextInputFormatter(mask: '+62 ###-####-#####');
+
+String humanDate(DateTime date) {
+  return DateFormat("d MMMM y", 'id_ID').format(date);
+}
+
+String humanDateTime(DateTime date) {
+  return DateFormat("d MMMM y hh:mm:ss", 'id_ID').format(date);
+}

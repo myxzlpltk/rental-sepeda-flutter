@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/components/balance_box.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/setting_item.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
@@ -13,20 +14,18 @@ class SettingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenTemplate(
-      title: "Setting",
+      title: "Pengaturan",
       children: [
-        SizedBox(height: 20),
+        SizedBox(height: 10),
         Row(
           children: [
             Consumer<AppProvider>(
               builder: (context, state, _) => CircleAvatar(
-                radius: 45,
-                backgroundImage: state.image != null
-                    ? FileImage(state.image!)
-                    : state.user!.photoURL.isNotEmpty
-                        ? NetworkImage(state.user!.photoURL)
-                        : AssetImage("assets/image/profile_pict.jpg")
-                            as ImageProvider,
+                radius: 24,
+                backgroundImage: state.user!.photoURL.isNotEmpty
+                    ? NetworkImage(state.user!.photoURL)
+                    : AssetImage("assets/image/profile_pict.jpg")
+                        as ImageProvider,
               ),
             ),
             SizedBox(width: 20),
@@ -39,7 +38,7 @@ class SettingPage extends StatelessWidget {
                     style: headline2Style.copyWith(color: Colors.black87),
                   ),
                 ),
-                SizedBox(height: 12),
+                SizedBox(height: 4),
                 Consumer<AppProvider>(
                   builder: (context, app, _) => Text(
                     app.user!.email,
@@ -50,22 +49,24 @@ class SettingPage extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(height: 40),
-        Text(
-          "General",
-          style: headline2Style,
-        ),
+        SizedBox(height: 20),
+        BalanceBox(),
+        SizedBox(height: 20),
+        Text("Pilih Menu", style: headline2Style),
         SettingItem(
-          text: "help",
-          iconData: Icons.headphones_rounded,
-        ),
-        SettingItem(
-          text: "About Application",
+          text: "Tentang Aplikasi",
           iconData: Icons.info_rounded,
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.infoApp);
+          },
         ),
         SettingItem(
-          text: "User Feedback",
-          iconData: Icons.mark_email_read_outlined,
+          text: "Minta Bantuan",
+          iconData: Icons.help,
+        ),
+        SettingItem(
+          text: "Umpan Balik Pengguna",
+          iconData: Icons.feedback,
         ),
         SettingItem(
           text: "Keluar",

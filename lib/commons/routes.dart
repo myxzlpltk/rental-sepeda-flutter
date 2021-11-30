@@ -5,8 +5,11 @@ import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
 import 'package:rental_sepeda_flutter/pages/dashboard_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
+import 'package:rental_sepeda_flutter/pages/setting/info_app_page.dart';
 import 'package:rental_sepeda_flutter/pages/station/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
+import 'package:rental_sepeda_flutter/pages/wallets/detail_top_up_page.dart';
+import 'package:rental_sepeda_flutter/pages/wallets/top_up_page.dart';
 
 class Routes {
   Routes._();
@@ -18,10 +21,13 @@ class Routes {
   static const String station = '/station';
   static const String checkout = '/checkout';
   static const String loading = '/loading';
+  static const String infoApp = '/info-app';
+  static const String topUp = '/wallets/top-up';
+  static const String detailTopUp = '/wallets/top-up/detail';
 }
 
 Route<dynamic>? generateRoute(RouteSettings settings) {
-  // final arguments = settings.arguments;
+  final arguments = settings.arguments;
 
   switch (settings.name) {
     /* Home */
@@ -39,6 +45,15 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (_) => CheckoutPage());
     case Routes.loading:
       return MaterialPageRoute(builder: (_) => LoadingPage());
+    case Routes.infoApp:
+      return MaterialPageRoute(builder: (_) => InfoAppPage());
+    case Routes.topUp:
+      return MaterialPageRoute(builder: (_) => TopUpPage());
+    case Routes.detailTopUp:
+      if (arguments is String) {
+        return MaterialPageRoute(
+            builder: (_) => DetailTopUpPage(id: arguments));
+      }
   }
 
   return MaterialPageRoute(
