@@ -83,7 +83,7 @@ class DashboardPage extends StatelessWidget {
             ),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, Routes.loading);
+            Navigator.pushNamed(context, Routes.search);
           },
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
