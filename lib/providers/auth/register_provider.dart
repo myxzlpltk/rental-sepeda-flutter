@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
@@ -32,7 +31,8 @@ class RegisterProvider extends ChangeNotifier {
     isProcessing = false;
 
     if (!result.status) {
-      Fluttertoast.showToast(msg: result.message!);
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text(result.message!)));
     } else {
       Provider.of<AppProvider>(context, listen: false).user = result.data;
 
