@@ -56,10 +56,10 @@ class SettingPage extends StatelessWidget {
         SizedBox(height: 20),
         Text("Pilih Menu", style: headline2Style),
         SettingItem(
-          text: "Tentang Aplikasi",
-          iconData: Icons.info_rounded,
+          text: "Dompet Saya",
+          iconData: Icons.account_balance_wallet,
           onPressed: () {
-            Navigator.pushNamed(context, Routes.infoApp);
+            Navigator.pushNamed(context, Routes.wallet);
           },
         ),
         SettingItem(
@@ -80,6 +80,13 @@ class SettingPage extends StatelessWidget {
           onPressed: () => LaunchReview.launch(
             androidAppId: 'com.myxzlpltk.rental_sepeda_flutter',
           ),
+        ),
+        SettingItem(
+          text: "Tentang Aplikasi",
+          iconData: Icons.info_rounded,
+          onPressed: () {
+            Navigator.pushNamed(context, Routes.infoApp);
+          },
         ),
         SettingItem(
           text: "Keluar",
