@@ -266,6 +266,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  geoflutterfire2:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: d63f29bc2cb8b289dd0a714305aa1be0f7aeacce
+      url: "git://github.com/myxzlpltk/GeoFlutterFire2.git"
+    source: git
+    version: "2.3.10"
   geolocator:
     dependency: "direct main"
     description:
@@ -532,6 +541,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.0.0"
+  rxdart:
+    dependency: transitive
+    description:
+      name: rxdart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.27.3"
   shimmer:
     dependency: "direct main"
     description:

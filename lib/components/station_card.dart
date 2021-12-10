@@ -50,12 +50,15 @@ class StationCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        stationName,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w700,
+                      Expanded(
+                        child: Text(
+                          stationName,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black,
+                            fontWeight: FontWeight.w700,
+                            overflow: TextOverflow.ellipsis,
+                          ),
                         ),
                       ),
                       Text(
@@ -67,6 +70,10 @@ class StationCard extends StatelessWidget {
                   SizedBox(height: 4),
                   Text(
                     stationAddress,
+                    style: captionStyle,
+                  ),
+                  Text(
+                    "Buka Jam 08:00 - 16:00",
                     style: captionStyle,
                   ),
                   Text(

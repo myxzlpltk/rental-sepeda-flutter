@@ -23,25 +23,41 @@ class SearchPage extends StatelessWidget {
                 Expanded(
                   child: Stack(
                     children: [
-                      GoogleMap(
-                        mapType: MapType.normal,
-                        zoomControlsEnabled: false,
-                        rotateGesturesEnabled: false,
-                        tiltGesturesEnabled: false,
-                        initialCameraPosition:
-                            Provider.of<SearchProvider>(context, listen: false)
-                                .initialCam,
-                        onMapCreated:
-                            Provider.of<SearchProvider>(context, listen: false)
-                                .onMapCreated,
-                        onCameraMove:
-                            Provider.of<SearchProvider>(context, listen: false)
-                                .onCameraMove,
+                      Consumer<SearchProvider>(
+                        builder: (context, state, _) => GoogleMap(
+                          mapType: MapType.normal,
+                          zoomControlsEnabled: false,
+                          rotateGesturesEnabled: false,
+                          tiltGesturesEnabled: false,
+                          initialCameraPosition: state.initialCam,
+                          onMapCreated: state.onMapCreated,
+                          onCameraMove: state.onCameraMove,
+                          markers: Set<Marker>.of(
+                            state.stations.map(
+                              (e) => Marker(
+                                markerId: MarkerId(e.id),
+                                position: LatLng(
+                                  e.geoPoint.latitude,
+                                  e.geoPoint.longitude,
+                                ),
+                                onTap: () {
+                                  Future.delayed(Duration(seconds: 1), () {
+                                    state.pinEnabled = false;
+                                  });
+                                },
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                       Center(
-                        child: Icon(
-                          Icons.location_on,
-                          color: Colors.red.shade400,
+                        child: Consumer<SearchProvider>(
+                          builder: (context, state, _) => state.pinEnabled
+                              ? Icon(
+                                  Icons.location_on,
+                                  color: Colors.red.shade500,
+                                )
+                              : SizedBox(),
                         ),
                       ),
                     ],
@@ -125,21 +141,21 @@ class SearchPage extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.bottomRight,
-            child: Consumer<SearchProvider>(
-              builder: (context, state, _) => FloatingActionButton(
-                mini: true,
-                child: Icon(Icons.my_location, size: 20),
-                onPressed: state.isMapLoaded ? state.toCurrentLocation : null,
-              ),
+            child: FloatingActionButton(
+              mini: true,
+              child: Icon(Icons.my_location, size: 20),
+              onPressed: Provider.of<SearchProvider>(context, listen: false)
+                  .toCurrentLocation,
             ),
           ),
-          SizedBox(height: 16),
-          StationCardHorizontal(
-            stationID: 1,
-            stationName: "Station 1",
-            stationRange: 50,
-            stationAddress: "H5 Building",
-            bikesAvailable: 23,
+          Consumer<SearchProvider>(
+            builder: (context, state, _) =>
+                state.stations.isNotEmpty ? SizedBox(height: 16) : SizedBox(),
+          ),
+          Consumer<SearchProvider>(
+            builder: (context, state, _) => state.stations.isNotEmpty
+                ? StationCardHorizontal(station: state.stations.first)
+                : SizedBox(),
           ),
         ],
       ),

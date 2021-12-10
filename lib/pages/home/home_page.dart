@@ -207,7 +207,7 @@ class HomePage extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 140,
+          height: 144,
           child: ListView.separated(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 2),
             scrollDirection: Axis.horizontal,

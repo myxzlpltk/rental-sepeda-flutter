@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rental_sepeda_flutter/models/station_model.dart';
+import 'package:rental_sepeda_flutter/services/station_services.dart';
 
 class SearchProvider extends ChangeNotifier {
   late BuildContext _context;
@@ -14,6 +16,7 @@ class SearchProvider extends ChangeNotifier {
   GoogleMapController? _controller;
   GoogleMapController? get controller => _controller;
   bool get isMapLoaded => controller != null;
+  List<Station> stations = [];
 
   TextEditingController searchController =
       TextEditingController(text: "Universitas Negeri Malang");
@@ -22,34 +25,37 @@ class SearchProvider extends ChangeNotifier {
     target: LatLng(-7.9606, 112.6173),
     zoom: 15,
   );
-  double longitude = -7.9606;
-  double latitude = 112.6173;
+  LatLng location = LatLng(-7.9606, 112.6173);
 
   void onMapCreated(GoogleMapController controller) {
     _controller = controller;
     toCurrentLocation();
-    notifyListeners();
+    print("Loaded");
   }
 
   Timer? _timer1;
   void onCameraMove(CameraPosition cameraPosition) {
     if (_timer1 != null && _timer1!.isActive) _timer1!.cancel();
-    _timer1 = Timer(Duration(seconds: 1), () async {
-      latitude = cameraPosition.target.latitude;
-      longitude = cameraPosition.target.longitude;
+    if (!pinEnabled) pinEnabled = true;
 
-      await updateAddressBasedOnPosition();
+    _timer1 = Timer(Duration(seconds: 1), () async {
+      location = LatLng(
+          cameraPosition.target.latitude, cameraPosition.target.longitude);
+
+      updateAddressBasedOnPosition();
+      stations =
+          await StationServices.nearby(location.latitude, location.longitude);
+      notifyListeners();
     });
   }
 
   void search() async {
-    List<Location> locations = await locationFromAddress(searchController.text);
+    List<Location> locations = await locationFromAddress(searchController.text,
+        localeIdentifier: 'id_ID');
 
     if (locations.isEmpty) return;
-    latitude = locations.first.latitude;
-    longitude = locations.first.longitude;
-    await controller!
-        .animateCamera(CameraUpdate.newLatLng(LatLng(latitude, longitude)));
+    location = LatLng(locations.first.latitude, locations.first.longitude);
+    controller!.animateCamera(CameraUpdate.newLatLng(location));
     FocusScope.of(_context).unfocus();
   }
 
@@ -84,16 +90,14 @@ class SearchProvider extends ChangeNotifier {
     }
 
     Position position = await Geolocator.getCurrentPosition();
-    latitude = position.latitude;
-    longitude = position.longitude;
-    await controller!
-        .animateCamera(CameraUpdate.newLatLng(LatLng(latitude, longitude)));
-    await updateAddressBasedOnPosition();
+    location = LatLng(position.latitude, position.longitude);
+    controller!.animateCamera(CameraUpdate.newLatLng(location));
+    updateAddressBasedOnPosition();
   }
 
   Future updateAddressBasedOnPosition() async {
     List<Placemark> placemarks = await placemarkFromCoordinates(
-        latitude, longitude,
+        location.latitude, location.longitude,
         localeIdentifier: "id_ID");
     if (placemarks.isEmpty) return;
 
@@ -112,5 +116,12 @@ class SearchProvider extends ChangeNotifier {
         TextPosition(offset: newValue.length),
       ),
     );
+  }
+
+  bool _pinEnabled = true;
+  bool get pinEnabled => _pinEnabled;
+  set pinEnabled(bool value) {
+    _pinEnabled = value;
+    notifyListeners();
   }
 }
