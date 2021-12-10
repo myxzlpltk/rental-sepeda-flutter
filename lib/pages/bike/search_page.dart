@@ -21,46 +21,33 @@ class SearchPage extends StatelessWidget {
               children: [
                 _searchBox(context),
                 Expanded(
-                  child: Stack(
-                    children: [
-                      Consumer<SearchProvider>(
-                        builder: (context, state, _) => GoogleMap(
-                          mapType: MapType.normal,
-                          zoomControlsEnabled: false,
-                          rotateGesturesEnabled: false,
-                          tiltGesturesEnabled: false,
-                          initialCameraPosition: state.initialCam,
-                          onMapCreated: state.onMapCreated,
-                          onCameraMove: state.onCameraMove,
-                          markers: Set<Marker>.of(
-                            state.stations.map(
-                              (e) => Marker(
-                                markerId: MarkerId(e.id),
-                                position: LatLng(
-                                  e.geoPoint.latitude,
-                                  e.geoPoint.longitude,
-                                ),
-                                onTap: () {
-                                  Future.delayed(Duration(seconds: 1), () {
-                                    state.pinEnabled = false;
-                                  });
-                                },
-                              ),
+                  child: Consumer<SearchProvider>(
+                    builder: (context, state, _) => GoogleMap(
+                      padding: state.stations.isEmpty
+                          ? EdgeInsets.fromLTRB(10, 0, 0, 10)
+                          : EdgeInsets.fromLTRB(10, 0, 0, 90),
+                      mapType: MapType.normal,
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      mapToolbarEnabled: false,
+                      zoomControlsEnabled: false,
+                      rotateGesturesEnabled: false,
+                      tiltGesturesEnabled: false,
+                      initialCameraPosition: state.initialCam,
+                      onMapCreated: state.onMapCreated,
+                      onCameraMove: state.onCameraMove,
+                      markers: Set<Marker>.of(
+                        state.stations.map(
+                          (e) => Marker(
+                            markerId: MarkerId(e.id),
+                            position: LatLng(
+                              e.geoPoint.latitude,
+                              e.geoPoint.longitude,
                             ),
                           ),
                         ),
                       ),
-                      Center(
-                        child: Consumer<SearchProvider>(
-                          builder: (context, state, _) => state.pinEnabled
-                              ? Icon(
-                                  Icons.location_on,
-                                  color: Colors.red.shade500,
-                                )
-                              : SizedBox(),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
@@ -106,25 +93,28 @@ class SearchPage extends StatelessWidget {
                       ),
                       onEditingComplete:
                           Provider.of<SearchProvider>(context, listen: false)
-                              .search,
+                              .searchAddress,
                     ),
                   ),
                 ),
               ],
             ),
             SizedBox(height: 16),
-            Row(
-              children: const [
-                TextIcon(
-                  iconData: Icons.home,
-                  text: "10 rental didekatmu",
-                ),
-                Spacer(),
-                TextIcon(
-                  iconData: Icons.pin_drop_rounded,
-                  text: "10 sepeda tersedia",
-                ),
-              ],
+            Consumer<SearchProvider>(
+              builder: (context, state, _) => Row(
+                children: [
+                  TextIcon(
+                    iconData: Icons.home,
+                    text: "${state.stations.length} stasiun didekatmu",
+                  ),
+                  Spacer(),
+                  TextIcon(
+                    iconData: Icons.pin_drop_rounded,
+                    text:
+                        "${state.stations.isEmpty ? 0 : state.stations.map((a) => a.totalCycles).reduce((a, b) => a + b)} sepeda tersedia",
+                  ),
+                ],
+              ),
             ),
           ],
         ),
@@ -137,27 +127,10 @@ class SearchPage extends StatelessWidget {
       bottom: 16,
       left: 16,
       right: 16,
-      child: Column(
-        children: [
-          Align(
-            alignment: Alignment.bottomRight,
-            child: FloatingActionButton(
-              mini: true,
-              child: Icon(Icons.my_location, size: 20),
-              onPressed: Provider.of<SearchProvider>(context, listen: false)
-                  .toCurrentLocation,
-            ),
-          ),
-          Consumer<SearchProvider>(
-            builder: (context, state, _) =>
-                state.stations.isNotEmpty ? SizedBox(height: 16) : SizedBox(),
-          ),
-          Consumer<SearchProvider>(
-            builder: (context, state, _) => state.stations.isNotEmpty
-                ? StationCardHorizontal(station: state.stations.first)
-                : SizedBox(),
-          ),
-        ],
+      child: Consumer<SearchProvider>(
+        builder: (context, state, _) => state.stations.isNotEmpty
+            ? StationCardHorizontal(station: state.stations.first)
+            : SizedBox(),
       ),
     );
   }

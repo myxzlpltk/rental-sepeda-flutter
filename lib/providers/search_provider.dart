@@ -29,73 +29,40 @@ class SearchProvider extends ChangeNotifier {
 
   void onMapCreated(GoogleMapController controller) {
     _controller = controller;
-    toCurrentLocation();
-    print("Loaded");
+    loadNearby();
   }
 
   Timer? _timer1;
   void onCameraMove(CameraPosition cameraPosition) {
     if (_timer1 != null && _timer1!.isActive) _timer1!.cancel();
-    if (!pinEnabled) pinEnabled = true;
 
     _timer1 = Timer(Duration(seconds: 1), () async {
       location = LatLng(
           cameraPosition.target.latitude, cameraPosition.target.longitude);
 
-      updateAddressBasedOnPosition();
-      stations =
-          await StationServices.nearby(location.latitude, location.longitude);
-      notifyListeners();
+      updateAddress();
+      loadNearby();
     });
   }
 
-  void search() async {
+  void loadNearby() async {
+    stations =
+        await StationServices.nearby(location.latitude, location.longitude);
+    notifyListeners();
+  }
+
+  void searchAddress() async {
     List<Location> locations = await locationFromAddress(searchController.text,
         localeIdentifier: 'id_ID');
 
     if (locations.isEmpty) return;
     location = LatLng(locations.first.latitude, locations.first.longitude);
-    controller!.animateCamera(CameraUpdate.newLatLng(location));
+    controller!.animateCamera(CameraUpdate.newCameraPosition(
+        CameraPosition(target: location, zoom: 15)));
     FocusScope.of(_context).unfocus();
   }
 
-  void toCurrentLocation() async {
-    if (controller == null) return;
-
-    bool serviceEnabled;
-    LocationPermission permission;
-
-    // Test if location services are enabled.
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      ScaffoldMessenger.of(_context)
-          .showSnackBar(SnackBar(content: Text("Aktifkan layanan lokasi!")));
-      return;
-    }
-
-    permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        ScaffoldMessenger.of(_context)
-            .showSnackBar(SnackBar(content: Text("Layanan lokasi ditolak.")));
-        return;
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      ScaffoldMessenger.of(_context).showSnackBar(
-          SnackBar(content: Text("Layanan lokasi ditolak permanen.")));
-      return;
-    }
-
-    Position position = await Geolocator.getCurrentPosition();
-    location = LatLng(position.latitude, position.longitude);
-    controller!.animateCamera(CameraUpdate.newLatLng(location));
-    updateAddressBasedOnPosition();
-  }
-
-  Future updateAddressBasedOnPosition() async {
+  Future updateAddress() async {
     List<Placemark> placemarks = await placemarkFromCoordinates(
         location.latitude, location.longitude,
         localeIdentifier: "id_ID");
@@ -116,12 +83,9 @@ class SearchProvider extends ChangeNotifier {
         TextPosition(offset: newValue.length),
       ),
     );
-  }
 
-  bool _pinEnabled = true;
-  bool get pinEnabled => _pinEnabled;
-  set pinEnabled(bool value) {
-    _pinEnabled = value;
+    stations =
+        await StationServices.nearby(location.latitude, location.longitude);
     notifyListeners();
   }
 }

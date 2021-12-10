@@ -12,6 +12,7 @@ class Station extends Equatable {
   final GeoPoint geoPoint;
   final String geoHash;
   final double distance;
+  final int totalCycles;
 
   const Station({
     required this.id,
@@ -23,6 +24,7 @@ class Station extends Equatable {
     required this.geoPoint,
     required this.geoHash,
     required this.distance,
+    required this.totalCycles,
   });
 
   @override
@@ -46,6 +48,7 @@ class Station extends Equatable {
         lat: doc.get('point.geopoint').latitude,
         lng: doc.get('point.geopoint').longitude,
       ),
+      totalCycles: doc.get('totalCycles'),
     );
   }
 }
