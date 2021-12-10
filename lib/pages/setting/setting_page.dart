@@ -63,17 +63,19 @@ class SettingPage extends StatelessWidget {
           },
         ),
         SettingItem(
-            text: "Minta Bantuan",
-            iconData: Icons.help,
-            onPressed: () async {
-              if (await canLaunch(emailURL)) {
-                await launch(emailURL);
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  content: Text("Tidak bisa mengirim surel. Hubungi kami di $emailAddress"),
-                ));
-              }
-            }),
+          text: "Minta Bantuan",
+          iconData: Icons.help,
+          onPressed: () async {
+            if (await canLaunch(emailURL)) {
+              await launch(emailURL);
+            } else {
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text(
+                    "Tidak bisa mengirim surel. Hubungi kami di $emailAddress"),
+              ));
+            }
+          },
+        ),
         SettingItem(
           text: "Umpan Balik Pengguna",
           iconData: Icons.feedback,

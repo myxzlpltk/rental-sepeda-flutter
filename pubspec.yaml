@@ -40,7 +40,10 @@ dependencies:
   flutter_screenutil: ^5.0.0+2
   flutter_svg: ^0.23.0+1
   form_field_validator: ^1.1.0
+  geocoding: ^2.0.1
+  geolocator: ^8.0.0
   google_fonts: ^2.1.0
+  google_maps_flutter: ^2.1.1
   image_cropper: ^1.4.1
   image_picker: ^0.8.4+4
   intl: ^0.17.0
