@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/models/station_model.dart';
+import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
@@ -63,9 +64,9 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.topUp:
       return MaterialPageRoute(builder: (_) => TopUpPage());
     case Routes.detailTopUp:
-      if (arguments is String) {
+      if (arguments is TopUp) {
         return MaterialPageRoute(
-            builder: (_) => DetailTopUpPage(id: arguments));
+            builder: (_) => DetailTopUpPage(topUp: arguments));
       }
       break;
   }

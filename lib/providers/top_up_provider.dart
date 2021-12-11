@@ -64,7 +64,7 @@ class TopUpProvider extends ChangeNotifier {
       isProcessing = false;
 
       Navigator.pushReplacementNamed(context, Routes.detailTopUp,
-          arguments: topUp.id);
+          arguments: topUp);
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(appError)));
