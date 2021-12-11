@@ -1,4 +1,10 @@
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +18,14 @@ import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // TODO: Remove firebase debug code
+  String host = Platform.isAndroid ? '10.0.2.2' : 'localhost';
+  FirebaseAuth.instance.useAuthEmulator(host, 9099);
+  FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
+  FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
+  FirebaseStorage.instance.useStorageEmulator(host, 9199);
+
   runApp(
     MultiProvider(
       providers: [

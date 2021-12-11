@@ -31,7 +31,6 @@ class AppUser extends Equatable {
     String? photoURL,
     String? phoneNumber,
     String? city,
-    int? balance,
   }) =>
       AppUser(
         id: id,
@@ -40,7 +39,7 @@ class AppUser extends Equatable {
         photoURL: photoURL ?? this.photoURL,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         city: city ?? this.city,
-        balance: balance ?? this.balance,
+        balance: balance,
       );
 
   factory AppUser.fromDocument(DocumentSnapshot doc) {

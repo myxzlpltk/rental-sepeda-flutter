@@ -58,13 +58,9 @@ class TopUpProvider extends ChangeNotifier {
         uid: user.id,
         amount: amount,
         createdAt: DateTime.now(),
-        status: TopUpStatus.success,
+        status: TopUpStatus.pending,
       );
-
       topUp = await TopUpServices.create(topUp);
-      appState.user = await UserServices.update(
-        user.copyWith(balance: user.balance + topUp.amount),
-      );
 
       isProcessing = false;
 

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/components/countdown.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/station_card.dart';
+import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -58,12 +60,17 @@ class HomePage extends StatelessWidget {
     return Wrap(
       runSpacing: 2,
       children: [
-        Text(
-          "Selamat datang, Megumin",
-          style: headline2Style.copyWith(color: blueColor),
+        Consumer<AppProvider>(
+          builder: (context, state, _) => Text(
+            "Selamat datang, ${state.user!.name}",
+            style: headline2Style.copyWith(
+              color: blueColor,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ),
         Text(
-          "Let’s find and book the Bike for You! ",
+          "Ayo cari dan pesan sepeda listrik untukmu!",
           style: TextStyle(
             color: blueColor,
             fontSize: 12,
@@ -93,7 +100,7 @@ class HomePage extends StatelessWidget {
                     color: Color(0xFFFBA73F),
                   ),
                   child: Text(
-                    "Exclusive Offer",
+                    "Penawaran Ekslusif",
                     style: bodyText1Style.copyWith(color: whiteColor),
                   ),
                 ),
