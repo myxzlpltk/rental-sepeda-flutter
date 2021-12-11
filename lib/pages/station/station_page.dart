@@ -7,6 +7,7 @@ import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
 import 'package:rental_sepeda_flutter/components/specification_box.dart';
 import 'package:rental_sepeda_flutter/models/station_model.dart';
+import 'package:rental_sepeda_flutter/models/order_model.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 
 class StationPage extends StatelessWidget {
@@ -95,7 +96,19 @@ class StationPage extends StatelessWidget {
                                   station.totalCycles > 0
                               ? null
                               : () {
-                                  Navigator.pushNamed(context, Routes.checkout);
+                                  Navigator.pushNamed(context, Routes.checkout,
+                                      arguments: Order(
+                                        id: "",
+                                        price: station.discountPrice,
+                                        days: value,
+                                        expiredAt: DateTime.now().add(
+                                          Duration(days: value, hours: 12),
+                                        ),
+                                        station: station,
+                                        user: Provider.of<AppProvider>(context,
+                                                listen: false)
+                                            .user!,
+                                      ));
                                 },
                         ),
                       ),

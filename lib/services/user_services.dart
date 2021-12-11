@@ -7,29 +7,29 @@ import 'package:rental_sepeda_flutter/models/user_model.dart';
 class UserServices {
   UserServices._();
 
-  static final CollectionReference _users =
+  static final CollectionReference collectionRef =
       FirebaseFirestore.instance.collection("users");
-  static final firebase_storage.FirebaseStorage _storage =
+  static final firebase_storage.FirebaseStorage storageRef =
       firebase_storage.FirebaseStorage.instance;
 
   static Future<void> create(AppUser appUser) async {
-    await _users.doc(appUser.id).set(appUser.toMap());
+    await collectionRef.doc(appUser.id).set(appUser.toMap());
   }
 
   static Future<AppUser?> get(String id) async {
-    final doc = await _users.doc(id).get();
+    final doc = await collectionRef.doc(id).get();
     return AppUser.fromDocument(doc);
   }
 
   static Future<AppUser> update(AppUser appUser) async {
-    await _users.doc(appUser.id).update(appUser.toMap());
+    await collectionRef.doc(appUser.id).update(appUser.toMap());
     return appUser;
   }
 
   static Future<AppUser> updateWithPhoto(AppUser appUser, File file) async {
     try {
       final task =
-          await _storage.ref("users/${appUser.id}/avatar.jpg").putFile(file);
+          await storageRef.ref("users/${appUser.id}/avatar.jpg").putFile(file);
 
       return await update(
         appUser.copyWith(

@@ -5,7 +5,7 @@ import 'package:rental_sepeda_flutter/models/station_model.dart';
 class StationServices {
   StationServices._();
 
-  static final CollectionReference _stations =
+  static final CollectionReference collectionRef =
       FirebaseFirestore.instance.collection("stations");
 
   static Future<List<Station>> nearby(double latitude, double longitude) async {
@@ -15,7 +15,7 @@ class StationServices {
     double radius = 20;
     String field = "point";
     List<DocumentSnapshot> snapshots = await geo
-        .collection(collectionRef: _stations)
+        .collection(collectionRef: collectionRef)
         .within(center: center, radius: radius, field: field)
         .first;
 
@@ -27,7 +27,7 @@ class StationServices {
   }
 
   static Future<Station?> currentPromo() async {
-    final query = await _stations
+    final query = await collectionRef
         .where('promo.expiredAt', isNull: false)
         .orderBy('promo.expiredAt')
         .orderBy('promo.discount', descending: true)

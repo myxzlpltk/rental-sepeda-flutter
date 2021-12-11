@@ -8,6 +8,7 @@ import 'package:rental_sepeda_flutter/commons/utils.dart';
 import 'package:rental_sepeda_flutter/components/countdown.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/station_card.dart';
+import 'package:rental_sepeda_flutter/models/order_model.dart';
 import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 import 'package:rental_sepeda_flutter/providers/dashboard/home_provider.dart';
 
@@ -195,7 +196,18 @@ class HomePage extends StatelessWidget {
                 CustomButton(
                   text: "Pesan Sekarang",
                   onPressed: () {
-                    Navigator.pushNamed(context, Routes.checkout);
+                    Navigator.pushNamed(context, Routes.checkout,
+                        arguments: Order(
+                          id: "",
+                          price: state.promo!.discountPrice,
+                          days: 1,
+                          expiredAt: DateTime.now().add(
+                            Duration(days: 1, hours: 12),
+                          ),
+                          station: state.promo!,
+                          user: Provider.of<AppProvider>(context, listen: false)
+                              .user!,
+                        ));
                   },
                 ),
               ],
