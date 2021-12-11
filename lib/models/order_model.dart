@@ -27,7 +27,8 @@ class Order extends Equatable {
 
   int get total => price * days;
 
-  factory Order.fromDocument(DocumentSnapshot doc, DocumentSnapshot station, DocumentSnapshot user) {
+  factory Order.fromDocument(
+      DocumentSnapshot doc, DocumentSnapshot station, DocumentSnapshot user) {
     return Order(
       id: doc.id,
       price: doc.get('price'),
