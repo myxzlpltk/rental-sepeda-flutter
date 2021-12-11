@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/components/history_item.dart';
 import 'package:rental_sepeda_flutter/components/screen_template.dart';
-import 'package:rental_sepeda_flutter/components/shimmer_box.dart';
 import 'package:rental_sepeda_flutter/models/order_model.dart';
 import 'package:rental_sepeda_flutter/models/station_model.dart';
 import 'package:rental_sepeda_flutter/models/user_model.dart';
@@ -21,7 +20,7 @@ class HistoryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     PaginateRefreshedChangeListener refreshChangeListener =
-    PaginateRefreshedChangeListener();
+        PaginateRefreshedChangeListener();
 
     return RefreshIndicator(
       onRefresh: () async {
@@ -33,7 +32,8 @@ class HistoryPage extends StatelessWidget {
         children: <Widget>[
           PaginateFirestore(
             itemBuilder: (context, snapshots, i) => HistoryItem(
-              order: Order.fromDocument(snapshots[i], Station.dummy, AppUser.dummy),
+              order: Order.fromDocument(
+                  snapshots[i], Station.dummy, AppUser.dummy),
             ),
             query: OrderServices.previousQueryList(),
             itemBuilderType: PaginateBuilderType.listView,
@@ -51,7 +51,8 @@ class HistoryPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.5,
                 ),
                 SizedBox(height: 16),
-                Text("Tidak ada transaksi yang ditemukan", style: bodyText1Style),
+                Text("Tidak ada transaksi yang ditemukan",
+                    style: bodyText1Style),
                 SizedBox(height: 16),
               ],
             ),
