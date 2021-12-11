@@ -22,6 +22,12 @@ class AppUser extends Equatable {
     this.balance = 0,
   });
 
+  static const AppUser dummy = AppUser(
+    id: '0',
+    name: 'John Doe',
+    email: 'johndoe@mail.com',
+  );
+
   @override
   List<Object?> get props => [id];
 

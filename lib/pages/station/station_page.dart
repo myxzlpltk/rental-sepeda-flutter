@@ -101,8 +101,9 @@ class StationPage extends StatelessWidget {
                                         id: "",
                                         price: station.discountPrice,
                                         days: value,
+                                        createdAt: DateTime.now(),
                                         expiredAt: DateTime.now().add(
-                                          Duration(days: value, hours: 12),
+                                          Duration(hours: value * 24 + 12),
                                         ),
                                         station: station,
                                         user: Provider.of<AppProvider>(context,

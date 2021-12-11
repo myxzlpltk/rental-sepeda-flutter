@@ -201,8 +201,9 @@ class HomePage extends StatelessWidget {
                           id: "",
                           price: state.promo!.discountPrice,
                           days: 1,
+                          createdAt: DateTime.now(),
                           expiredAt: DateTime.now().add(
-                            Duration(days: 1, hours: 12),
+                            Duration(hours: 36),
                           ),
                           station: state.promo!,
                           user: Provider.of<AppProvider>(context, listen: false)

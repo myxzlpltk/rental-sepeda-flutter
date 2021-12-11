@@ -31,6 +31,30 @@ class Station extends Equatable {
     required this.specs,
   });
 
+  static const Station dummy = Station(
+    id: '0',
+    name: "Stasiun",
+    address: "Jl. Soekarno Hatta",
+    photoURL: "",
+    openHour: 0,
+    closeHour: 0,
+    geoPoint: GeoPoint(0, 0),
+    geoHash: "",
+    distance: 0,
+    totalCycles: 0,
+    promo: Promo(discount: 0),
+    specs: Specification(
+      price: 0,
+      photoURL: "0",
+      usage: 0,
+      rent: 0,
+      repaired: 0,
+      speed: 0,
+      battery: 0,
+      seats: 0,
+    ),
+  );
+
   @override
   List<Object?> get props => [id];
 
@@ -78,7 +102,7 @@ class Promo {
   final double discount;
   final DateTime? expiredAt;
 
-  Promo({required this.discount, this.expiredAt});
+  const Promo({required this.discount, this.expiredAt});
 }
 
 class Specification {
@@ -91,7 +115,7 @@ class Specification {
   final int battery;
   final int seats;
 
-  Specification({
+  const Specification({
     required this.price,
     required this.photoURL,
     required this.usage,

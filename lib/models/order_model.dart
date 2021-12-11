@@ -9,7 +9,9 @@ class Order extends Equatable {
   final String id;
   final int price;
   final int days;
+  final DateTime createdAt;
   final DateTime expiredAt;
+  final String status;
   final Station station;
   final AppUser user;
 
@@ -17,10 +19,22 @@ class Order extends Equatable {
     required this.id,
     required this.price,
     required this.days,
+    required this.createdAt,
     required this.expiredAt,
+    this.status = StatusOrder.waiting,
     required this.station,
     required this.user,
   });
+
+  static Order dummy = Order(
+    id: '1234567890',
+    price: 50000,
+    days: 1,
+    createdAt: DateTime.now(),
+    expiredAt: DateTime.now(),
+    user: AppUser.dummy,
+    station: Station.dummy,
+  );
 
   @override
   List<Object?> get props => [id];
@@ -28,14 +42,16 @@ class Order extends Equatable {
   int get total => price * days;
 
   factory Order.fromDocument(
-      DocumentSnapshot doc, DocumentSnapshot station, DocumentSnapshot user) {
+      DocumentSnapshot doc, Station station, AppUser user) {
     return Order(
       id: doc.id,
       price: doc.get('price'),
       days: doc.get('days'),
+      createdAt: doc.get('createdAt').toDate(),
       expiredAt: doc.get('expiredAt').toDate(),
-      station: Station.fromDocument(station),
-      user: AppUser.fromDocument(user),
+      status: doc.get('status'),
+      station: station,
+      user: user,
     );
   }
 
@@ -44,9 +60,17 @@ class Order extends Equatable {
       'id': id,
       'price': price,
       'days': days,
+      'createdAt': createdAt,
       'expiredAt': expiredAt,
+      'status': status,
       'station': StationServices.collectionRef.doc(station.id),
       'user': UserServices.collectionRef.doc(user.id),
     };
   }
+}
+
+class StatusOrder {
+  static const String waiting = "waiting";
+  static const String picked = "picked";
+  static const String completed = "completed";
 }
