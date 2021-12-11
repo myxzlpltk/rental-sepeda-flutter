@@ -20,11 +20,11 @@ void main() async {
   await Firebase.initializeApp();
 
   // TODO: Remove firebase debug code
-  String host = Platform.isAndroid ? '10.0.2.2' : 'localhost';
-  FirebaseAuth.instance.useAuthEmulator(host, 9099);
-  FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
-  FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
-  FirebaseStorage.instance.useStorageEmulator(host, 9199);
+  // String host = Platform.isAndroid ? '10.0.2.2' : 'localhost';
+  // FirebaseAuth.instance.useAuthEmulator(host, 9099);
+  // FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
+  // FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
+  // FirebaseStorage.instance.useStorageEmulator(host, 9199);
 
   runApp(
     MultiProvider(

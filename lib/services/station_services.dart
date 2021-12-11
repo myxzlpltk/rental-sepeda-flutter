@@ -25,4 +25,15 @@ class StationServices {
 
     return data;
   }
+
+  static Future<Station?> currentPromo() async {
+    final query = await _stations
+        .where('promo.expiredAt', isNull: false)
+        .orderBy('promo.expiredAt')
+        .orderBy('promo.discount', descending: true)
+        .limit(1)
+        .get();
+
+    return Station.fromDocument(query.docs.first);
+  }
 }

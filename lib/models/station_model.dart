@@ -13,6 +13,8 @@ class Station extends Equatable {
   final String geoHash;
   final double distance;
   final int totalCycles;
+  final double discount;
+  final DateTime? expiredAt;
 
   const Station({
     required this.id,
@@ -25,6 +27,8 @@ class Station extends Equatable {
     required this.geoHash,
     required this.distance,
     required this.totalCycles,
+    required this.discount,
+    this.expiredAt,
   });
 
   @override
@@ -34,7 +38,7 @@ class Station extends Equatable {
       ? "${(distance * 1000).toStringAsFixed(0)} m"
       : "${(distance).toStringAsFixed(1)} km";
 
-  factory Station.fromDocument(DocumentSnapshot doc, GeoFirePoint center) {
+  factory Station.fromDocument(DocumentSnapshot doc, [GeoFirePoint? center]) {
     return Station(
       id: doc.id,
       name: doc.get('name'),
@@ -44,11 +48,14 @@ class Station extends Equatable {
       closeHour: doc.get('closeHour'),
       geoPoint: doc.get('point.geopoint'),
       geoHash: doc.get('point.geohash'),
-      distance: center.distance(
-        lat: doc.get('point.geopoint').latitude,
-        lng: doc.get('point.geopoint').longitude,
-      ),
+      distance: center == null
+          ? 0
+          : center.distance(
+              lat: doc.get('point.geopoint').latitude,
+              lng: doc.get('point.geopoint').longitude),
       totalCycles: doc.get('totalCycles'),
+      discount: doc.get('promo.discount').toDouble(),
+      expiredAt: doc.get('promo.expiredAt')?.toDate(),
     );
   }
 }

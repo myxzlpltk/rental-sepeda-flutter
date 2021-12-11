@@ -1,22 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/models/station_model.dart';
 
 class StationCard extends StatelessWidget {
-  final String stationAddress;
-  final String stationName;
-  final int bikesAvailable;
-  final int stationID;
-  final int stationRange;
+  final Station station;
 
-  const StationCard({
-    Key? key,
-    required this.bikesAvailable,
-    required this.stationAddress,
-    required this.stationID,
-    required this.stationName,
-    required this.stationRange,
-  }) : super(key: key);
+  const StationCard({Key? key, required this.station}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +19,7 @@ class StationCard extends StatelessWidget {
           Navigator.pushNamed(
             context,
             Routes.station,
-            arguments: {'id': stationID},
+            arguments: {'id': station.id},
           );
         },
         child: Column(
@@ -38,7 +28,9 @@ class StationCard extends StatelessWidget {
             Image(
               height: 73,
               width: 120,
-              image: AssetImage('assets/image/card_banner.png'),
+              image: station.photoURL.isEmpty
+                  ? AssetImage('assets/image/card_banner.png')
+                  : NetworkImage(station.photoURL) as ImageProvider<Object>,
               fit: BoxFit.cover,
             ),
             Container(
@@ -52,7 +44,7 @@ class StationCard extends StatelessWidget {
                     children: [
                       Expanded(
                         child: Text(
-                          stationName,
+                          station.name,
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
@@ -62,22 +54,22 @@ class StationCard extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "${stationRange}m",
+                        station.humanDistance,
                         style: captionStyle.copyWith(color: Colors.black54),
                       ),
                     ],
                   ),
                   SizedBox(height: 4),
                   Text(
-                    stationAddress,
+                    station.address,
                     style: captionStyle,
                   ),
                   Text(
-                    "Buka Jam 08:00 - 16:00",
+                    "Buka Jam ${station.openHour.toString().padLeft(2, "0")}:00 - ${station.closeHour.toString().padLeft(2, "0")}:00",
                     style: captionStyle,
                   ),
                   Text(
-                    bikesAvailable.toString() + " Bikes available",
+                    "${station.totalCycles} Sepeda tersedia",
                     style: captionStyle,
                   ),
                 ],

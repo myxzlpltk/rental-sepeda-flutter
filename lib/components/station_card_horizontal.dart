@@ -70,7 +70,7 @@ class StationCardHorizontal extends StatelessWidget {
                       style: captionStyle,
                     ),
                     Text(
-                      "10 Sepeda tersedia",
+                      "${station.totalCycles} Sepeda tersedia",
                       style: captionStyle,
                     ),
                   ],
