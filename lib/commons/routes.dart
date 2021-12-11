@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/models/station_model.dart';
 import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
@@ -46,7 +47,11 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.search:
       return MaterialPageRoute(builder: (_) => SearchPage());
     case Routes.station:
-      return MaterialPageRoute(builder: (_) => StationPage(id: 1));
+      if (arguments is Station) {
+        return MaterialPageRoute(
+            builder: (_) => StationPage(station: arguments));
+      }
+      break;
     case Routes.checkout:
       return MaterialPageRoute(builder: (_) => CheckoutPage());
     case Routes.loading:

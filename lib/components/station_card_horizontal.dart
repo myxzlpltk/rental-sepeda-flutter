@@ -19,8 +19,11 @@ class StationCardHorizontal extends StatelessWidget {
       elevation: 1,
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, Routes.station,
-              arguments: {'id': station.id});
+          Navigator.pushNamed(
+            context,
+            Routes.station,
+            arguments: station,
+          );
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,

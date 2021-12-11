@@ -19,7 +19,7 @@ class StationCard extends StatelessWidget {
           Navigator.pushNamed(
             context,
             Routes.station,
-            arguments: {'id': station.id},
+            arguments: station,
           );
         },
         child: Column(

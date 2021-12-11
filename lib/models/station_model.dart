@@ -13,8 +13,8 @@ class Station extends Equatable {
   final String geoHash;
   final double distance;
   final int totalCycles;
-  final double discount;
-  final DateTime? expiredAt;
+  final Promo promo;
+  final Specification specs;
 
   const Station({
     required this.id,
@@ -27,8 +27,8 @@ class Station extends Equatable {
     required this.geoHash,
     required this.distance,
     required this.totalCycles,
-    required this.discount,
-    this.expiredAt,
+    required this.promo,
+    required this.specs,
   });
 
   @override
@@ -37,6 +37,8 @@ class Station extends Equatable {
   String get humanDistance => (distance < 1)
       ? "${(distance * 1000).toStringAsFixed(0)} m"
       : "${(distance).toStringAsFixed(1)} km";
+
+  int get discountPrice => (specs.price - promo.discount * specs.price).toInt();
 
   factory Station.fromDocument(DocumentSnapshot doc, [GeoFirePoint? center]) {
     return Station(
@@ -54,8 +56,49 @@ class Station extends Equatable {
               lat: doc.get('point.geopoint').latitude,
               lng: doc.get('point.geopoint').longitude),
       totalCycles: doc.get('totalCycles'),
-      discount: doc.get('promo.discount').toDouble(),
-      expiredAt: doc.get('promo.expiredAt')?.toDate(),
+      promo: Promo(
+        discount: doc.get('promo.discount').toDouble(),
+        expiredAt: doc.get('promo.expiredAt')?.toDate(),
+      ),
+      specs: Specification(
+        price: doc.get('specs.price'),
+        photoURL: doc.get('specs.photoURL'),
+        usage: doc.get('specs.usage'),
+        rent: doc.get('specs.rent'),
+        repaired: doc.get('specs.repaired'),
+        speed: doc.get('specs.speed'),
+        battery: doc.get('specs.battery'),
+        seats: doc.get('specs.seats'),
+      ),
     );
   }
+}
+
+class Promo {
+  final double discount;
+  final DateTime? expiredAt;
+
+  Promo({required this.discount, this.expiredAt});
+}
+
+class Specification {
+  final int price;
+  final String photoURL;
+  final int usage;
+  final int rent;
+  final int repaired;
+  final int speed;
+  final int battery;
+  final int seats;
+
+  Specification({
+    required this.price,
+    required this.photoURL,
+    required this.usage,
+    required this.rent,
+    required this.repaired,
+    required this.speed,
+    required this.battery,
+    required this.seats,
+  });
 }

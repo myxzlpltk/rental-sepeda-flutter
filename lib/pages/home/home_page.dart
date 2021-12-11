@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
+import 'package:rental_sepeda_flutter/commons/utils.dart';
 import 'package:rental_sepeda_flutter/components/countdown.dart';
 import 'package:rental_sepeda_flutter/components/custom_button.dart';
 import 'package:rental_sepeda_flutter/components/station_card.dart';
@@ -140,7 +141,7 @@ class HomePage extends StatelessWidget {
                       ),
                     ),
                     SizedBox(width: 8),
-                    Countdown(dateTime: state.promo!.expiredAt!),
+                    Countdown(dateTime: state.promo!.promo.expiredAt!),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -173,7 +174,7 @@ class HomePage extends StatelessWidget {
                     ),
                     SizedBox(width: 4),
                     Text(
-                      "IDR 30.000/hour",
+                      "${toIDR(state.promo!.specs.price)}/hari",
                       style: bodyText1Style.copyWith(
                         decoration: TextDecoration.lineThrough,
                       ),
@@ -185,14 +186,14 @@ class HomePage extends StatelessWidget {
                   children: [
                     SizedBox(width: 18),
                     Text(
-                      "IDR 20.000/hour",
+                      "${toIDR(state.promo!.discountPrice)}/hari",
                       style: bodyText2Style.copyWith(fontSize: 14),
                     ),
                   ],
                 ),
                 SizedBox(height: 2),
                 CustomButton(
-                  text: "Book Now",
+                  text: "Pesan Sekarang",
                   onPressed: () {
                     Navigator.pushNamed(context, Routes.checkout);
                   },
@@ -201,10 +202,10 @@ class HomePage extends StatelessWidget {
             ),
             Spacer(),
             Image(
-              image: true
-                  ? AssetImage('assets/image/cycle.png')
-                  : NetworkImage(state.promo!.photoURL)
-                      as ImageProvider<Object>,
+              image: (state.promo!.specs.photoURL.isEmpty
+                      ? AssetImage('assets/image/cycle.png')
+                      : NetworkImage(state.promo!.specs.photoURL))
+                  as ImageProvider<Object>,
               width: 101,
               height: 115,
             ),
@@ -222,7 +223,7 @@ class HomePage extends StatelessWidget {
         Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
           child: Text(
-            "Nearby Station",
+            "Stasiun Terdekat",
             style: TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w700,
