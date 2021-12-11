@@ -76,7 +76,7 @@ class StationPage extends StatelessWidget {
                       child: ValueListenableBuilder<int>(
                         valueListenable: days,
                         builder: (context, value, _) => Text(
-                          toIDR(station.specs.price * value),
+                          toIDR(station.discountPrice * value),
                           style: headline3Style,
                         ),
                       ),
@@ -87,7 +87,7 @@ class StationPage extends StatelessWidget {
                         valueListenable: days,
                         builder: (context, value, _) => CustomButton(
                           text: "Pesan Sekarang",
-                          onPressed: station.specs.price * value >
+                          onPressed: station.discountPrice * value >
                                       Provider.of<AppProvider>(context,
                                               listen: false)
                                           .user!
