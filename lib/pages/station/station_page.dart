@@ -28,73 +28,80 @@ class StationPage extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              station.specs.photoURL.isEmpty
-                  ? Image.asset('assets/image/cycle.png')
-                  : Image.network(station.specs.photoURL),
+              Expanded(
+                child: station.specs.photoURL.isEmpty
+                    ? Image.asset('assets/image/cycle.png')
+                    : Image.network(station.specs.photoURL),
+              ),
               SizedBox(width: 30),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Lama Sewa", style: headline2Style),
-                  SizedBox(
-                    width: 140,
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: days,
-                      builder: (context, value, _) => DropdownButton<int>(
-                        isExpanded: true,
-                        icon: const Icon(Icons.arrow_drop_down),
-                        value: value,
-                        iconSize: 24,
-                        onChanged: (int? newValue) {
-                          if (newValue != null) {
-                            days.value = newValue;
-                          }
-                        },
-                        items: List.generate(7, (index) => index + 1)
-                            .map((int value) => DropdownMenuItem<int>(
-                                  value: value,
-                                  child: Text("$value Hari"),
-                                ))
-                            .toList(),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Lama Sewa", style: headline2Style),
+                    SizedBox(
+                      width: 140,
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: days,
+                        builder: (context, value, _) => DropdownButton<int>(
+                          isExpanded: true,
+                          icon: const Icon(Icons.arrow_drop_down),
+                          value: value,
+                          iconSize: 24,
+                          onChanged: (int? newValue) {
+                            if (newValue != null) {
+                              days.value = newValue;
+                            }
+                          },
+                          items: List.generate(7, (index) => index + 1)
+                              .map((int value) => DropdownMenuItem<int>(
+                                    value: value,
+                                    child: Text("$value Hari"),
+                                  ))
+                              .toList(),
+                        ),
                       ),
                     ),
-                  ),
-                  Text("Harga", style: headline2Style),
-                  SizedBox(height: 10),
-                  Container(
-                    width: 140,
-                    alignment: Alignment.center,
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(40),
-                      color: Colors.black12,
-                    ),
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: days,
-                      builder: (context, value, _) => Text(
-                        toIDR(station.specs.price * value),
-                        style: headline3Style,
+                    Text("Harga", style: headline2Style),
+                    SizedBox(height: 10),
+                    Container(
+                      width: 140,
+                      alignment: Alignment.center,
+                      padding:
+                          EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(40),
+                        color: Colors.black12,
+                      ),
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: days,
+                        builder: (context, value, _) => Text(
+                          toIDR(station.specs.price * value),
+                          style: headline3Style,
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 140,
-                    child: ValueListenableBuilder<int>(
-                      valueListenable: days,
-                      builder: (context, value, _) => CustomButton(
-                        text: "Pesan Sekarang",
-                        onPressed: station.specs.price * value >
-                                Provider.of<AppProvider>(context, listen: false)
-                                    .user!
-                                    .balance && station.totalCycles > 0
-                            ? null
-                            : () {
-                                Navigator.pushNamed(context, Routes.checkout);
-                              },
+                    SizedBox(
+                      width: 140,
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: days,
+                        builder: (context, value, _) => CustomButton(
+                          text: "Pesan Sekarang",
+                          onPressed: station.specs.price * value >
+                                      Provider.of<AppProvider>(context,
+                                              listen: false)
+                                          .user!
+                                          .balance &&
+                                  station.totalCycles > 0
+                              ? null
+                              : () {
+                                  Navigator.pushNamed(context, Routes.checkout);
+                                },
+                        ),
                       ),
-                    ),
-                  )
-                ],
+                    )
+                  ],
+                ),
               )
             ],
           ),
