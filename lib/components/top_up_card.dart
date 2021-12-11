@@ -13,7 +13,7 @@ class TopUpCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.pushNamed(context, Routes.detailTopUp, arguments: topUp.id);
+        Navigator.pushNamed(context, Routes.detailTopUp, arguments: topUp);
       },
       child: Padding(
         padding: EdgeInsets.all(8),

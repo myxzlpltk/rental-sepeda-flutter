@@ -22,6 +22,12 @@ class AppUser extends Equatable {
     this.balance = 0,
   });
 
+  static const AppUser dummy = AppUser(
+    id: '0',
+    name: 'John Doe',
+    email: 'johndoe@mail.com',
+  );
+
   @override
   List<Object?> get props => [id];
 
@@ -31,7 +37,6 @@ class AppUser extends Equatable {
     String? photoURL,
     String? phoneNumber,
     String? city,
-    int? balance,
   }) =>
       AppUser(
         id: id,
@@ -40,7 +45,7 @@ class AppUser extends Equatable {
         photoURL: photoURL ?? this.photoURL,
         phoneNumber: phoneNumber ?? this.phoneNumber,
         city: city ?? this.city,
-        balance: balance ?? this.balance,
+        balance: balance,
       );
 
   factory AppUser.fromDocument(DocumentSnapshot doc) {

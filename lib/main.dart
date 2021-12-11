@@ -12,6 +12,13 @@ import 'package:rental_sepeda_flutter/providers/app_provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  // String host = Platform.isAndroid ? '10.0.2.2' : 'localhost';
+  // FirebaseAuth.instance.useAuthEmulator(host, 9099);
+  // FirebaseFunctions.instance.useFunctionsEmulator(host, 5001);
+  // FirebaseFirestore.instance.useFirestoreEmulator(host, 8080);
+  // FirebaseStorage.instance.useStorageEmulator(host, 9199);
+
   runApp(
     MultiProvider(
       providers: [

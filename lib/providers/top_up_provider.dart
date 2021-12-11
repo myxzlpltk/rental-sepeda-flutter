@@ -5,7 +5,6 @@ import 'package:rental_sepeda_flutter/commons/constants.dart';
 import 'package:rental_sepeda_flutter/commons/routes.dart';
 import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 import 'package:rental_sepeda_flutter/services/top_up_services.dart';
-import 'package:rental_sepeda_flutter/services/user_services.dart';
 
 import 'app_provider.dart';
 
@@ -58,18 +57,14 @@ class TopUpProvider extends ChangeNotifier {
         uid: user.id,
         amount: amount,
         createdAt: DateTime.now(),
-        status: TopUpStatus.success,
+        status: TopUpStatus.pending,
       );
-
       topUp = await TopUpServices.create(topUp);
-      appState.user = await UserServices.update(
-        user.copyWith(balance: user.balance + topUp.amount),
-      );
 
       isProcessing = false;
 
       Navigator.pushReplacementNamed(context, Routes.detailTopUp,
-          arguments: topUp.id);
+          arguments: topUp);
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text(appError)));

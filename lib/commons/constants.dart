@@ -8,7 +8,8 @@ const String appError = "Terjadi kesalahan aplikasi. Silahkan coba lagi nanti!";
 const String appDescription =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Phasellus faucibus scelerisque eleifend donec pretium vulputate sapien nec sagittis. Est ultricies integer quis auctor elit sed vulputate mi. Donec enim diam vulputate ut pharetra sit.";
 const String emailAddress = "e-brent@um.ac.id";
-const String emailURL = "mailto:$emailAddress?subject=Permintaan%20Bantuan%20Aplikasi%20E-BRent&body=Jelaskan%20permalasahan%20anda%20disini...";
+const String emailURL =
+    "mailto:$emailAddress?subject=Permintaan%20Bantuan%20Aplikasi%20E-BRent&body=Jelaskan%20permalasahan%20anda%20disini...";
 
 /* Literal Object */
 Map<String, String> headerHttp = {'Accept': 'application/json'};

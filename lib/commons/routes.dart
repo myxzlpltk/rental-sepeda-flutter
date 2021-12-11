@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:rental_sepeda_flutter/models/order_model.dart';
+import 'package:rental_sepeda_flutter/models/station_model.dart';
+import 'package:rental_sepeda_flutter/models/top_up_model.dart';
 import 'package:rental_sepeda_flutter/pages/auth/login_page.dart';
 import 'package:rental_sepeda_flutter/pages/auth/register_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/checkout_page.dart';
-import 'package:rental_sepeda_flutter/pages/bike/loading_page.dart';
 import 'package:rental_sepeda_flutter/pages/bike/search_page.dart';
 import 'package:rental_sepeda_flutter/pages/dashboard_page.dart';
 import 'package:rental_sepeda_flutter/pages/landing_page.dart';
+import 'package:rental_sepeda_flutter/pages/order/detail_order_page.dart';
 import 'package:rental_sepeda_flutter/pages/setting/info_app_page.dart';
 import 'package:rental_sepeda_flutter/pages/station/station_page.dart';
 import 'package:rental_sepeda_flutter/pages/undefined_page.dart';
@@ -23,7 +26,7 @@ class Routes {
   static const String search = '/search';
   static const String station = '/station';
   static const String checkout = '/checkout';
-  static const String loading = '/loading';
+  static const String detailOrder = '/orders/detail';
   static const String infoApp = '/info-app';
   static const String wallet = '/wallets/my';
   static const String topUp = '/wallets/top-up';
@@ -46,11 +49,23 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.search:
       return MaterialPageRoute(builder: (_) => SearchPage());
     case Routes.station:
-      return MaterialPageRoute(builder: (_) => StationPage(id: 1));
+      if (arguments is Station) {
+        return MaterialPageRoute(
+            builder: (_) => StationPage(station: arguments));
+      }
+      break;
     case Routes.checkout:
-      return MaterialPageRoute(builder: (_) => CheckoutPage());
-    case Routes.loading:
-      return MaterialPageRoute(builder: (_) => LoadingPage());
+      if (arguments is Order) {
+        return MaterialPageRoute(
+            builder: (_) => CheckoutPage(order: arguments));
+      }
+      break;
+    case Routes.detailOrder:
+      if (arguments is Order) {
+        return MaterialPageRoute(
+            builder: (_) => DetailOrderPage(order: arguments));
+      }
+      break;
     case Routes.infoApp:
       return MaterialPageRoute(builder: (_) => InfoAppPage());
     case Routes.wallet:
@@ -58,9 +73,9 @@ Route<dynamic>? generateRoute(RouteSettings settings) {
     case Routes.topUp:
       return MaterialPageRoute(builder: (_) => TopUpPage());
     case Routes.detailTopUp:
-      if (arguments is String) {
+      if (arguments is TopUp) {
         return MaterialPageRoute(
-            builder: (_) => DetailTopUpPage(id: arguments));
+            builder: (_) => DetailTopUpPage(topUp: arguments));
       }
       break;
   }

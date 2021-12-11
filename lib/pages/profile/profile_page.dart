@@ -50,100 +50,105 @@ class ProfilePage extends StatelessWidget {
         context,
         Provider.of<AppProvider>(context, listen: false).user!,
       ),
-      builder: (context, _) => ScreenTemplate(
-        controller: scroll,
-        title: "Profil Saya",
-        children: <Widget>[
-          SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Stack(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.all(4),
-                    child: Consumer<ProfileProvider>(
-                      builder: (context, state, _) => CircleAvatar(
-                        radius: 45,
-                        backgroundImage: state.image != null
-                            ? FileImage(state.image!)
-                            : state.user.photoURL.isNotEmpty
-                                ? NetworkImage(state.user.photoURL)
-                                : AssetImage("assets/image/profile_pict.jpg")
-                                    as ImageProvider,
+      builder: (context, _) => RefreshIndicator(
+        onRefresh: () async {
+          await Provider.of<AppProvider>(context, listen: false).sync();
+        },
+        child: ScreenTemplate(
+          controller: scroll,
+          title: "Profil Saya",
+          children: <Widget>[
+            SizedBox(height: 10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Stack(
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: Consumer<ProfileProvider>(
+                        builder: (context, state, _) => CircleAvatar(
+                          radius: 45,
+                          backgroundImage: state.image != null
+                              ? FileImage(state.image!)
+                              : state.user.photoURL.isNotEmpty
+                                  ? NetworkImage(state.user.photoURL)
+                                  : AssetImage("assets/image/profile_pict.jpg")
+                                      as ImageProvider,
+                        ),
                       ),
                     ),
-                  ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(18),
-                      child: Container(
-                        padding: EdgeInsets.all(4),
-                        margin: EdgeInsets.all(4),
-                        decoration: BoxDecoration(
-                          color: greenColor,
-                          shape: BoxShape.circle,
-                          border: Border.all(color: whiteColor, width: 3),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(18),
+                        child: Container(
+                          padding: EdgeInsets.all(4),
+                          margin: EdgeInsets.all(4),
+                          decoration: BoxDecoration(
+                            color: greenColor,
+                            shape: BoxShape.circle,
+                            border: Border.all(color: whiteColor, width: 3),
+                          ),
+                          child: Icon(Icons.edit, size: 16),
                         ),
-                        child: Icon(Icons.edit, size: 16),
+                        onTap: () => pickImage(context),
                       ),
-                      onTap: () => pickImage(context),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(height: 10),
+            Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  Consumer<ProfileProvider>(
+                    builder: (context, state, _) => CustomTextFormField2(
+                      focusNode: focus1,
+                      labelText: "Nama Lengkap",
+                      hintText: "Ahmad Budiman",
+                      initialValue: state.user.name,
+                      enabled: true,
+                      textInputAction: TextInputAction.next,
+                      validator: Validator.name,
+                      onChanged: (value) => state.name = value,
+                    ),
+                  ),
+                  Consumer<ProfileProvider>(
+                    builder: (context, state, _) => CustomTextFormField2(
+                      focusNode: focus2,
+                      labelText: "Nomor HP",
+                      hintText: "+62",
+                      initialValue: phoneNumberMask.maskText(
+                        state.user.phoneNumber,
+                      ),
+                      enabled: true,
+                      textInputAction: TextInputAction.next,
+                      keyboardType: TextInputType.phone,
+                      inputFormatters: [phoneNumberMask],
+                      onChanged: (value) =>
+                          state.phoneNumber = phoneNumberMask.unmaskText(value),
+                    ),
+                  ),
+                  Consumer<ProfileProvider>(
+                    builder: (context, state, _) => CustomTextFormField2(
+                      focusNode: focus3,
+                      labelText: "Asal Kota",
+                      hintText: "Malang",
+                      enabled: true,
+                      initialValue: state.user.city,
+                      onChanged: (value) => state.city = value,
                     ),
                   ),
                 ],
               ),
-            ],
-          ),
-          SizedBox(height: 10),
-          Form(
-            key: formKey,
-            child: Column(
-              children: [
-                Consumer<ProfileProvider>(
-                  builder: (context, state, _) => CustomTextFormField2(
-                    focusNode: focus1,
-                    labelText: "Nama Lengkap",
-                    hintText: "Ahmad Budiman",
-                    initialValue: state.user.name,
-                    enabled: true,
-                    textInputAction: TextInputAction.next,
-                    validator: Validator.name,
-                    onChanged: (value) => state.name = value,
-                  ),
-                ),
-                Consumer<ProfileProvider>(
-                  builder: (context, state, _) => CustomTextFormField2(
-                    focusNode: focus2,
-                    labelText: "Nomor HP",
-                    hintText: "+62",
-                    initialValue: phoneNumberMask.maskText(
-                      state.user.phoneNumber,
-                    ),
-                    enabled: true,
-                    textInputAction: TextInputAction.next,
-                    keyboardType: TextInputType.phone,
-                    inputFormatters: [phoneNumberMask],
-                    onChanged: (value) =>
-                        state.phoneNumber = phoneNumberMask.unmaskText(value),
-                  ),
-                ),
-                Consumer<ProfileProvider>(
-                  builder: (context, state, _) => CustomTextFormField2(
-                    focusNode: focus3,
-                    labelText: "Asal Kota",
-                    hintText: "Malang",
-                    enabled: true,
-                    initialValue: state.user.city,
-                    onChanged: (value) => state.city = value,
-                  ),
-                ),
-              ],
             ),
-          ),
-          SizedBox(height: 200),
-        ],
+            SizedBox(height: 200),
+          ],
+        ),
       ),
     );
   }

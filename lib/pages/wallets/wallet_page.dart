@@ -1,5 +1,5 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:paginate_firestore/bloc/pagination_listeners.dart';
 import 'package:paginate_firestore/paginate_firestore.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class WalletPage extends StatelessWidget {
               itemBuilder: (context, snapshots, i) => TopUpCard(
                 topUp: TopUp.fromDocument(snapshots[i]),
               ),
-              query: TopUpServices.queryList(context),
+              query: TopUpServices.queryList(),
               itemBuilderType: PaginateBuilderType.listView,
               listeners: [refreshChangeListener],
               physics: NeverScrollableScrollPhysics(),
@@ -46,8 +46,18 @@ class WalletPage extends StatelessWidget {
               separator: Divider(thickness: 1, height: 2),
               initialLoader: _shimmerTopUpCard(),
               bottomLoader: _shimmerTopUpCard(),
-              onEmpty: Center(
-                child: Text("Kosong?"),
+              onEmpty: Column(
+                children: [
+                  SizedBox(height: 16),
+                  SvgPicture.asset(
+                    "assets/svg/no-data.svg",
+                    width: MediaQuery.of(context).size.width * 0.5,
+                  ),
+                  SizedBox(height: 16),
+                  Text("Tidak ada transaksi yang ditemukan",
+                      style: bodyText1Style),
+                  SizedBox(height: 16),
+                ],
               ),
             ),
             SizedBox(height: 16),

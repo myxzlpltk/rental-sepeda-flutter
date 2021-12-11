@@ -1,120 +1,136 @@
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:rental_sepeda_flutter/commons/constants.dart';
-import 'package:rental_sepeda_flutter/components/custom_button.dart';
-import 'package:rental_sepeda_flutter/components/location_box.dart';
+import 'package:rental_sepeda_flutter/components/station_card_horizontal.dart';
 import 'package:rental_sepeda_flutter/components/text_icon.dart';
+import 'package:rental_sepeda_flutter/providers/search_provider.dart';
 
 class SearchPage extends StatelessWidget {
   const SearchPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            child: Center(
-              child: Text("Insert map here"),
-            ),
-          ),
-          Container(
-            height: 120,
-            padding: EdgeInsets.symmetric(horizontal: 28, vertical: 16),
-            decoration: BoxDecoration(gradient: customGradientBlueToGreen),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+    return ChangeNotifierProvider(
+      create: (context) => SearchProvider(context),
+      builder: (context, _) => Scaffold(
+        body: Stack(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
               children: [
-                LocationBox(
-                  iconData: Icons.pin_drop_outlined,
-                  text: "Jl. in aja ya bang no.69",
-                ),
-                SizedBox(height: 12),
-                LocationBox(
-                  iconData: Icons.pin_drop_rounded,
-                  text: "Jl. in aja ya bang no.69",
-                ),
-                SizedBox(height: 12),
-                Row(
-                  children: const [
-                    TextIcon(
-                      iconData: Icons.home,
-                      text: "10 Rentals near you",
+                _searchBox(context),
+                Expanded(
+                  child: Consumer<SearchProvider>(
+                    builder: (context, state, _) => GoogleMap(
+                      padding: state.stations.isEmpty
+                          ? EdgeInsets.fromLTRB(10, 0, 0, 10)
+                          : EdgeInsets.fromLTRB(10, 0, 0, 90),
+                      mapType: MapType.normal,
+                      myLocationButtonEnabled: true,
+                      myLocationEnabled: true,
+                      mapToolbarEnabled: false,
+                      zoomControlsEnabled: false,
+                      rotateGesturesEnabled: false,
+                      tiltGesturesEnabled: false,
+                      initialCameraPosition: state.initialCam,
+                      onMapCreated: state.onMapCreated,
+                      onCameraMove: state.onCameraMove,
+                      markers: Set<Marker>.of(
+                        state.stations.map(
+                          (e) => Marker(
+                            markerId: MarkerId(e.id),
+                            position: LatLng(
+                              e.geoPoint.latitude,
+                              e.geoPoint.longitude,
+                            ),
+                          ),
+                        ),
+                      ),
                     ),
-                    Spacer(),
-                    TextIcon(
-                      iconData: Icons.pin_drop_rounded,
-                      text: "10 Bikes Available",
-                    )
-                  ],
+                  ),
                 ),
               ],
             ),
-          ),
-          Positioned.fill(
-            bottom: 20,
-            child: Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                width: 260,
-                height: 140,
-                decoration: BoxDecoration(
+            _cardRental(context),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _searchBox(BuildContext context) {
+    return Ink(
+      padding: EdgeInsets.all(16),
+      decoration: BoxDecoration(gradient: customGradientBlueToGreen),
+      child: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                Icon(
+                  Icons.location_pin,
+                  size: 16,
                   color: whiteColor,
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
                 ),
-                child: Column(
-                  children: [
-                    SizedBox(height: 12),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image(
-                            height: 73,
-                            width: 110,
-                            image: AssetImage('assets/image/card_banner.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        SizedBox(width: 16),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Station 1's Bike",
-                              style: headline2Style.copyWith(color: blueColor),
-                            ),
-                            SizedBox(height: 8),
-                            Text(
-                              "Open 9.00 - 18.00",
-                              style: bodyText1Style.copyWith(color: blueColor),
-                            ),
-                            SizedBox(height: 4),
-                            Text(
-                              "5 Bikes Available",
-                              style: bodyText1Style.copyWith(color: blueColor),
-                            ),
-                          ],
-                        )
-                      ],
+                SizedBox(width: 12),
+                Expanded(
+                  child: Ink(
+                    padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: whiteColor.withAlpha(90),
+                      borderRadius: BorderRadius.circular(50),
                     ),
-                    SizedBox(height: 6),
-                    CustomButton(onPressed: () {}, text: "See Details")
-                  ],
+                    child: TextField(
+                      controller:
+                          Provider.of<SearchProvider>(context, listen: false)
+                              .searchController,
+                      style: bodyText2Style.copyWith(color: whiteColor),
+                      textInputAction: TextInputAction.search,
+                      decoration: InputDecoration.collapsed(
+                        hintText: "Ketik pencarian alamat...",
+                        hintStyle: bodyText2Style.copyWith(color: whiteColor),
+                      ),
+                      onEditingComplete:
+                          Provider.of<SearchProvider>(context, listen: false)
+                              .searchAddress,
+                    ),
+                  ),
                 ),
+              ],
+            ),
+            SizedBox(height: 16),
+            Consumer<SearchProvider>(
+              builder: (context, state, _) => Row(
+                children: [
+                  TextIcon(
+                    iconData: Icons.home,
+                    text: "${state.stations.length} stasiun didekatmu",
+                  ),
+                  Spacer(),
+                  TextIcon(
+                    iconData: Icons.pin_drop_rounded,
+                    text:
+                        "${state.stations.isEmpty ? 0 : state.stations.map((a) => a.totalCycles).reduce((a, b) => a + b)} sepeda tersedia",
+                  ),
+                ],
               ),
             ),
-          )
-        ],
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _cardRental(BuildContext context) {
+    return Positioned(
+      bottom: 16,
+      left: 16,
+      right: 16,
+      child: Consumer<SearchProvider>(
+        builder: (context, state, _) => state.stations.isNotEmpty
+            ? StationCardHorizontal(station: state.stations.first)
+            : SizedBox(),
       ),
     );
   }
