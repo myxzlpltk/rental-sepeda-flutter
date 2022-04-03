@@ -157,7 +157,7 @@ class ProfilePage extends StatelessWidget {
     final xImg = await ImagePicker().pickImage(source: media);
 
     if (xImg != null) {
-      final img = await ImageCropper.cropImage(
+      final img = await ImageCropper().cropImage(
         sourcePath: xImg.path,
         aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
         maxWidth: 500,

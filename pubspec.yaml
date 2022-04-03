@@ -39,7 +39,7 @@ dependencies:
   firebase_core: ^1.10.0
   firebase_storage: ^10.1.0
   flutter_screenutil: ^5.0.0+2
-  flutter_svg: ^0.23.0+1
+  flutter_svg: ^1.0.3
   form_field_validator: ^1.1.0
   geocoding: ^2.0.1
   geoflutterfire2:
