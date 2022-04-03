@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:904742683372:android:2c44ac8e548c8f727edbc9",
+        "mobilesdk_app_id": "1:904742683372:android:8ab96a2a65bb8afb7edbc9",
         "android_client_info": {
           "package_name": "com.myxzlpltk.rental_sepeda_flutter"
         }
       },
       "oauth_client": [
         {
-          "client_id": "904742683372-r83a1g8lpv50vt35itkgibehsq67htlu.apps.googleusercontent.com",
+          "client_id": "904742683372-6ocs1k5oortmehctptr7272l6cf2errm.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.myxzlpltk.rental_sepeda_flutter",
-            "certificate_hash": "50ccd40d4c24165f44b2dc15fc9487bce35c85d0"
+            "certificate_hash": "21a83e4386a41db556aff12a3e92c36717cddcd3"
           }
         },
         {
